@@ -24,7 +24,7 @@ const AllProducts = () => {
         {allProducts &&
           allProducts.items?.map((product) => {
             return (
-              <div>
+              <div key={product.id}>
                 <h2>name: {product.name}</h2>
               </div>
             );
