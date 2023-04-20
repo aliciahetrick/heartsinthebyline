@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav style={{ backgroundColor: "pink" }}>
       <Link to="/">Home</Link>
       <Link to="/products">Products</Link>
       <Link to="/">heartsinthebyline</Link>
