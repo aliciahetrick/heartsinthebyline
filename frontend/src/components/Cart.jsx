@@ -9,7 +9,6 @@ const Cart = () => {
   console.log(cart);
 
   const handleRemoveFromCart = (cartItem) => {
-    console.log("clicked");
     dispatch(removeFromCart(cartItem));
   };
 
