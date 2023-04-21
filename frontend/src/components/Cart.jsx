@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   addToCart,
+  clearCart,
   decreaseCartQuantity,
   removeFromCart,
 } from "../features/cartSlice";
@@ -22,6 +23,10 @@ const Cart = () => {
 
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
   return (
@@ -63,7 +68,7 @@ const Cart = () => {
             );
           })}
           <div>
-            <button>Clear cart</button>
+            <button onClick={() => handleClearCart()}>Clear cart</button>
             <p>Taxes and shipping calculated at checkout</p>
             <p>Subtotal: ${cart.cartTotalPrice}</p>
             <button>Checkout</button>
