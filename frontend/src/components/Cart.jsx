@@ -16,7 +16,7 @@ const Cart = () => {
     dispatch(decreaseCartQuantity(product));
   };
 
-  const handleAddToCart = (product) => {
+  const handleIncreaseCartQuantity = (product) => {
     dispatch(addToCart(product));
   };
 
@@ -51,7 +51,9 @@ const Cart = () => {
                     -
                   </button>
                   <div>{cartItem.cartQty}</div>
-                  <button onClick={() => handleAddToCart(cartItem)}>+</button>
+                  <button onClick={() => handleIncreaseCartQuantity(cartItem)}>
+                    +
+                  </button>
                   <p>Total: ${cartItem.price * cartItem.cartQty}</p>
                   <button onClick={() => handleRemoveFromCart(cartItem)}>
                     Remove
