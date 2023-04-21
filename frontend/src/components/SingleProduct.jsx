@@ -1,8 +1,11 @@
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../features/cartSlice";
 import { useGetSingleProductQuery } from "../features/productsApi";
 
 const SingleProduct = () => {
   const param = useParams().id;
+  const dispatch = useDispatch();
 
   const {
     data: singleProduct,
@@ -11,6 +14,10 @@ const SingleProduct = () => {
   } = useGetSingleProductQuery(param);
 
   console.log("singleProduct", singleProduct);
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <>
@@ -28,6 +35,9 @@ const SingleProduct = () => {
           />
           <p>{singleProduct.desc}</p>
           <p>Price: ${singleProduct.price}</p>
+          <button onClick={() => handleAddToCart(singleProduct)}>
+            Add to Cart
+          </button>
         </>
       )}
     </>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useGetAllProductsQuery } from "../features/productsApi";
 
 const AllProducts = () => {
@@ -16,12 +17,14 @@ const AllProducts = () => {
             {allProducts?.map((product) => {
               return (
                 <div key={product.id}>
-                  <h2>{product.name}</h2>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    style={{ width: "300px" }}
-                  />
+                  <Link to={`/products/${product.name}`}>
+                    <h2>{product.name}</h2>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      style={{ width: "300px" }}
+                    />
+                  </Link>
                 </div>
               );
             })}
