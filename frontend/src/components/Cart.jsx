@@ -17,7 +17,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getTotals());
-  }, [cart]);
+  }, [cart, dispatch]);
 
   const handleDecreaseCartQuantity = (product) => {
     dispatch(decreaseCartQuantity(product));

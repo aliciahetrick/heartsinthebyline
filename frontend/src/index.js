@@ -7,6 +7,7 @@ import store from "./features";
 import { getTotals } from "./features/cartSlice";
 
 store.dispatch(getTotals());
+// console.log("totals", getTotals());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

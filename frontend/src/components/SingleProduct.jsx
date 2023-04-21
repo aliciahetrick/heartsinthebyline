@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addToCart } from "../features/cartSlice";
+import { addToCart, getTotals } from "../features/cartSlice";
 import { useGetSingleProductQuery } from "../features/productsApi";
 
 const SingleProduct = () => {
   const param = useParams().id;
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   const {
     data: singleProduct,
@@ -14,6 +16,10 @@ const SingleProduct = () => {
   } = useGetSingleProductQuery(param);
 
   console.log("singleProduct", singleProduct);
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cart, dispatch]);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
