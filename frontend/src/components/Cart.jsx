@@ -1,9 +1,18 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../features/cartSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
   console.log(cart);
+
+  const handleRemoveFromCart = (cartItem) => {
+    console.log("clicked");
+    dispatch(removeFromCart(cartItem));
+  };
+
   return (
     <>
       <h2>Cart</h2>
@@ -31,7 +40,9 @@ const Cart = () => {
                   <div>{cartItem.cartQty}</div>
                   <button>+</button>
                   <p>Total: ${cartItem.price * cartItem.cartQty}</p>
-                  <button>Remove</button>
+                  <button onClick={() => handleRemoveFromCart(cartItem)}>
+                    Remove
+                  </button>
                 </div>
               </div>
             );
