@@ -10,7 +10,8 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  // res.send("Hello World!");
+  res.send(products);
 });
 
 app.get("/products", (req, res) => {
