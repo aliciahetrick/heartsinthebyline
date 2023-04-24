@@ -9,6 +9,7 @@ import AllProducts from "./components/AllProducts";
 import NotFound from "./components/NotFound";
 import SingleProduct from "./components/SingleProduct";
 import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/products" element={<AllProducts />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
           <Route exact path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
