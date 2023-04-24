@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const port = process.env.PORT || 5000;
+const mongoose = require("mongoose");
 
 const products = require("./products");
 
 const app = express();
+
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
@@ -24,6 +26,15 @@ app.get(`/products/:id`, (req, res) => {
   res.send(products.find((product) => product.name === req.params.id));
 });
 
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewURLParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connection successful"))
+  .catch((err) => console.log("MongoDB connection failed", err.message));
