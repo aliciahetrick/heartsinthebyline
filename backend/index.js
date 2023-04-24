@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const register = require("./routes/register");
+const login = require("./routes/login");
 
 const products = require("./products");
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/register", register);
+app.use("/api/login", require("./routes/login"));
 
 app.get("/", (req, res) => {
   // res.send("Hello World!");
