@@ -37,7 +37,40 @@ export const registerUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    loadUser(state, action) {
+      const token = state.token;
+
+      if (token) {
+        const user = jwtDecode(token);
+
+        return {
+          ...state,
+          token,
+          name: user.name,
+          email: user.email,
+          _id: user._id,
+          userLoaded: true,
+        };
+      }
+    },
+
+    logoutUser(state, action) {
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: "",
+        name: "",
+        email: "",
+        _id: "",
+        registerStatus: "",
+        registerError: "",
+        loginStatus: "",
+        loginError: "",
+        userLoaded: false,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state, action) => {
       return {
@@ -46,7 +79,7 @@ const authSlice = createSlice({
       };
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
-      if (action.payload.status) {
+      if (action.payload) {
         const user = jwtDecode(action.payload);
 
         return {
@@ -70,5 +103,7 @@ const authSlice = createSlice({
     });
   },
 });
+
+export const { loadUser, logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;
