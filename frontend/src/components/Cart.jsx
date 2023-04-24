@@ -8,6 +8,7 @@ import {
   getTotals,
   removeFromCart,
 } from "../features/cartSlice";
+import PayButton from "./PayButton";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -77,7 +78,7 @@ const Cart = () => {
             <button onClick={() => handleClearCart()}>Clear cart</button>
             <p>Taxes and shipping calculated at checkout</p>
             <p>Subtotal: ${cart.cartTotalPrice}</p>
-            <button>Checkout</button>
+            <PayButton cartItems={cart.cartItems} />
           </div>
         </div>
       )}
