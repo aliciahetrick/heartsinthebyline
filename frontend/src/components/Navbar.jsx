@@ -6,6 +6,8 @@ const Navbar = () => {
   return (
     <nav style={{ backgroundColor: "pink" }}>
       <Link to="/">Home</Link>
+      <Link to="/register">Register</Link>
+      <Link to="/login">Log In</Link>
       <Link to="/products">Products</Link>
       <Link to="/">heartsinthebyline</Link>
       <Link to="/faq">FAQ</Link>
