@@ -12,6 +12,11 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import CheckoutSuccess from "./components/CheckoutSuccess";
 
+import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminProducts from "./components/admin/AdminProducts";
+import AdminSummary from "./components/admin/AdminSummary";
+import CreateProduct from "./components/admin/CreateProduct";
+
 function App() {
   return (
     <div className="App">
@@ -24,6 +29,12 @@ function App() {
           <Route exact path="/checkout-success" element={<CheckoutSuccess />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route path="summary" element={<AdminSummary />} />
+            <Route path="products" element={<AdminProducts />}>
+              <Route path="create" element={<CreateProduct />} />
+            </Route>
+          </Route>
           <Route exact path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
