@@ -1,5 +1,6 @@
 const express = require("express");
 const Stripe = require("stripe");
+const Order = require("../models/order");
 
 require("dotenv").config();
 
@@ -116,6 +117,30 @@ router.post("/create-checkout-session", async (req, res) => {
   res.send({ url: session.url });
 });
 
+//Create order
+
+const createOrder = async (customer, data) => {
+  const items = JSON.parse(customer.metadata.cart);
+
+  const newOrder = new Order({
+    userId: customer.metadata.userId,
+    customerId: data.customer,
+    paymentIntentId: data.payment_intent_id,
+    products: items,
+    subtotal: data.amount_subtotal,
+    total: data.amount_total,
+    shipping_address: data.customer_details,
+    payment_status: data.payment_status,
+  });
+
+  try {
+    const savedOrder = await newOrder.save();
+    console.log("Processed order: ", savedOrder);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Stripe webhoook
 
 router.post(
@@ -159,6 +184,8 @@ router.post(
         .then((customer) => {
           console.log("customer", customer);
           console.log("data", data);
+
+          createOrder(customer, data);
         })
         .catch((err) => {
           console.log(err.message);
