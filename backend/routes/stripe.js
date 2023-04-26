@@ -13,7 +13,7 @@ router.post("/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
-      cart: JSON.stringify(req.body.cartItems),
+      // cart: JSON.stringify(req.body.cartItems),
     },
   });
 
@@ -23,7 +23,7 @@ router.post("/create-checkout-session", async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.name,
-          images: [item.image],
+          images: [item.image.url],
           description: item.desc,
           metadata: {
             id: item.id,
@@ -129,14 +129,14 @@ router.post("/create-checkout-session", async (req, res) => {
 
 //Create order
 
-const createOrder = async (customer, data) => {
-  const items = JSON.parse(customer.metadata.cart);
+const createOrder = async (customer, data, lineItems) => {
+  // const items = JSON.parse(customer.metadata.cart);
 
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent_id,
-    products: items,
+    products: lineItems.data,
     subtotal: data.amount_subtotal,
     total: data.amount_total,
     shipping_address: data.customer_details,
@@ -192,10 +192,18 @@ router.post(
       stripe.customers
         .retrieve(data.customer)
         .then((customer) => {
-          console.log("customer", customer);
-          console.log("data", data);
+          stripe.checkout.sessions.listLineItems(
+            data.id,
+            {},
+            function (err, lineItems) {
+              console.log("lineItems", lineItems);
+              createOrder(customer, data, lineItems);
+            }
+          );
+          // console.log("customer", customer);
+          // console.log("data", data);
 
-          createOrder(customer, data);
+          // createOrder(customer, data);
         })
         .catch((err) => {
           console.log(err.message);
