@@ -14,7 +14,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const itemIndex = state.cartItems.findIndex(
-        (cartItem) => cartItem.id === action.payload.id
+        (cartItem) => cartItem._id === action.payload._id
       );
 
       // if item already in cart
@@ -29,7 +29,7 @@ const cartSlice = createSlice({
     },
     removeFromCart(state, action) {
       const filterCartItems = state.cartItems.filter(
-        (cartItem) => cartItem.id !== action.payload.id
+        (cartItem) => cartItem._id !== action.payload.id
       );
       state.cartItems = filterCartItems;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));

@@ -5,21 +5,37 @@ import { url } from "./api";
 const initialState = {
   items: [],
   status: null,
+  singleProduct: {},
+  singleProductStatus: null,
   createStatus: null,
 };
 
-// export const fetchProductsAsync = createAsyncThunk(
-//   "products/fetchAllProducts",
-//   async () => {
-//     try {
-//       const response = await axios.get("http://localhost:5000/products");
-//       //   console.log("fetch response", response);
-//       return response?.data;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
+export const fetchProductsAsync = createAsyncThunk(
+  "products/fetchAllProducts",
+  async () => {
+    try {
+      const response = await axios.get(`${url}/products`);
+      console.log("fetch response", response);
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// a redux thunk that fetches a single post from the database
+export const fetchSingleProductAsync = createAsyncThunk(
+  "products/fetchSingleProductAsync",
+  async (_id) => {
+    try {
+      const { data } = await axios.get(`${url}/products/${_id}`);
+      console.log("fetch response", data);
+      return data;
+    } catch (error) {
+      console.log("thunk error", error);
+    }
+  }
+);
 
 export const createProductAsync = createAsyncThunk(
   "products/createProductAsync",
@@ -51,6 +67,30 @@ const productsSlice = createSlice({
   //         status: "pending",
   //         items: state.items,
   extraReducers: (builder) => {
+    builder.addCase(fetchProductsAsync.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
+      console.log("fulfilled", action.payload);
+      state.items = action.payload;
+      state.status = "success";
+    });
+    builder.addCase(fetchProductsAsync.rejected, (state, action) => {
+      state.status = "rejected";
+    });
+
+    builder.addCase(fetchSingleProductAsync.pending, (state, action) => {
+      state.singleProductStatus = "pending";
+    });
+    builder.addCase(fetchSingleProductAsync.fulfilled, (state, action) => {
+      console.log("fulfilled", action.payload);
+      state.singleProduct = action.payload;
+      state.singleProductStatus = "success";
+    });
+    builder.addCase(fetchSingleProductAsync.rejected, (state, action) => {
+      state.singleProductStatus = "rejected";
+    });
+
     builder.addCase(createProductAsync.pending, (state, action) => {
       state.createStatus = "pending";
     });

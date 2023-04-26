@@ -50,10 +50,10 @@ const Cart = () => {
         <div>
           {cart.cartItems.map((cartItem) => {
             return (
-              <div key={cartItem.id}>
+              <div key={cartItem._id}>
                 <div>
                   <img
-                    src={cartItem.image}
+                    src={cartItem.image.url}
                     alt={cartItem.name}
                     style={{ width: "300px" }}
                   />

@@ -15,6 +15,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Fetch single product in MongoDB
+router.get("/:_id", async (req, res, next) => {
+  try {
+    // console.log("requesrrrt", req.params._id);
+    const product = await Product.findOne({ name: req.params._id });
+    res.status(200).send(product);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 // Create a product
 router.post("/", async (req, res) => {
   const { name, desc, price, image } = req.body;
