@@ -13,9 +13,12 @@ const Navbar = () => {
       {/* <Link to="/register">Register</Link> */}
       {auth._id ? (
         <>
-          <div>
-            <Link to="/admin/summary">Admin</Link>
-          </div>
+          {auth.isAdmin ? (
+            <div>
+              <Link to="/admin/summary">Admin</Link>
+            </div>
+          ) : null}
+
           <div
             onClick={() => {
               dispatch(logoutUser(null));

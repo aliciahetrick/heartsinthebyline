@@ -1,4 +1,5 @@
 const express = require("express");
+const { isAdmin } = require("../middleware/auth");
 const Product = require("../models/product");
 const cloudinary = require("../utils/cloudinary");
 
@@ -28,7 +29,7 @@ router.get("/:_id", async (req, res, next) => {
 });
 
 // Create a product
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
   const { name, desc, price, image } = req.body;
 
   try {
