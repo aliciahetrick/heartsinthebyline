@@ -12,13 +12,21 @@ const Navbar = () => {
       <Link to="/">Home</Link>
       {/* <Link to="/register">Register</Link> */}
       {auth._id ? (
-        <div
-          onClick={() => {
-            dispatch(logoutUser(null));
-          }}
-        >
-          <Link to="/">Log Out</Link>
-        </div>
+        <>
+          {auth.isAdmin ? (
+            <div>
+              <Link to="/admin/summary">Admin</Link>
+            </div>
+          ) : null}
+
+          <div
+            onClick={() => {
+              dispatch(logoutUser(null));
+            }}
+          >
+            <Link to="/">Log Out</Link>
+          </div>
+        </>
       ) : (
         <div>
           <Link to="/register">Register</Link>

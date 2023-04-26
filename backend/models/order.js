@@ -14,16 +14,7 @@ const orderSchema = new mongoose.Schema(
     payment_intent_id: {
       type: String,
     },
-    products: [
-      {
-        id: { type: String },
-        name: { type: String },
-        desc: { type: String },
-        price: { type: String },
-        image: { type: String },
-        cartQty: { type: Number },
-      },
-    ],
+    products: [],
     subtotal: { type: Number, required: true },
     total: { type: Number, required: true },
 

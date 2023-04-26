@@ -1,26 +1,33 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useGetAllProductsQuery } from "../features/productsApi";
+import { fetchProductsAsync } from "../features/productsSlice";
 
 const AllProducts = () => {
-  const { data: allProducts, error, isLoading } = useGetAllProductsQuery();
+  const dispatch = useDispatch();
+  // const { data: allProducts, error, isLoading } = useGetAllProductsQuery();
+  const { items: allProducts, status } = useSelector((state) => state.products);
   // console.log("query", allProducts);
+
+  useEffect(() => {
+    console.log("useEffect");
+    dispatch(fetchProductsAsync());
+  }, []);
+  // console.log("allProducts", allProducts);
   return (
     <>
       <h1>All Products</h1>
       <div>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>An error occured</p>
-        ) : (
+        {status === "success" ? (
           <>
             {allProducts?.map((product) => {
               return (
-                <div key={product.id}>
+                <div key={product._id}>
                   <Link to={`/products/${product.name}`}>
                     <h2>{product.name}</h2>
                     <img
-                      src={product.image}
+                      src={product.image.url}
                       alt={product.name}
                       style={{ width: "300px" }}
                     />
@@ -29,6 +36,10 @@ const AllProducts = () => {
               );
             })}
           </>
+        ) : status === "pending" ? (
+          <p>Loading...</p>
+        ) : (
+          <p>Unexpected error occured...</p>
         )}
       </div>
     </>
