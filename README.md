@@ -22,7 +22,7 @@ A full stack e-commerce application for [heartsinthebyline](https://www.etsy.com
 
 ## Developer
 
-Alicia Hetrick: [LinkedIn](https://www.linkedin.com/in/alicia-hetrick/) | [Github](https://github.com/aliciahetrick) <br>
+Alicia Hetrick: [LinkedIn](https://www.linkedin.com/in/alicia-hetrick/) | [Github](https://github.com/aliciahetrick)
 
 ## Run Memory marker locally
 
