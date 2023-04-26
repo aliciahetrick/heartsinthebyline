@@ -4,9 +4,10 @@ import { url } from "../features/api";
 
 const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
+  console.log("user", user);
   const handleCheckout = () => {
     axios
-      .post(`${url}/api/stripe/create-checkout-session`, {
+      .post(`${url}/stripe/create-checkout-session`, {
         cartItems,
         userId: user._id,
       })
@@ -15,7 +16,7 @@ const PayButton = ({ cartItems }) => {
           window.location.href = response.data.url;
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log("stripe error", err));
   };
 
   return (

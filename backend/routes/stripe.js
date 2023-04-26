@@ -9,6 +9,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req, res) => {
+  console.log("create checkout session");
   const customer = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
@@ -23,7 +24,7 @@ router.post("/create-checkout-session", async (req, res) => {
         product_data: {
           name: item.name,
           images: [item.image],
-          //   description: item.desc,
+          description: item.desc,
           metadata: {
             id: item.id,
           },
@@ -112,6 +113,15 @@ router.post("/create-checkout-session", async (req, res) => {
     cancel_url: `${process.env.CLIENT_URL}/cart`,
     // success_url: `https:localhost:3000/checkout-success`,
     // cancel_url: `https:localhost:3000/cart`,
+
+    // consent_collection: {
+    //   promotions: "auto",
+    // },
+    // after_expiration: {
+    //   recovery: {
+    //     enabled: true,
+    //   },
+    // },
   });
 
   res.send({ url: session.url });
