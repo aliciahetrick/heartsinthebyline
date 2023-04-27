@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToCart, getTotals } from "../features/cartSlice";
-import { useGetSingleProductQuery } from "../features/productsApi";
+// import { useGetSingleProductQuery } from "../features/productsApi";
 import { fetchSingleProductAsync } from "../features/productsSlice";
 
 const SingleProduct = () => {
@@ -22,7 +22,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     dispatch(fetchSingleProductAsync(param));
-  }, []);
+  }, [dispatch, param]);
 
   console.log("singleProduct", singleProduct);
 

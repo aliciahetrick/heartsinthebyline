@@ -86,7 +86,7 @@ const CreateProduct = () => {
       <div>
         {productImage ? (
           <>
-            <img src={productImage} alt="product image" />
+            <img src={productImage} alt="" />
           </>
         ) : (
           <p>Image preview will appear here</p>

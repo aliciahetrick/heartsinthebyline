@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useGetAllProductsQuery } from "../features/productsApi";
+// import { useGetAllProductsQuery } from "../features/productsApi";
 import { fetchProductsAsync } from "../features/productsSlice";
 
 const AllProducts = () => {
@@ -13,7 +13,7 @@ const AllProducts = () => {
   useEffect(() => {
     console.log("useEffect");
     dispatch(fetchProductsAsync());
-  }, []);
+  }, [dispatch]);
   // console.log("allProducts", allProducts);
   return (
     <>
