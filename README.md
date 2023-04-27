@@ -1,6 +1,6 @@
 # heartsinthebyline
 
-A full stack e-commerce application for [heartsinthebyline](https://www.etsy.com/shop/heartsinthebyline).
+A full stack e-commerce application for [heartsinthebyline](https://www.etsy.com/shop/heartsinthebyline). [Deployed:](https://heartsinthebyline2.netlify.app/)
 
 ## Tech Stack
 
@@ -24,13 +24,13 @@ A full stack e-commerce application for [heartsinthebyline](https://www.etsy.com
 
 Alicia Hetrick: [LinkedIn](https://www.linkedin.com/in/alicia-hetrick/) | [Github](https://github.com/aliciahetrick)
 
-## Run Memory marker locally
+## Run heartsinthebyline locally
 
 ### Backend
 
 1. `cd backend`
 2. `npm install`
-3. `npx nodemon index.js`
+3. `npm run start server`
 
 ### Frontend
 
