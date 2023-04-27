@@ -28,6 +28,22 @@ router.get("/:_id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    console.log(req.body);
+    // console.log("requesrrrt", req.params._id);
+    const product = await Product.findOne({ url: req.params.id });
+    // console.log(product);
+    product.stock = product.stock - req.body.cartQty;
+    await product.save();
+    // res.send(product);
+    res.status(200).send(product);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 // Create a product
 // router.post("/", async (req, res) => {
 router.post("/", isAdmin, async (req, res) => {
