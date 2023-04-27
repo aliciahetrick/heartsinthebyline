@@ -1,9 +1,13 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart, getTotals } from "../features/cartSlice";
 
 const CheckoutSuccess = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    localStorage.clear();
-  }, []);
+    dispatch(clearCart());
+    dispatch(getTotals());
+  }, [dispatch]);
   return (
     <>
       <h2>Checkout Success</h2>
