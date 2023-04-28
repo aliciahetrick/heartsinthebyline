@@ -8,6 +8,7 @@ const initialState = {
   singleProduct: {},
   singleProductStatus: null,
   createStatus: null,
+  updateStockStatus: null,
 };
 
 export const fetchProductsAsync = createAsyncThunk(
@@ -40,7 +41,7 @@ export const fetchSingleProductAsync = createAsyncThunk(
 export const createProductAsync = createAsyncThunk(
   "products/createProductAsync",
   async (values) => {
-    console.log("values", values);
+    // console.log("values", values);
     try {
       const response = await axios.post(
         `${url}/products`,
@@ -56,17 +57,42 @@ export const createProductAsync = createAsyncThunk(
   }
 );
 
+export const updateProductAsync = createAsyncThunk(
+  "products/updateProductAsync",
+  async ({ url: productUrl, name, cartQty }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${url}/products/${productUrl}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          cartQty,
+        }),
+      });
+
+      // console.log("fetch response", response);
+
+      const resData = await response.json();
+      if (!response.ok && resData?.error) {
+        // console.error("there was an error in the backend", resData);
+        return rejectWithValue("HIIII There was an error in the backend");
+        // throw new Error("HIIII There was an error in the backend");
+      }
+      return resData;
+    } catch (error) {
+      console.log("put thunk error", error);
+    }
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
-  //   extraReducers: (builder) => {
-  //     builder.addCase(fetchProductsAsync.pending, (state, action) => {
-  //       //   state.status = "pending";
-  //       console.log("pending");
-  //       return {
-  //         status: "pending",
-  //         items: state.items,
+
   extraReducers: (builder) => {
     builder.addCase(fetchProductsAsync.pending, (state, action) => {
       state.status = "pending";
@@ -102,6 +128,14 @@ const productsSlice = createSlice({
     builder.addCase(createProductAsync.rejected, (state, action) => {
       state.createStatus = "rejected";
       console.log("rejected", action.error);
+    });
+
+    builder.addCase(updateProductAsync.rejected, (state, action) => {
+      // console.log("rejected");
+      state.updateStockStatus = "rejected";
+    });
+    builder.addCase(updateProductAsync.fulfilled, (state, action) => {
+      // console.log("fulfilled");
     });
   },
 });

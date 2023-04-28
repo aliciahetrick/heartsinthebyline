@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema(
       enum: ["taylor", "billie", "olivia"],
     },
     price: { type: Number, required: true },
-    stock: { type: Number, required: true },
+    stock: { type: Number, min: 0, required: true },
     image: { type: Object, required: true },
   },
   { timestamps: true }

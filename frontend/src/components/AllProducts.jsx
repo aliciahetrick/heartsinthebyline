@@ -31,6 +31,7 @@ const AllProducts = () => {
                       alt={product.name}
                       style={{ width: "300px" }}
                     />
+                    <h3>{product.stock}</h3>
                   </Link>
                 </div>
               );

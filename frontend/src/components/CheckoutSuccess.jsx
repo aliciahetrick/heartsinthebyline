@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getTotals } from "../features/cartSlice";
+import { updateProductAsync } from "../features/productsSlice";
 
 const CheckoutSuccess = () => {
-  const paidCart = localStorage.getItem("cartItems");
-  console.log(paidCart);
-  // const [paidCart, setPaidCart] = useState([]);
+  const { updateStockStatus } = useSelector((state) => state.products);
+
+  const paidCart = JSON.parse(localStorage.getItem("cartItems"));
+  // console.log(paidCart);
 
   const dispatch = useDispatch();
 
-  // sets the state of the checked out cart
   useEffect(() => {
-    // setPaidCart(localStorage.getItem("cartItems"));
-    // dispatch(clearCart());
     dispatch(getTotals());
+
+    paidCart.map((cartItem) => {
+      const updateObject = {
+        url: cartItem.url,
+        name: cartItem.name,
+        cartQty: cartItem.cartQty,
+      };
+      return dispatch(updateProductAsync(updateObject));
+    });
   }, []);
 
+  // TODO: clear the cart from local storage after checkout
   // clears the cart in local storage
   // useEffect(() => {
   //   console.log("paidCart", paidCart);
@@ -25,8 +34,11 @@ const CheckoutSuccess = () => {
 
   return (
     <>
-      <h2>Checkout Success</h2>
-      <h1>{paidCart[0].name}</h1>
+      {updateStockStatus === "rejected" ? (
+        <h2>There was not enough stock</h2>
+      ) : (
+        <h2>Checkout Success</h2>
+      )}
     </>
   );
 };
