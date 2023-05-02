@@ -65,7 +65,7 @@ export const updateProductAsync = createAsyncThunk(
         method: "PUT",
         headers: {
           "Content-type": "application/json",
-          accept: "application/json",
+          // accept: "application/json",
         },
         body: JSON.stringify({
           name,
