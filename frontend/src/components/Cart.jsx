@@ -52,12 +52,14 @@ const Cart = () => {
             return (
               <div key={cartItem._id}>
                 <div>
-                  <img
-                    src={cartItem.image.url}
-                    alt={cartItem.name}
-                    style={{ width: "300px" }}
-                  />
-                  <p>{cartItem.name}</p>
+                  <Link to={`/products/${cartItem.url}`}>
+                    <img
+                      src={cartItem.image.url}
+                      alt={cartItem.name}
+                      style={{ width: "300px" }}
+                    />
+                    <p>{cartItem.name}</p>
+                  </Link>
                   <p>${cartItem.price} each</p>
                   <button onClick={() => handleDecreaseCartQuantity(cartItem)}>
                     -

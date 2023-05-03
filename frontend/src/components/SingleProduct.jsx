@@ -14,12 +14,6 @@ const SingleProduct = () => {
     (state) => state.products
   );
 
-  // const {
-  //   data: singleProduct,
-  //   error,
-  //   isLoading,
-  // } = useGetSingleProductQuery(param);
-
   useEffect(() => {
     dispatch(fetchSingleProductAsync(param));
   }, [dispatch, param]);

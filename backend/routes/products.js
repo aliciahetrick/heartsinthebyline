@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/:_id", async (req, res, next) => {
   try {
     // console.log("requesrrrt", req.params._id);
-    const product = await Product.findOne({ name: req.params._id });
+    const product = await Product.findOne({ url: req.params._id });
     res.status(200).send(product);
   } catch (err) {
     console.log(err);
@@ -28,9 +28,24 @@ router.get("/:_id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const product = await Product.findOne({ url: req.params.id });
+    product.stock = product.stock - req.body.cartQty;
+    await product.save();
+    res.status(200).send(product);
+  } catch (err) {
+    console.log("Stock update error", err);
+
+    res.status(500).send({ error: "stock_error" });
+  }
+});
+
 // Create a product
+// router.post("/", async (req, res) => {
 router.post("/", isAdmin, async (req, res) => {
-  const { name, desc, price, image } = req.body;
+  const { name, type, desc, price, image, url, stock } = req.body;
 
   try {
     if (image) {
@@ -41,8 +56,11 @@ router.post("/", isAdmin, async (req, res) => {
       if (uploadResponse) {
         const product = new Product({
           name,
+          type,
+          url,
           desc,
           price,
+          stock,
           image: uploadResponse,
         });
 
