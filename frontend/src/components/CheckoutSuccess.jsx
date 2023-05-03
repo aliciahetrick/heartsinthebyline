@@ -22,7 +22,7 @@ const CheckoutSuccess = () => {
       };
       return dispatch(updateProductAsync(updateObject));
     });
-  }, []);
+  }, [dispatch, paidCart]);
 
   // TODO: clear the cart from local storage after checkout
   // clears the cart in local storage
