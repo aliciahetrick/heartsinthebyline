@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, getTotals } from "../features/cartSlice";
+import { getTotals } from "../features/cartSlice";
 import { updateProductAsync } from "../features/productsSlice";
 
 const CheckoutSuccess = () => {
