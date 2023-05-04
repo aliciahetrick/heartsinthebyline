@@ -19,7 +19,11 @@ const cartSlice = createSlice({
 
       // if item already in cart
       if (itemIndex >= 0) {
-        state.cartItems[itemIndex].cartQty += 1;
+        if (
+          state.cartItems[itemIndex].cartQty < state.cartItems[itemIndex].stock
+        ) {
+          state.cartItems[itemIndex].cartQty += 1;
+        }
       } else {
         const tempProduct = { ...action.payload, cartQty: 1 };
         state.cartItems.push(tempProduct);
