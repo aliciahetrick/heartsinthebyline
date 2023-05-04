@@ -32,11 +32,17 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     removeFromCart(state, action) {
-      const filterCartItems = state.cartItems.filter(
-        (cartItem) => cartItem._id !== action.payload.id
-      );
-      state.cartItems = filterCartItems;
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      state.cartItems.map((cartItem) => {
+        if (cartItem._id === action.payload._id) {
+          const filtedCartItems = state.cartItems.filter(
+            (item) => item._id !== cartItem._id
+          );
+
+          state.cartItems = filtedCartItems;
+        }
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        return state;
+      });
     },
     decreaseCartQuantity(state, action) {
       const itemIndex = state.cartItems.findIndex(
