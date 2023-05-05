@@ -43,14 +43,24 @@ export const createProductAsync = createAsyncThunk(
   async (values) => {
     // console.log("values", values);
     try {
-      const response = await axios.post(
-        `${url}/products`,
-        // "http://localhost:5000/api/products",
-        values,
-        setHeaders()
-      );
-      console.log("fetch response", response);
-      return response.data;
+      // const response = await axios.post(
+      //   `${url}/products`,
+      //   // "http://localhost:5000/api/products",
+      //   values,
+      //   setHeaders()
+      // );
+      // console.log("fetch response", response);
+      // return response.data;
+      const response = await fetch(`${url}/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify(values),
+      });
+      const jsonData = await response.json();
+      return jsonData;
     } catch (error) {
       console.log("post error", error);
     }
