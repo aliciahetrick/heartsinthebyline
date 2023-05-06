@@ -15,9 +15,9 @@ export const fetchProductsAsync = createAsyncThunk(
   "products/fetchAllProducts",
   async () => {
     try {
-      const response = await axios.get(`${url}/products`);
-      console.log("fetch response", response);
-      return response?.data;
+      const response = await fetch(`${url}/products`);
+      const jsonData = await response.json();
+      return jsonData;
     } catch (error) {
       console.log(error);
     }
@@ -29,9 +29,9 @@ export const fetchSingleProductAsync = createAsyncThunk(
   "products/fetchSingleProductAsync",
   async (_id) => {
     try {
-      const { data } = await axios.get(`${url}/products/${_id}`);
-      console.log("fetch response", data);
-      return data;
+      const response = await fetch(`${url}/products/${_id}`);
+      const jsonData = await response.json();
+      return jsonData;
     } catch (error) {
       console.log("thunk error", error);
     }
@@ -43,14 +43,24 @@ export const createProductAsync = createAsyncThunk(
   async (values) => {
     // console.log("values", values);
     try {
-      const response = await axios.post(
-        `${url}/products`,
-        // "http://localhost:5000/api/products",
-        values,
-        setHeaders()
-      );
-      console.log("fetch response", response);
-      return response.data;
+      // const response = await axios.post(
+      //   `${url}/products`,
+      //   // "http://localhost:5000/api/products",
+      //   values,
+      //   setHeaders()
+      // );
+      // console.log("fetch response", response);
+      // return response.data;
+      const response = await fetch(`${url}/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify(values),
+      });
+      const jsonData = await response.json();
+      return jsonData;
     } catch (error) {
       console.log("post error", error);
     }
@@ -77,9 +87,7 @@ export const updateProductAsync = createAsyncThunk(
 
       const resData = await response.json();
       if (!response.ok && resData?.error) {
-        // console.error("there was an error in the backend", resData);
         return rejectWithValue("HIIII There was an error in the backend");
-        // throw new Error("HIIII There was an error in the backend");
       }
       return resData;
     } catch (error) {

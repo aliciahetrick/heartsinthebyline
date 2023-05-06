@@ -40,9 +40,13 @@ const SingleProduct = () => {
           />
           <p>{singleProduct.desc}</p>
           <p>Price: ${singleProduct.price}</p>
-          <button onClick={() => handleAddToCart(singleProduct)}>
-            Add to Cart
-          </button>
+          {singleProduct.stock === 0 ? (
+            <button disabled>Sold Out </button>
+          ) : (
+            <button onClick={() => handleAddToCart(singleProduct)}>
+              Add to Cart
+            </button>
+          )}
         </>
       ) : singleProductStatus === "pending" ? (
         <p>Loading...</p>

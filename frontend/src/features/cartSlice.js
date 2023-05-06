@@ -19,7 +19,11 @@ const cartSlice = createSlice({
 
       // if item already in cart
       if (itemIndex >= 0) {
-        state.cartItems[itemIndex].cartQty += 1;
+        if (
+          state.cartItems[itemIndex].cartQty < state.cartItems[itemIndex].stock
+        ) {
+          state.cartItems[itemIndex].cartQty += 1;
+        }
       } else {
         const tempProduct = { ...action.payload, cartQty: 1 };
         state.cartItems.push(tempProduct);
@@ -28,11 +32,17 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     removeFromCart(state, action) {
-      const filterCartItems = state.cartItems.filter(
-        (cartItem) => cartItem._id !== action.payload.id
-      );
-      state.cartItems = filterCartItems;
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      state.cartItems.map((cartItem) => {
+        if (cartItem._id === action.payload._id) {
+          const filtedCartItems = state.cartItems.filter(
+            (item) => item._id !== cartItem._id
+          );
+
+          state.cartItems = filtedCartItems;
+        }
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        return state;
+      });
     },
     decreaseCartQuantity(state, action) {
       const itemIndex = state.cartItems.findIndex(
