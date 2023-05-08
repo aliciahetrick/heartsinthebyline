@@ -4,6 +4,7 @@ import { logoutUser } from "../features/authSlice";
 
 import styled from "styled-components";
 import "../fonts/AmerikaSignature.ttf";
+import * as FaIcons from "react-icons/fa";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -12,9 +13,8 @@ const Navbar = () => {
 
   return (
     <nav style={{ backgroundColor: "pink" }}>
-      <Link to="/">Home</Link>
-      {/* <Link to="/register">Register</Link> */}
-      {auth._id ? (
+      {/* <Link to="/">Home</Link> */}
+      {/* {auth._id ? (
         <>
           {auth.isAdmin ? (
             <div>
@@ -35,13 +35,15 @@ const Navbar = () => {
           <Link to="/register">Register</Link>
           <Link to="/login">Log In</Link>
         </div>
-      )}
+      )} */}
 
-      {/* <Link to="/login">Log In</Link> */}
-      <Link to="/products">Products</Link>
+      {/* <Link to="/products">Products</Link> */}
+      <NavbarHamburgerIcon>
+        <FaIcons.FaBars />
+      </NavbarHamburgerIcon>
       <TitleLink to="/">heartsinthebyline</TitleLink>
-      <Link to="/faq">FAQ</Link>
-      <Link to="/cart">Cart({cartTotalQty})</Link>
+      {/* <Link to="/faq">FAQ</Link>
+      <Link to="/cart">Cart({cartTotalQty})</Link> */}
     </nav>
   );
 };
@@ -50,15 +52,20 @@ export default Navbar;
 
 const TitleLink = styled(Link)`
   display: flex;
-  top: 0;
+
+  // top: 0;
   // background-color: #fff5fa;
   display: inline-block;
   text-decoration: none;
   color: #f578a6;
   font-size: 100px;
-  padding-top: 0;
-  margin-top: 10px;
-  /* margin-left: 15px; */
-  margin-right: 15px;
   font-family: "AmerikaSignature";
+`;
+
+const NavbarHamburgerIcon = styled.div`
+  display: flex;
+  justify-content: left;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: #fff5fa;
 `;
