@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { setHeaders, url } from "./api";
+import { url } from "./api";
 
 const initialState = {
   items: [],
@@ -43,14 +42,7 @@ export const createProductAsync = createAsyncThunk(
   async (values) => {
     // console.log("values", values);
     try {
-      // const response = await axios.post(
-      //   `${url}/products`,
-      //   // "http://localhost:5000/api/products",
-      //   values,
-      //   setHeaders()
-      // );
-      // console.log("fetch response", response);
-      // return response.data;
+      // "http://localhost:5000/api/products",
       const response = await fetch(`${url}/products`, {
         method: "POST",
         headers: {
