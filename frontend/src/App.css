@@ -44,3 +44,16 @@
 .link-inactive {
   background-color: white;
 }
+
+body {
+  margin: 0;
+  background-color: #fff5fa;
+}
+
+@font-face {
+  font-family: AmerikaSignature;
+  src: local("AmerikaSignature"),
+    url(./fonts/AmerikaSignature.ttf) format("truetype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}

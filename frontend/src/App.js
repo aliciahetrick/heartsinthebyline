@@ -35,7 +35,7 @@ function App() {
               <Route path="create" element={<CreateProduct />} />
             </Route>
           </Route>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<AllProducts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
