@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { logoutUser } from "../features/authSlice";
+import { logoutUser } from "../features/authSlice";
 
 import styled from "styled-components";
 import "../fonts/AmerikaSignature.ttf";
@@ -10,9 +10,9 @@ import * as FaIcons from "react-icons/fa";
 
 const Navbar = () => {
   const [isMobileSidebarToggled, setIsMobileSidebarToggled] = useState(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { cartTotalQty } = useSelector((state) => state.cart);
-  // const auth = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
 
   const handleNavbarToggle = () => {
     setIsMobileSidebarToggled(!isMobileSidebarToggled);
@@ -34,13 +34,22 @@ const Navbar = () => {
           <TitleLink to="/">heartsinthebyline</TitleLink>
           <MobileNavItems>
             <MobileNavItem
+              to="/"
+              onClick={() => {
+                handleNavbarToggle();
+              }}
+              style={{ textDecoration: "none", color: "#f578a6" }}
+            >
+              <FaIcons.FaHome /> Home
+            </MobileNavItem>
+            <MobileNavItem
               to="/products"
               onClick={() => {
                 handleNavbarToggle();
               }}
               style={{ textDecoration: "none", color: "#f578a6" }}
             >
-              Products
+              <FaIcons.FaHeart /> Products
             </MobileNavItem>
             <MobileNavItem
               to="/cart"
@@ -49,8 +58,63 @@ const Navbar = () => {
               }}
               style={{ textDecoration: "none", color: "#f578a6" }}
             >
-              Cart({cartTotalQty})
+              <FaIcons.FaShoppingCart /> Cart({cartTotalQty})
             </MobileNavItem>
+            {auth._id ? (
+              <>
+                {auth.isAdmin ? (
+                  <div>
+                    <MobileNavItem
+                      to="/admin/summary"
+                      onClick={() => {
+                        handleNavbarToggle();
+                      }}
+                      style={{ textDecoration: "none", color: "#f578a6" }}
+                    >
+                      <FaIcons.FaKey /> Admin
+                    </MobileNavItem>
+                  </div>
+                ) : null}
+
+                <div
+                  onClick={() => {
+                    dispatch(logoutUser(null));
+                  }}
+                >
+                  <MobileNavItem
+                    to="/"
+                    onClick={() => {
+                      handleNavbarToggle();
+                    }}
+                    style={{ textDecoration: "none", color: "#f578a6" }}
+                  >
+                    <FaIcons.FaSignOutAlt />
+                    Log Out
+                  </MobileNavItem>
+                </div>
+              </>
+            ) : (
+              <>
+                <MobileNavItem
+                  to="/register"
+                  onClick={() => {
+                    handleNavbarToggle();
+                  }}
+                  style={{ textDecoration: "none", color: "#f578a6" }}
+                >
+                  <FaIcons.FaUserPlus /> Register
+                </MobileNavItem>
+                <MobileNavItem
+                  to="/login"
+                  onClick={() => {
+                    handleNavbarToggle();
+                  }}
+                  style={{ textDecoration: "none", color: "#f578a6" }}
+                >
+                  <FaIcons.FaSignInAlt /> Log In
+                </MobileNavItem>
+              </>
+            )}
           </MobileNavItems>
         </MobileNavToggled>
       ) : (
@@ -66,31 +130,6 @@ const Navbar = () => {
           <TitleLink to="/">heartsinthebyline</TitleLink>
         </>
       )}
-      {/* <Link to="/">Home</Link> */}
-      {/* {auth._id ? (
-        <>
-          {auth.isAdmin ? (
-            <div>
-              <Link to="/admin/summary">Admin</Link>
-            </div>
-          ) : null}
-
-          <div
-            onClick={() => {
-              dispatch(logoutUser(null));
-            }}
-          >
-            <Link to="/">Log Out</Link>
-          </div>
-        </>
-      ) : (
-        <div>
-          <Link to="/register">Register</Link>
-          <Link to="/login">Log In</Link>
-        </div>
-      )} */}
-
-      {/* <Link to="/products">Products</Link> */}
 
       {/* <Link to="/faq">FAQ</Link>
       <Link to="/cart">Cart({cartTotalQty})</Link> */}
@@ -131,7 +170,7 @@ const CloseNavButton = styled.div`
   padding-top: 15px;
   padding-right: 15px;
 
-  color: #f578a6;
+  color: #fff5fa;
 `;
 
 const MobileNavItems = styled.div`
@@ -139,7 +178,8 @@ const MobileNavItems = styled.div`
   flex-direction: column;
   gap: 1em;
 
-  height: 80vh;
+  height: 70vh;
+  border: 1px solid red;
 
   // justify-content: space-around;
 
