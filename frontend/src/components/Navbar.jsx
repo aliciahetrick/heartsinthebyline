@@ -1,4 +1,5 @@
 // import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { logoutUser } from "../features/authSlice";
 
@@ -7,9 +8,16 @@ import "../fonts/AmerikaSignature.ttf";
 import * as FaIcons from "react-icons/fa";
 
 const Navbar = () => {
+  const [isMobileSidebarToggled, setIsMobileSidebarToggled] = useState(false);
   // const dispatch = useDispatch();
   // const { cartTotalQty } = useSelector((state) => state.cart);
   // const auth = useSelector((state) => state.auth);
+
+  const handleNavbarToggle = () => {
+    setIsMobileSidebarToggled(!isMobileSidebarToggled);
+  };
+
+  console.log("toggled?", isMobileSidebarToggled);
 
   return (
     <nav style={{ backgroundColor: "pink" }}>
@@ -38,7 +46,11 @@ const Navbar = () => {
       )} */}
 
       {/* <Link to="/products">Products</Link> */}
-      <NavbarHamburgerIcon>
+      <NavbarHamburgerIcon
+        onClick={() => {
+          handleNavbarToggle();
+        }}
+      >
         <FaIcons.FaBars />
       </NavbarHamburgerIcon>
       <TitleLink to="/">heartsinthebyline</TitleLink>
@@ -60,12 +72,13 @@ const TitleLink = styled(Link)`
   color: #f578a6;
   font-size: 100px;
   font-family: "AmerikaSignature";
+  margin-top: -0.3em;
 `;
 
 const NavbarHamburgerIcon = styled.div`
   display: flex;
   justify-content: left;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
   color: #fff5fa;
 `;
