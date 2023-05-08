@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logoutUser } from "../features/authSlice";
+// import { logoutUser } from "../features/authSlice";
 
 import styled from "styled-components";
 import "../fonts/AmerikaSignature.ttf";
 import * as FaIcons from "react-icons/fa";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-  const { cartTotalQty } = useSelector((state) => state.cart);
-  const auth = useSelector((state) => state.auth);
+  // const dispatch = useDispatch();
+  // const { cartTotalQty } = useSelector((state) => state.cart);
+  // const auth = useSelector((state) => state.auth);
 
   return (
     <nav style={{ backgroundColor: "pink" }}>
