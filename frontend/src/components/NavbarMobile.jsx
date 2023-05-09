@@ -8,8 +8,6 @@ import styled from "styled-components";
 import "../fonts/AmerikaSignature.ttf";
 import * as FaIcons from "react-icons/fa";
 
-import { BREAKPOINTS } from "../constants/breakpoints";
-
 const NavbarMobile = () => {
   const [isMobileSidebarToggled, setIsMobileSidebarToggled] = useState(false);
   const dispatch = useDispatch();
