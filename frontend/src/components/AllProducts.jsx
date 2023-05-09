@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import { useGetAllProductsQuery } from "../features/productsApi";
 import { fetchProductsAsync } from "../features/productsSlice";
 import styled from "styled-components";
+import { BREAKPOINTS } from "../constants/breakpoints";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -22,21 +23,27 @@ const AllProducts = () => {
       <div>
         {status === "success" ? (
           <>
-            {allProducts?.map((product) => {
-              return (
-                <ProductContainer key={product._id}>
-                  <Link
-                    to={`/products/${product.url}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <ProductImage src={product.image.url} alt={product.name} />
+            <AllProductsContainer>
+              {allProducts?.map((product) => {
+                return (
+                  <ProductContainer key={product._id}>
+                    <Link
+                      to={`/products/${product.url}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <ProductImage
+                        src={product.image.url}
+                        alt={product.name}
+                      />
 
-                    <ProductName>{product.name}</ProductName>
-                    {/* <h3>{product.stock}</h3> */}
-                  </Link>
-                </ProductContainer>
-              );
-            })}
+                      <ProductName>{product.name}</ProductName>
+                      {/* <h3>{product.stock}</h3> */}
+                      {/* <ProductName>${product.price}</ProductName> */}
+                    </Link>
+                  </ProductContainer>
+                );
+              })}
+            </AllProductsContainer>
           </>
         ) : status === "pending" ? (
           <p>Loading...</p>
@@ -60,6 +67,18 @@ const WrapperTitle = styled.h1`
   margin-bottom: 1em;
 `;
 
+const AllProductsContainer = styled.div`
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+`;
+
 const ProductContainer = styled.div`
   margin-bottom: 3em;
 `;
@@ -67,6 +86,9 @@ const ProductContainer = styled.div`
 const ProductImage = styled.img`
   width: 250px;
   border-radius: 1em;
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    width: 300px;
+  }
 `;
 
 const ProductName = styled.h2`
@@ -76,4 +98,7 @@ const ProductName = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 0.5em;
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    max-width: 300px;
+  }
 `;
