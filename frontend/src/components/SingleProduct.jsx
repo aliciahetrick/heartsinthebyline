@@ -106,7 +106,7 @@ border:
   text-align: center;
   align-items: center;
   justify-content: center;
-  &:hover {
-    background-color: #fff5fa;
-  }
+  // &:hover {
+  //   background-color: #fff5fa;
+  // }
 `;
