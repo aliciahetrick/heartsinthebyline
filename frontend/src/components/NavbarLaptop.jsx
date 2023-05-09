@@ -6,12 +6,8 @@ import { logoutUser } from "../features/authSlice";
 
 import styled from "styled-components";
 import "../fonts/AmerikaSignature.ttf";
-import * as FaIcons from "react-icons/fa";
-
-import { BREAKPOINTS } from "../constants/breakpoints";
 
 const NavbarLaptop = () => {
-  const [isMobileSidebarToggled, setIsMobileSidebarToggled] = useState(false);
   const dispatch = useDispatch();
   const { cartTotalQty } = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
