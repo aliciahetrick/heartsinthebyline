@@ -108,10 +108,10 @@ const Cart = () => {
             })}
           </AllCartItemsContainer>
           <div>
-            <button onClick={() => handleClearCart()}>Clear cart</button>
-            <p>Taxes and shipping calculated at checkout</p>
-            <p>Subtotal: ${cart.cartTotalPrice}</p>
+            <p>Total: ${cart.cartTotalPrice}</p>
+            <p>Shipping & taxes calculated at checkout</p>
             <PayButton cartItems={cart.cartItems} />
+            <button onClick={() => handleClearCart()}>Clear cart</button>
           </div>
         </>
       )}
@@ -206,13 +206,13 @@ const CartItemLeftWrapper = styled(Link)`
 `;
 
 const CartItemImage = styled.img`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 1em;
-  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
-    width: 300px;
-    height: 300px;
-  }
+  // @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+  //   width: 300px;
+  //   height: 300px;
+  // }
 `;
 
 const CartItemDetailsWrapper = styled.div`
@@ -260,8 +260,9 @@ const CartQuantityButtonMinus = styled.button`
   background-color: #f578a6;
   color: white;
   padding: 0.5em;
-  border-top-left-radius: 1em;
-  border-bottom-left-radius: 1em;
+
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
   border: none;
   padding-left: 1em;
 `;
@@ -279,8 +280,9 @@ const CartQuantityButtonPlus = styled.button`
   background-color: #f578a6;
   color: white;
   padding: 0.5em;
-  border-top-right-radius: 1em;
-  border-bottom-right-radius: 1em;
+
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
   border: none;
   padding-right: 1em;
 `;
@@ -311,7 +313,7 @@ const CartItemRightWrapper = styled.div`
 `;
 
 const CartItemTotal = styled.h2`
-  color: pink;
+  color: #f578a6;
   font-size: 1rem;
   font-weight: 600;
   font-family: "Raleway", sans-serif;
