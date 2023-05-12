@@ -51,9 +51,10 @@ const cartSlice = createSlice({
       if (state.cartItems[itemIndex].cartQty > 1) {
         state.cartItems[itemIndex].cartQty -= 1;
       } else if (state.cartItems[itemIndex].cartQty === 1) {
-        const filterCartItems = state.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload.id
-        );
+        const filterCartItems = state.cartItems.filter((cartItem) => {
+          return cartItem._id !== action.payload._id;
+        });
+
         state.cartItems = filterCartItems;
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
