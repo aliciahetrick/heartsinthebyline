@@ -11,7 +11,6 @@ import {
 import PayButton from "./PayButton";
 
 import styled from "styled-components";
-import { BREAKPOINTS } from "../constants/breakpoints";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,7 @@ const Cart = () => {
 
   return (
     <>
-      <WrapperTitle>Cart</WrapperTitle>
+      <WrapperPageTitle>Cart</WrapperPageTitle>
       {cart.cartItems.length === 0 ? (
         <div>
           <p>Your cart is empty</p>
@@ -50,70 +49,63 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <>
-          <AllCartItemsContainer>
-            <HeadingWrapper>
-              <ProductWrapper>Product</ProductWrapper>
-              <QuantityWrapper>Quantity</QuantityWrapper>
-              <TotalWrapper>Total</TotalWrapper>
-            </HeadingWrapper>
-            {cart.cartItems.map((cartItem) => {
-              return (
-                <CartItemContainer key={cartItem._id}>
-                  <>
-                    <CartItemLeftWrapper
-                      to={`/products/${cartItem.url}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <CartItemImage
-                        src={cartItem.image.url}
-                        alt={cartItem.name}
-                        // style={{ width: "300px" }}
-                      />
-                      <CartItemDetailsWrapper>
-                        <CartItemName>{cartItem.name}</CartItemName>
-                        <CartItemPrice>${cartItem.price} each</CartItemPrice>
-                      </CartItemDetailsWrapper>
-                    </CartItemLeftWrapper>
-                    <CartItemMiddleWrapper>
-                      <CartQuantityButtonContainer>
-                        <CartQuantityButtonMinus
-                          onClick={() => handleDecreaseCartQuantity(cartItem)}
-                        >
-                          -
-                        </CartQuantityButtonMinus>
-                        <CartQuantityNumber>
-                          {cartItem.cartQty}
-                        </CartQuantityNumber>
-                        <CartQuantityButtonPlus
-                          onClick={() => handleIncreaseCartQuantity(cartItem)}
-                        >
-                          +
-                        </CartQuantityButtonPlus>
-                      </CartQuantityButtonContainer>
-                      <RemoveCartItemButton
-                        onClick={() => handleRemoveFromCart(cartItem)}
+        <div>
+          {cart.cartItems.map((cartItem) => {
+            return (
+              <SingleCartItemContainer key={cartItem._id}>
+                <SingleCartItemContainerLeft>
+                  <Link to={`/products/${cartItem.url}`}>
+                    <SingleCartItemImage
+                      src={cartItem.image.url}
+                      alt={cartItem.name}
+                      style={{ width: "80px" }}
+                    />
+                  </Link>
+                </SingleCartItemContainerLeft>
+                <SingleCartItemContainerRight>
+                  <SingleCartItemDetailsTop>
+                    <SingleCartItemTitle>{cartItem.name}</SingleCartItemTitle>
+                    <SingleCartItemPrice>
+                      ${cartItem.price} each
+                    </SingleCartItemPrice>
+                  </SingleCartItemDetailsTop>
+                  <SingleCartItemDetailsBottom>
+                    <CartQuantityButtonContainer>
+                      <CartQuantityButtonMinus
+                        onClick={() => handleDecreaseCartQuantity(cartItem)}
                       >
-                        Remove
-                      </RemoveCartItemButton>
-                    </CartItemMiddleWrapper>
-                    <CartItemRightWrapper>
-                      <CartItemTotal>
-                        ${cartItem.price * cartItem.cartQty}
-                      </CartItemTotal>
-                    </CartItemRightWrapper>
-                  </>
-                </CartItemContainer>
-              );
-            })}
-          </AllCartItemsContainer>
-          <div>
-            <p>Total: ${cart.cartTotalPrice}</p>
-            <p>Shipping & taxes calculated at checkout</p>
+                        -
+                      </CartQuantityButtonMinus>
+                      <CartQuantityNumber>
+                        {cartItem.cartQty}
+                      </CartQuantityNumber>
+                      <CartQuantityButtonPlus
+                        onClick={() => handleIncreaseCartQuantity(cartItem)}
+                      >
+                        +
+                      </CartQuantityButtonPlus>
+                    </CartQuantityButtonContainer>
+
+                    <RemoveCartItemButton
+                      onClick={() => handleRemoveFromCart(cartItem)}
+                    >
+                      Remove
+                    </RemoveCartItemButton>
+                  </SingleCartItemDetailsBottom>
+                </SingleCartItemContainerRight>
+              </SingleCartItemContainer>
+            );
+          })}
+          <CartCheckoutContainer>
+            {/* <button onClick={() => handleClearCart()}>Clear cart</button> */}
+            <CheckoutBlurb>
+              Shipping & taxes calculated at checkout
+            </CheckoutBlurb>
+            <CheckoutTotal>Total: ${cart.cartTotalPrice}</CheckoutTotal>
+
             <PayButton cartItems={cart.cartItems} />
-            <button onClick={() => handleClearCart()}>Clear cart</button>
-          </div>
-        </>
+          </CartCheckoutContainer>
+        </div>
       )}
     </>
   );
@@ -121,134 +113,106 @@ const Cart = () => {
 
 export default Cart;
 
-const WrapperTitle = styled.h1`
+const WrapperPageTitle = styled.h1`
   color: #f578a6;
   text-align: center;
   font-size: 1.5rem;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 1em;
+  // margin-bottom: 1em;
+`;
+
+const SingleCartItemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-bottom: 1em;
-`;
+  padding-top: 1em;
 
-const HeadingWrapper = styled.div`
-  display: flex;
-  margin-left: 10%;
-  margin-right: 10%;
-  // border: 1px solid red;
-  color: #f578a6;
-  text-align: center;
-  font-size: 0.5rem;
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  &::after {
-    content: "";
-    position: absolute;
-    margin: auto;
-    margin-top: 4em;
-    width: 80%;
-    height: 2px;
-    background-color: pink;
-  }
-`;
-
-const ProductWrapper = styled.h2`
-  width: 60%;
-  text-align: left;
-  // border: 1px solid green;
-`;
-const QuantityWrapper = styled.h2`
-  width: 20%;
-  // border: 1px solid green;
-`;
-
-const TotalWrapper = styled.h2`
-  width: 20%;
-  // border: 1px solid green;
-`;
-
-const AllCartItemsContainer = styled.div`
-  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
-    // gap: 1em;
-    // flex-wrap: wrap;
-    // margin-left: 10%;
-    // margin-right: 10%;
-  }
-`;
-
-const CartItemContainer = styled.div`
-  display: flex;
-  padding-bottom: 2em;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 2em;
-
-  border-bottom: 2px solid pink;
   // &::after {
   //   content: "";
   //   position: absolute;
   //   margin: auto;
-  //   margin-top: 1em;
+  //   margin-top: 6em;
   //   right: 0;
   //   left: 0;
-  //   width: 80%;
+  //   width: 90%;
   //   height: 2px;
   //   background-color: pink;
   // }
 `;
 
-const CartItemLeftWrapper = styled(Link)`
-  width: 60%;
-  display: flex;
+const SingleCartItemContainerLeft = styled.div`
+  width: 25%;
+  // border: 1px solid red;
 `;
 
-const CartItemImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 1em;
-  // @media only screen and (min-width: ${BREAKPOINTS.medium}) {
-  //   width: 300px;
-  //   height: 300px;
-  // }
+const SingleCartItemImage = styled.img`
+  border-radius: 0.5em;
 `;
 
-const CartItemDetailsWrapper = styled.div`
+const SingleCartItemContainerRight = styled.div`
+  width: 75%;
+  // border: 1px solid red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-left: 1em;
+  justify-content: space-between;
 `;
 
-const CartItemName = styled.h2`
+const SingleCartItemDetailsTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 8%;
+  text-align: left;
+  // border: 1px solid orange;
+  // height: 50%;
+`;
+
+const SingleCartItemTitle = styled.p`
+  text-align: left;
+  // border: 1px solid green;
+  margin-top: 0;
+  margin-bottom: 0;
+
   color: #f578a6;
+  font-weight: bold;
   text-align: left;
   font-size: 1rem;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  margin-top: 0.5em;
-  // border: 1px solid blue;
 `;
 
-const CartItemPrice = styled.h2`
+const SingleCartItemPrice = styled.p`
+  text-align: left;
+  // border: 1px solid green;
+  margin-top: 0;
+
   color: pink;
+  font-weight: bold;
   text-align: left;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.7rem;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  margin-top: 0.5em;
-  // border: 1px solid blue;
 `;
 
-const CartItemMiddleWrapper = styled.div`
-  width: 20%;
+const SingleCartItemDetailsBottom = styled.div`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1em;
+  justify-content: space-between;
+  margin-left: 8%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    margin: auto;
+    margin-top: 2.5em;
+    right: 0;
+    left: 0;
+    width: 90%;
+    height: 2px;
+    background-color: pink;
+  }
 `;
 
 const CartQuantityButtonContainer = styled.div`
@@ -259,32 +223,31 @@ const CartQuantityButtonContainer = styled.div`
 const CartQuantityButtonMinus = styled.button`
   background-color: #f578a6;
   color: white;
-  padding: 0.5em;
+  padding: 0.3em;
 
   border-top-left-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   border: none;
-  padding-left: 1em;
+  padding-left: 0.5em;
 `;
 
 const CartQuantityNumber = styled.div`
   background-color: #f578a6;
   font-family: "Raleway", sans-serif;
   color: white;
-  padding: 0.5em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 0.3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 `;
 
 const CartQuantityButtonPlus = styled.button`
   background-color: #f578a6;
   color: white;
-  padding: 0.5em;
-
+  padding: 0.3em;
   border-top-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   border: none;
-  padding-right: 1em;
+  padding-right: 0.5em;
 `;
 
 const RemoveCartItemButton = styled.button`
@@ -298,26 +261,29 @@ const RemoveCartItemButton = styled.button`
   text-decoration: underline;
 
   color: pink;
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: 600;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
 `;
 
-const CartItemRightWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // border: 1px solid green;
-  width: 20%;
+const CartCheckoutContainer = styled.div`
+  padding-top: 0.5em;
+  padding-bottom: 1em;
 `;
 
-const CartItemTotal = styled.h2`
+const CheckoutBlurb = styled.p`
+  color: pink;
+  font-weight: bold;
+  font-size: 0.7rem;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+`;
+
+const CheckoutTotal = styled.p`
   color: #f578a6;
+  font-weight: bold;
   font-size: 1rem;
-  font-weight: 600;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  margin-top: 0.5em;
-  // border: 1px solid blue;
 `;
