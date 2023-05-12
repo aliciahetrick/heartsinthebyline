@@ -7,7 +7,7 @@ import {
   decreaseCartQuantity,
   getTotals,
   removeFromCart,
-} from "../features/cartSlice";
+} from "../../features/cartSlice";
 import PayButton from "./PayButton";
 
 import styled from "styled-components";

@@ -7,13 +7,13 @@ import {
   decreaseCartQuantity,
   getTotals,
   removeFromCart,
-} from "../features/cartSlice";
+} from "../../features/cartSlice";
 import PayButton from "./PayButton";
 
 import styled from "styled-components";
-import { BREAKPOINTS } from "../constants/breakpoints";
+import { BREAKPOINTS } from "../../constants/breakpoints";
 
-const CartTablet = () => {
+const CartLaptop = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -122,7 +122,7 @@ const CartTablet = () => {
   );
 };
 
-export default CartTablet;
+export default CartLaptop;
 
 const WrapperTitle = styled.h1`
   color: #f578a6;
