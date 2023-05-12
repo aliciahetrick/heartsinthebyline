@@ -2,10 +2,10 @@
 import { useDispatch, useSelector } from "react-redux";
 // import { useState } from "react";
 import { Link } from "react-router-dom";
-import { logoutUser } from "../features/authSlice";
+import { logoutUser } from "../../features/authSlice";
 
 import styled from "styled-components";
-import "../fonts/AmerikaSignature.ttf";
+import "../../fonts/AmerikaSignature.ttf";
 
 const NavbarLaptop = () => {
   const dispatch = useDispatch();
