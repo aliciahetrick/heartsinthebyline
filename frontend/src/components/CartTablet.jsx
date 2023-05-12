@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   addToCart,
-  clearCart,
+  // clearCart,
   decreaseCartQuantity,
   getTotals,
   removeFromCart,
@@ -35,9 +35,9 @@ const CartTablet = () => {
     dispatch(removeFromCart(cartItem));
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
+  // const handleClearCart = () => {
+  //   dispatch(clearCart());
+  // };
 
   return (
     <>
