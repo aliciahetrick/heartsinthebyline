@@ -146,7 +146,7 @@ const TitleLink = styled(Link)`
   display: inline-block;
   text-decoration: none;
   color: #f578a6;
-  font-size: 100px;
+  font-size: 80px;
   font-family: "AmerikaSignature";
   margin-top: -0.3em;
 `;
