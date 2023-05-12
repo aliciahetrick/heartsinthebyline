@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, getTotals } from "../features/cartSlice";
 // import { useGetSingleProductQuery } from "../features/productsApi";
 import { fetchSingleProductAsync } from "../features/productsSlice";
@@ -10,6 +10,7 @@ const SingleProduct = () => {
   const param = useParams().id;
   console.log("param", param);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { singleProduct, singleProductStatus } = useSelector(
     (state) => state.products
@@ -27,6 +28,7 @@ const SingleProduct = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    navigate("/cart");
   };
 
   return (
@@ -88,7 +90,6 @@ const ProductPrice = styled.p`
 `;
 
 const ProductButton = styled.button`
-border:
   display: flex;
   width: 150px;
   height: 40px;
