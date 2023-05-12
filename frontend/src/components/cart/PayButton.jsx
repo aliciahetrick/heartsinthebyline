@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
-  console.log("user", user);
+  // console.log("user", user);
   const handleCheckout = () => {
     axios
       .post(`${url}/stripe/create-checkout-session`, {

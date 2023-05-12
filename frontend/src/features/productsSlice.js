@@ -98,7 +98,6 @@ const productsSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
-      console.log("fulfilled", action.payload);
       state.items = action.payload;
       state.status = "success";
     });
@@ -110,7 +109,6 @@ const productsSlice = createSlice({
       state.singleProductStatus = "pending";
     });
     builder.addCase(fetchSingleProductAsync.fulfilled, (state, action) => {
-      console.log("fulfilled", action.payload);
       state.singleProduct = action.payload;
       state.singleProductStatus = "success";
     });

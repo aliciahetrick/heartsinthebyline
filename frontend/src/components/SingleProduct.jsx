@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 const SingleProduct = () => {
   const param = useParams().id;
-  console.log("param", param);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
@@ -20,7 +19,7 @@ const SingleProduct = () => {
     dispatch(fetchSingleProductAsync(param));
   }, [dispatch, param]);
 
-  console.log("singleProduct", singleProduct);
+  // console.log("singleProduct", singleProduct);
 
   useEffect(() => {
     dispatch(getTotals());

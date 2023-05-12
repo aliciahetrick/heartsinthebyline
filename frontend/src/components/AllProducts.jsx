@@ -13,7 +13,6 @@ const AllProducts = () => {
   // console.log("query", allProducts);
 
   useEffect(() => {
-    console.log("useEffect");
     dispatch(fetchProductsAsync());
   }, [dispatch]);
   // console.log("allProducts", allProducts);
