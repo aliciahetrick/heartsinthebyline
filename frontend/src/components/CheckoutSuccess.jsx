@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotals } from "../features/cartSlice";
 import { updateProductAsync } from "../features/productsSlice";
+import { Stars } from "./Stars";
 
 const CheckoutSuccess = () => {
   const { updateStockStatus } = useSelector((state) => state.products);
@@ -37,10 +38,15 @@ const CheckoutSuccess = () => {
       {updateStockStatus === "rejected" ? (
         <h2>There was not enough stock</h2>
       ) : (
-        <h2>Checkout Success</h2>
+        <>
+          <Stars amount={16} color={GOLD_COLOR} />
+          <h2>Checkout Success</h2>
+        </>
       )}
     </>
   );
 };
 
 export default CheckoutSuccess;
+
+const GOLD_COLOR = "#ffd700";
