@@ -153,6 +153,15 @@ const HeadingWrapper = styled.div`
     height: 2px;
     background-color: pink;
   }
+
+  @media only screen and (min-width: ${BREAKPOINTS.large}) {
+    margin-left: 25%;
+    margin-right: 25%;
+
+    &::after {
+      width: 50%;
+    }
+  }
 `;
 
 const ProductWrapper = styled.h2`
@@ -188,6 +197,11 @@ const CartItemContainer = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 2em;
+
+  @media only screen and (min-width: ${BREAKPOINTS.large}) {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 
   border-bottom: 2px solid pink;
   // &::after {
