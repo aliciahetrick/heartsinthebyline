@@ -64,7 +64,7 @@ const SingleProduct = () => {
 export default SingleProduct;
 
 const ProductWrapper = styled.div`
-  transform: translateY(30%);
+  transform: translateY(20%);
 `;
 
 const ProductImage = styled.img`
