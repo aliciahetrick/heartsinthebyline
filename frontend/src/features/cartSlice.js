@@ -55,7 +55,7 @@ const cartSlice = createSlice({
         state.cartItems[itemIndex].cartQty -= 1;
       } else if (state.cartItems[itemIndex].cartQty === 1) {
         const filterCartItems = state.cartItems.filter((cartItem) => {
-          return cartItem._id !== action.payload._id;
+          return cartItem.id !== action.payload.id;
         });
 
         state.cartItems = filterCartItems;
