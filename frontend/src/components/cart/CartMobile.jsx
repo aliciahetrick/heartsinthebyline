@@ -54,7 +54,7 @@ const CartMobile = () => {
             return (
               <SingleCartItemContainer key={cartItem.id}>
                 <SingleCartItemContainerLeft>
-                  <Link to={`/products/${cartItem.url}`}>
+                  <Link to={`/products/${cartItem.id}`}>
                     <SingleCartItemImage
                       src={cartItem.images[0]}
                       alt={cartItem.name}

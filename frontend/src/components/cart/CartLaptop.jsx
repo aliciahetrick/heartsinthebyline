@@ -64,7 +64,7 @@ const CartLaptop = () => {
                 <CartItemContainer key={cartItem.id}>
                   <>
                     <CartItemLeftWrapper
-                      to={`/products/${cartItem.url}`}
+                      to={`/products/${cartItem.id}`}
                       style={{ textDecoration: "none" }}
                     >
                       <CartItemImage
