@@ -1,16 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { useGetAllProductsQuery } from "../features/productsApi";
 import { fetchProductsAsync } from "../features/productsSlice";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../constants/breakpoints";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
-  // const { data: allProducts, error, isLoading } = useGetAllProductsQuery();
+
   const { items: allProducts, status } = useSelector((state) => state.products);
-  // console.log("query", allProducts);
 
   useEffect(() => {
     dispatch(fetchProductsAsync());
@@ -36,8 +34,6 @@ const AllProducts = () => {
                       />
 
                       <ProductName>{product.name}</ProductName>
-                      {/* <h3>{product.stock}</h3> */}
-                      {/* <ProductName>${product.price}</ProductName> */}
                     </Link>
                   </ProductContainer>
                 );

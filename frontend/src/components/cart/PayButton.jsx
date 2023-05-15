@@ -22,15 +22,10 @@ const PayButton = ({ cartItems }) => {
         }
       })
       .catch((response) => {
-        console.log("response", response.response.data);
-        setError(!error);
+        setError(true);
         const notEnoughStockItems = response.response.data.filter(
-          (item) =>
-            // console.log(item.price_data.product_data.metadata.stock)
-            // console.log(item.quantity)
-            item.price_data.product_data.metadata.stock < item.quantity
+          (item) => item.price_data.product_data.metadata.stock < item.quantity
         );
-        console.log("not enough stock items", notEnoughStockItems);
 
         setErrorMessage([
           ...errorMessage,
@@ -44,12 +39,8 @@ const PayButton = ({ cartItems }) => {
             }
           }),
         ]);
-        // setError(true)
       });
   };
-
-  console.log("error", error);
-  console.log("errorMessage", errorMessage);
 
   return (
     <>

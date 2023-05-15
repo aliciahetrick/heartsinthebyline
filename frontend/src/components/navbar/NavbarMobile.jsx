@@ -130,9 +130,6 @@ const NavbarMobile = () => {
           <TitleLink to="/">heartsinthebyline</TitleLink>
         </>
       )}
-
-      {/* <Link to="/faq">FAQ</Link>
-      <Link to="/cart">Cart({cartTotalQty})</Link> */}
     </nav>
   );
 };
