@@ -40,9 +40,7 @@ export const fetchSingleProductAsync = createAsyncThunk(
 export const createProductAsync = createAsyncThunk(
   "products/createProductAsync",
   async (values) => {
-    // console.log("values", values);
     try {
-      // "http://localhost:5000/api/products",
       const response = await fetch(`${url}/products`, {
         method: "POST",
         headers: {
@@ -70,14 +68,11 @@ export const updateProductAsync = createAsyncThunk(
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          // accept: "application/json",
         },
         body: JSON.stringify({
           purchasedQuantity,
         }),
       });
-
-      // console.log("fetch response", response);
 
       const resData = await response.json();
       if (!response.ok && resData?.error) {
@@ -131,12 +126,9 @@ const productsSlice = createSlice({
     });
 
     builder.addCase(updateProductAsync.rejected, (state, action) => {
-      // console.log("rejected");
       state.updateStockStatus = "rejected";
     });
-    builder.addCase(updateProductAsync.fulfilled, (state, action) => {
-      // console.log("fulfilled");
-    });
+    builder.addCase(updateProductAsync.fulfilled, (state, action) => {});
   },
 });
 
