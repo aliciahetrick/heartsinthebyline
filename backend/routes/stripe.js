@@ -108,6 +108,12 @@ router.post("/create-checkout-session", async (req, res) => {
     // },
     customer: customer.id,
     line_items,
+    // automatic_tax: {
+    //   enabled: true,
+    // },
+    // customer_update: {
+    //   shipping: "never",
+    // },
     mode: "payment",
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
