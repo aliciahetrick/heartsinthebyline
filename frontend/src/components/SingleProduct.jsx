@@ -44,8 +44,8 @@ const SingleProduct = () => {
           <ProductPrice>${singleProduct.price.unit_amount / 100}</ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
 
-          {singleProduct.stock === 0 ? (
-            <button disabled>Sold Out </button>
+          {singleProduct.metadata.stock === "0" ? (
+            <ProductButtonDisabled disabled>Sold Out </ProductButtonDisabled>
           ) : (
             <ProductButton onClick={() => handleAddToCart(singleProduct)}>
               Add to Cart
@@ -94,6 +94,29 @@ const ProductButton = styled.button`
   width: 150px;
   height: 40px;
   background-color: #f578a6;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: -30px; */
+  font-family: "Raleway", sans-serif;
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  // &:hover {
+  //   background-color: #fff5fa;
+  // }
+`;
+
+const ProductButtonDisabled = styled.button`
+  display: flex;
+  width: 150px;
+  height: 40px;
+  background-color: #757475;
   color: white;
   font-size: 15px;
   font-weight: 600;
