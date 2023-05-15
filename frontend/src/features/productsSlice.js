@@ -61,17 +61,19 @@ export const createProductAsync = createAsyncThunk(
 
 export const updateProductAsync = createAsyncThunk(
   "products/updateProductAsync",
-  async ({ url: productUrl, name, cartQty }, { rejectWithValue }) => {
+  async (
+    { url: productUrl, cartQty: purchasedQuantity },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await fetch(`${url}/products/${productUrl}`, {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-type": "application/json",
           // accept: "application/json",
         },
         body: JSON.stringify({
-          name,
-          cartQty,
+          purchasedQuantity,
         }),
       });
 
@@ -79,7 +81,7 @@ export const updateProductAsync = createAsyncThunk(
 
       const resData = await response.json();
       if (!response.ok && resData?.error) {
-        return rejectWithValue("HIIII There was an error in the backend");
+        return rejectWithValue("There was an error in the backend");
       }
       return resData;
     } catch (error) {

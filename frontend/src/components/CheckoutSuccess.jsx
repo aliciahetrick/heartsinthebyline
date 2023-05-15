@@ -17,8 +17,7 @@ const CheckoutSuccess = () => {
 
     paidCart.map((cartItem) => {
       const updateObject = {
-        url: cartItem.url,
-        name: cartItem.name,
+        url: cartItem.id,
         cartQty: cartItem.cartQty,
       };
       return dispatch(updateProductAsync(updateObject));
