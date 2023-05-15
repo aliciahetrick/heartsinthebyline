@@ -18,11 +18,6 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   const line_items = req.body.cartItems.map((item) => {
-    // console.log(item);
-    // const { metadata } = await stripe.products.retrieve(
-    //   item.price_data.product_data.metadata.id
-    // );
-
     return {
       price_data: {
         currency: "usd",
@@ -41,9 +36,6 @@ router.post("/create-checkout-session", async (req, res) => {
     };
   });
 
-  // console.log("lineItems", line_items[0]);
-  console.log("cart items", req.body.cartItems);
-
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
       if (
@@ -54,8 +46,6 @@ router.post("/create-checkout-session", async (req, res) => {
     }
     return true;
   }
-
-  console.log("IN STOCK?", allLineItemsInStock());
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -125,9 +115,6 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       },
     ],
-    // phone_number_collection: {
-    //   enabled: true,
-    // },
     customer: customer.id,
     line_items,
     // automatic_tax: {
@@ -139,17 +126,6 @@ router.post("/create-checkout-session", async (req, res) => {
     mode: "payment",
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
-    // success_url: `https:localhost:3000/checkout-success`,
-    // cancel_url: `https:localhost:3000/cart`,
-
-    // consent_collection: {
-    //   promotions: "auto",
-    // },
-    // after_expiration: {
-    //   recovery: {
-    //     enabled: true,
-    //   },
-    // },
   });
   if (allLineItemsInStock()) {
     res.send({ url: session.url });
@@ -161,8 +137,6 @@ router.post("/create-checkout-session", async (req, res) => {
 //Create order
 
 const createOrder = async (customer, data, lineItems) => {
-  // const items = JSON.parse(customer.metadata.cart);
-
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
@@ -231,10 +205,6 @@ router.post(
               createOrder(customer, data, lineItems);
             }
           );
-          // console.log("customer", customer);
-          // console.log("data", data);
-
-          // createOrder(customer, data);
         })
         .catch((err) => {
           console.log(err.message);
