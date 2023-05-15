@@ -2,10 +2,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { logoutUser } from "../features/authSlice";
+import { logoutUser } from "../../features/authSlice";
 
 import styled from "styled-components";
-import "../fonts/AmerikaSignature.ttf";
+import "../../fonts/AmerikaSignature.ttf";
 import * as FaIcons from "react-icons/fa";
 
 const NavbarMobile = () => {
@@ -146,7 +146,7 @@ const TitleLink = styled(Link)`
   display: inline-block;
   text-decoration: none;
   color: #f578a6;
-  font-size: 100px;
+  font-size: 80px;
   font-family: "AmerikaSignature";
   margin-top: -0.3em;
 `;

@@ -7,17 +7,17 @@ import {
   decreaseCartQuantity,
   getTotals,
   removeFromCart,
-} from "../features/cartSlice";
+} from "../../features/cartSlice";
 import PayButton from "./PayButton";
 
 import styled from "styled-components";
-import { BREAKPOINTS } from "../constants/breakpoints";
+import { BREAKPOINTS } from "../../constants/breakpoints";
 
-const CartTablet = () => {
+const CartLaptop = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
+  // console.log(cart);
 
   useEffect(() => {
     dispatch(getTotals());
@@ -39,6 +39,8 @@ const CartTablet = () => {
   //   dispatch(clearCart());
   // };
 
+  console.log("cartItems:", cart);
+
   return (
     <>
       <WrapperTitle>Cart</WrapperTitle>
@@ -59,20 +61,22 @@ const CartTablet = () => {
             </HeadingWrapper>
             {cart.cartItems.map((cartItem) => {
               return (
-                <CartItemContainer key={cartItem._id}>
+                <CartItemContainer key={cartItem.id}>
                   <>
                     <CartItemLeftWrapper
-                      to={`/products/${cartItem.url}`}
+                      to={`/products/${cartItem.id}`}
                       style={{ textDecoration: "none" }}
                     >
                       <CartItemImage
-                        src={cartItem.image.url}
+                        src={cartItem.images[0]}
                         alt={cartItem.name}
                         // style={{ width: "300px" }}
                       />
                       <CartItemDetailsWrapper>
                         <CartItemName>{cartItem.name}</CartItemName>
-                        <CartItemPrice>${cartItem.price} each</CartItemPrice>
+                        <CartItemPrice>
+                          ${cartItem.price.unit_amount / 100} each
+                        </CartItemPrice>
                       </CartItemDetailsWrapper>
                     </CartItemLeftWrapper>
                     <CartItemMiddleWrapper>
@@ -99,7 +103,7 @@ const CartTablet = () => {
                     </CartItemMiddleWrapper>
                     <CartItemRightWrapper>
                       <CartItemTotal>
-                        ${cartItem.price * cartItem.cartQty}
+                        ${(cartItem.price.unit_amount / 100) * cartItem.cartQty}
                       </CartItemTotal>
                     </CartItemRightWrapper>
                   </>
@@ -122,7 +126,7 @@ const CartTablet = () => {
   );
 };
 
-export default CartTablet;
+export default CartLaptop;
 
 const WrapperTitle = styled.h1`
   color: #f578a6;
@@ -152,6 +156,15 @@ const HeadingWrapper = styled.div`
     width: 80%;
     height: 2px;
     background-color: pink;
+  }
+
+  @media only screen and (min-width: ${BREAKPOINTS.large}) {
+    margin-left: 25%;
+    margin-right: 25%;
+
+    &::after {
+      width: 50%;
+    }
   }
 `;
 
@@ -188,6 +201,11 @@ const CartItemContainer = styled.div`
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 2em;
+
+  @media only screen and (min-width: ${BREAKPOINTS.large}) {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 
   border-bottom: 2px solid pink;
   // &::after {

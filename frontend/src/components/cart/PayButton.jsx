@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { url } from "../features/api";
+import { url } from "../../features/api";
 import styled from "styled-components";
 
 const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
-  console.log("user", user);
+  // console.log("user", user);
   const handleCheckout = () => {
     axios
       .post(`${url}/stripe/create-checkout-session`, {
@@ -45,7 +45,6 @@ const CheckoutButton = styled.button`
   font-weight: 600;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: -30px; */
   font-family: "Raleway", sans-serif;
   border-radius: 0.5em;
   border: none;
