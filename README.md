@@ -13,7 +13,6 @@
 - MongoDB
 - Mongoose
 - Stripe API
-- Cloudinary
 - JSON Web Tokens
 - Bcrypt
 - Joi
