@@ -9,7 +9,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req, res) => {
-  console.log("create checkout session");
+  // console.log("create checkout session");
   const customer = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
@@ -18,6 +18,11 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   const line_items = req.body.cartItems.map((item) => {
+    // console.log(item);
+    // const { metadata } = await stripe.products.retrieve(
+    //   item.price_data.product_data.metadata.id
+    // );
+
     return {
       price_data: {
         currency: "usd",
@@ -27,6 +32,7 @@ router.post("/create-checkout-session", async (req, res) => {
           description: item.desc,
           metadata: {
             id: item.id,
+            stock: item.metadata.stock,
           },
         },
         unit_amount: item.price.unit_amount,
@@ -34,6 +40,22 @@ router.post("/create-checkout-session", async (req, res) => {
       quantity: item.cartQty,
     };
   });
+
+  // console.log("lineItems", line_items[0]);
+  console.log("cart items", req.body.cartItems);
+
+  function allLineItemsInStock() {
+    for (let i = 0; i < req.body.cartItems.length; i++) {
+      if (
+        req.body.cartItems[i].cartQty > req.body.cartItems[i].metadata.stock
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  console.log("IN STOCK?", allLineItemsInStock());
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -129,8 +151,11 @@ router.post("/create-checkout-session", async (req, res) => {
     //   },
     // },
   });
-
-  res.send({ url: session.url });
+  if (allLineItemsInStock()) {
+    res.send({ url: session.url });
+  } else {
+    res.status(500).send(line_items);
+  }
 });
 
 //Create order
@@ -183,7 +208,7 @@ router.post(
         header,
         process.env.WEBHOOK_ENDPOINT_SECRET
       );
-      console.log(`Webhook Verified: `, event);
+      // console.log(`Webhook Verified: `, event);
     } catch (err) {
       console.log(`Webhook Error: ${err.message}`);
       res.status(400).send(`Webhook Error: ${err.message}`);
