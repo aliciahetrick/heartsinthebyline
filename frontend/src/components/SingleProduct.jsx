@@ -44,7 +44,7 @@ const SingleProduct = () => {
           <ProductPrice>${singleProduct.price.unit_amount / 100}</ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
 
-          {singleProduct.metadata.stock === "0" ? (
+          {singleProduct.metadata.stock <= "0" ? (
             <ProductButtonDisabled disabled>Sold Out </ProductButtonDisabled>
           ) : (
             <ProductButton onClick={() => handleAddToCart(singleProduct)}>

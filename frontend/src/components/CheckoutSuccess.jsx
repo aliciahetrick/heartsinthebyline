@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTotals } from "../features/cartSlice";
+import { clearCart, getTotals } from "../features/cartSlice";
 import { updateProductAsync } from "../features/productsSlice";
 import { Stars } from "./Stars";
 
@@ -15,13 +15,15 @@ const CheckoutSuccess = () => {
   useEffect(() => {
     dispatch(getTotals());
 
-    paidCart.map((cartItem) => {
+    paidCart?.map((cartItem) => {
       const updateObject = {
         url: cartItem.id,
         cartQty: cartItem.cartQty,
       };
       return dispatch(updateProductAsync(updateObject));
     });
+
+    dispatch(clearCart());
   }, [dispatch, paidCart]);
 
   // TODO: clear the cart from local storage after checkout
