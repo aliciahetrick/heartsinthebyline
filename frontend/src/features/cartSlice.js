@@ -13,14 +13,16 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
+      console.log("action payload", action.payload.id);
       const itemIndex = state.cartItems.findIndex(
-        (cartItem) => cartItem._id === action.payload._id
+        (cartItem) => cartItem.id === action.payload.id
       );
 
       // if item already in cart
       if (itemIndex >= 0) {
         if (
-          state.cartItems[itemIndex].cartQty < state.cartItems[itemIndex].stock
+          state.cartItems[itemIndex].cartQty <
+          Number(state.cartItems[itemIndex].metadata.stock)
         ) {
           state.cartItems[itemIndex].cartQty += 1;
         }
@@ -66,7 +68,8 @@ const cartSlice = createSlice({
     getTotals(state, action) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
-          const { price, cartQty } = cartItem;
+          const { cartQty } = cartItem;
+          const price = cartItem.price.unit_amount / 100;
           const itemTotal = price * cartQty;
 
           cartTotal.total += itemTotal;

@@ -52,11 +52,11 @@ const CartMobile = () => {
         <div>
           {cart.cartItems.map((cartItem) => {
             return (
-              <SingleCartItemContainer key={cartItem._id}>
+              <SingleCartItemContainer key={cartItem.id}>
                 <SingleCartItemContainerLeft>
                   <Link to={`/products/${cartItem.url}`}>
                     <SingleCartItemImage
-                      src={cartItem.image.url}
+                      src={cartItem.images[0]}
                       alt={cartItem.name}
                       style={{ width: "80px" }}
                     />
@@ -66,7 +66,7 @@ const CartMobile = () => {
                   <SingleCartItemDetailsTop>
                     <SingleCartItemTitle>{cartItem.name}</SingleCartItemTitle>
                     <SingleCartItemPrice>
-                      ${cartItem.price} each
+                      ${cartItem.price.unit_amount / 100} each
                     </SingleCartItemPrice>
                   </SingleCartItemDetailsTop>
                   <SingleCartItemDetailsBottom>

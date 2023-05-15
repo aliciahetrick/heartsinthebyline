@@ -15,11 +15,12 @@ const SingleProduct = () => {
     (state) => state.products
   );
 
+  console.log("param", param);
   useEffect(() => {
     dispatch(fetchSingleProductAsync(param));
   }, [dispatch, param]);
 
-  // console.log("singleProduct", singleProduct);
+  console.log("singleProduct", singleProduct);
 
   useEffect(() => {
     dispatch(getTotals());
@@ -36,11 +37,11 @@ const SingleProduct = () => {
         <ProductWrapper>
           <ProductName>{singleProduct.name}</ProductName>
           <ProductImage
-            src={singleProduct.image.url}
+            src={singleProduct.images[0]}
             alt={singleProduct.name}
             style={{ width: "300px" }}
           />
-          <ProductPrice>${singleProduct.price}</ProductPrice>
+          <ProductPrice>${singleProduct.price.unit_amount / 100}</ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
 
           {singleProduct.stock === 0 ? (

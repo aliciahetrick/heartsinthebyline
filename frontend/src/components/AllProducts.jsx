@@ -15,7 +15,7 @@ const AllProducts = () => {
   useEffect(() => {
     dispatch(fetchProductsAsync());
   }, [dispatch]);
-  // console.log("allProducts", allProducts);
+  console.log("allProducts", allProducts);
   return (
     <>
       <WrapperTitle>All Products</WrapperTitle>
@@ -23,15 +23,15 @@ const AllProducts = () => {
         {status === "success" ? (
           <>
             <AllProductsContainer>
-              {allProducts?.map((product) => {
+              {allProducts?.data.map((product) => {
                 return (
-                  <ProductContainer key={product._id}>
+                  <ProductContainer key={product.id}>
                     <Link
-                      to={`/products/${product.url}`}
+                      to={`/products/${product.id}`}
                       style={{ textDecoration: "none" }}
                     >
                       <ProductImage
-                        src={product.image.url}
+                        src={product.images[0]}
                         alt={product.name}
                       />
 

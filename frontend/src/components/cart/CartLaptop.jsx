@@ -39,6 +39,8 @@ const CartLaptop = () => {
   //   dispatch(clearCart());
   // };
 
+  console.log("cartItems:", cart);
+
   return (
     <>
       <WrapperTitle>Cart</WrapperTitle>
@@ -59,20 +61,22 @@ const CartLaptop = () => {
             </HeadingWrapper>
             {cart.cartItems.map((cartItem) => {
               return (
-                <CartItemContainer key={cartItem._id}>
+                <CartItemContainer key={cartItem.id}>
                   <>
                     <CartItemLeftWrapper
                       to={`/products/${cartItem.url}`}
                       style={{ textDecoration: "none" }}
                     >
                       <CartItemImage
-                        src={cartItem.image.url}
+                        src={cartItem.images[0]}
                         alt={cartItem.name}
                         // style={{ width: "300px" }}
                       />
                       <CartItemDetailsWrapper>
                         <CartItemName>{cartItem.name}</CartItemName>
-                        <CartItemPrice>${cartItem.price} each</CartItemPrice>
+                        <CartItemPrice>
+                          ${cartItem.price.unit_amount / 100} each
+                        </CartItemPrice>
                       </CartItemDetailsWrapper>
                     </CartItemLeftWrapper>
                     <CartItemMiddleWrapper>
@@ -99,7 +103,7 @@ const CartLaptop = () => {
                     </CartItemMiddleWrapper>
                     <CartItemRightWrapper>
                       <CartItemTotal>
-                        ${cartItem.price * cartItem.cartQty}
+                        ${(cartItem.price.unit_amount / 100) * cartItem.cartQty}
                       </CartItemTotal>
                     </CartItemRightWrapper>
                   </>
