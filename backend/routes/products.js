@@ -44,7 +44,6 @@ router.post("/:id", async (req, res, next) => {
         stock: Number(metadataStock) - req.body.purchasedQuantity,
       },
     });
-
     res.status(200).send(product);
   } catch (err) {
     console.log(err);

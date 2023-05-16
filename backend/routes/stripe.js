@@ -9,11 +9,9 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req, res) => {
-  console.log("create checkout session");
   const customer = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
-      // cart: JSON.stringify(req.body.cartItems),
     },
   });
 
@@ -27,6 +25,7 @@ router.post("/create-checkout-session", async (req, res) => {
           description: item.desc,
           metadata: {
             id: item.id,
+            stock: item.metadata.stock,
           },
         },
         unit_amount: item.price.unit_amount,
@@ -34,6 +33,17 @@ router.post("/create-checkout-session", async (req, res) => {
       quantity: item.cartQty,
     };
   });
+
+  function allLineItemsInStock() {
+    for (let i = 0; i < req.body.cartItems.length; i++) {
+      if (
+        req.body.cartItems[i].cartQty > req.body.cartItems[i].metadata.stock
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -49,7 +59,6 @@ router.post("/create-checkout-session", async (req, res) => {
             currency: "usd",
           },
           display_name: "USPS First-Class Mail",
-          // Delivers between 5-7 business days
           delivery_estimate: {
             minimum: {
               unit: "business_day",
@@ -103,9 +112,6 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       },
     ],
-    // phone_number_collection: {
-    //   enabled: true,
-    // },
     customer: customer.id,
     line_items,
     // automatic_tax: {
@@ -117,27 +123,17 @@ router.post("/create-checkout-session", async (req, res) => {
     mode: "payment",
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
-    // success_url: `https:localhost:3000/checkout-success`,
-    // cancel_url: `https:localhost:3000/cart`,
-
-    // consent_collection: {
-    //   promotions: "auto",
-    // },
-    // after_expiration: {
-    //   recovery: {
-    //     enabled: true,
-    //   },
-    // },
   });
-
-  res.send({ url: session.url });
+  if (allLineItemsInStock()) {
+    res.send({ url: session.url });
+  } else {
+    res.status(500).send(line_items);
+  }
 });
 
 //Create order
 
 const createOrder = async (customer, data, lineItems) => {
-  // const items = JSON.parse(customer.metadata.cart);
-
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
@@ -157,68 +153,60 @@ const createOrder = async (customer, data, lineItems) => {
   }
 };
 
-// Stripe webhoook
+// Stripe webhook
 
-router.post(
-  "/webhook",
-  //   express.raw({ type: "application/json" }),
-  (request, response) => {
-    // confirms that the event that is being called from webhook is coming from stripe
-    const sig = request.headers["stripe-signature"];
+router.post("/webhook", (request, response) => {
+  // confirms that the event that is being called from webhook is coming from stripe
+  const sig = request.headers["stripe-signature"];
 
-    let data;
-    let eventType;
+  let data;
+  let eventType;
 
-    const payload = request.body;
-    const payloadString = JSON.stringify(payload, null, 2);
-    const header = stripe.webhooks.generateTestHeaderString({
-      payload: payloadString,
-      secret: process.env.WEBHOOK_ENDPOINT_SECRET,
-    });
+  const payload = request.body;
+  const payloadString = JSON.stringify(payload, null, 2);
+  const header = stripe.webhooks.generateTestHeaderString({
+    payload: payloadString,
+    secret: process.env.WEBHOOK_ENDPOINT_SECRET,
+  });
 
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(
-        payloadString,
-        header,
-        process.env.WEBHOOK_ENDPOINT_SECRET
-      );
-      console.log(`Webhook Verified: `, event);
-    } catch (err) {
-      console.log(`Webhook Error: ${err.message}`);
-      res.status(400).send(`Webhook Error: ${err.message}`);
-      return;
-    }
-    data = event.data.object;
-    eventType = event.type;
-
-    // Handle the event
-
-    if (eventType === "checkout.session.completed") {
-      stripe.customers
-        .retrieve(data.customer)
-        .then((customer) => {
-          stripe.checkout.sessions.listLineItems(
-            data.id,
-            {},
-            function (err, lineItems) {
-              console.log("lineItems", lineItems);
-              createOrder(customer, data, lineItems);
-            }
-          );
-          // console.log("customer", customer);
-          // console.log("data", data);
-
-          // createOrder(customer, data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-
-    // Return a 200 response to acknowledge receipt of the event
-    response.send().end();
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      payloadString,
+      header,
+      process.env.WEBHOOK_ENDPOINT_SECRET
+    );
+    console.log(`Webhook Verified: `, event);
+  } catch (err) {
+    console.log(`Webhook Error: ${err.message}`);
+    res.status(400).send(`Webhook Error: ${err.message}`);
+    return;
   }
-);
+  data = event.data.object;
+  eventType = event.type;
+
+  // Handle the event
+
+  if (eventType === "checkout.session.completed") {
+    stripe.customers
+      .retrieve(data.customer)
+      .then((customer) => {
+        stripe.checkout.sessions.listLineItems(
+          data.id,
+          {},
+          function (err, lineItems) {
+            console.log("lineItems", lineItems);
+            createOrder(customer, data, lineItems);
+          }
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  // Return a 200 response to acknowledge receipt of the event
+  response.send().end();
+});
 
 module.exports = router;
