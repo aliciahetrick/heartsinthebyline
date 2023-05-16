@@ -127,7 +127,7 @@ router.post("/create-checkout-session", async (req, res) => {
   if (allLineItemsInStock()) {
     res.send({ url: session.url });
   } else {
-    res.status(500).send(line_items);
+    res.status(500).send({ data: line_items });
   }
 });
 
