@@ -8,7 +8,6 @@ const CheckoutSuccess = () => {
   const { updateStockStatus } = useSelector((state) => state.products);
 
   const paidCart = JSON.parse(localStorage.getItem("cartItems"));
-  // console.log(paidCart);
 
   const dispatch = useDispatch();
 
@@ -25,14 +24,6 @@ const CheckoutSuccess = () => {
 
     dispatch(clearCart());
   }, [dispatch, paidCart]);
-
-  // TODO: clear the cart from local storage after checkout
-  // clears the cart in local storage
-  // useEffect(() => {
-  //   console.log("paidCart", paidCart);
-  //   dispatch(clearCart());
-  //   dispatch(getTotals());
-  // }, [paidCart]);
 
   return (
     <>

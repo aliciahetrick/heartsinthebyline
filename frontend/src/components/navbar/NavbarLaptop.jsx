@@ -21,10 +21,6 @@ const NavbarLaptop = () => {
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/faq">FAQ</NavLink>
 
-          {/* <TitleLink to="/products">heartsinthebyline</TitleLink> */}
-
-          {/* <NavLink to="/faq">FAQ</NavLink>
-            <NavLink to="/contact">Contact</NavLink> */}
           {auth._id ? (
             <>
               {auth.isAdmin ? (
@@ -69,100 +65,7 @@ const NavbarLaptop = () => {
           )}
           <NavLink to="/cart">Cart ({cartTotalQty})</NavLink>
         </WrapperNavBoth>
-
-        {/* 
-      <WrapperSearch>
-        <SearchBox />
-      </WrapperSearch> */}
-
-        {/* <WrapperNavImg src={Banner} /> */}
-        {/* <WrapperBorderBottom></WrapperBorderBottom> */}
       </>
-      {/* <TitleLink to="/">heartsinthebyline</TitleLink>
-      <MobileNavItems>
-        <MobileNavItem
-          to="/"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
-          style={{ textDecoration: "none", color: "#f578a6" }}
-        >
-          <FaIcons.FaHome /> Home
-        </MobileNavItem>
-        <MobileNavItem
-          to="/products"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
-          style={{ textDecoration: "none", color: "#f578a6" }}
-        >
-          <FaIcons.FaHeart /> Products
-        </MobileNavItem>
-        <MobileNavItem
-          to="/cart"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
-          style={{ textDecoration: "none", color: "#f578a6" }}
-        >
-          <FaIcons.FaShoppingCart /> Cart({cartTotalQty})
-        </MobileNavItem>
-        {auth._id ? (
-          <>
-            {auth.isAdmin ? (
-              <div>
-                <MobileNavItem
-                  to="/admin/summary"
-                  onClick={() => {
-                    handleNavbarToggle();
-                  }}
-                  style={{ textDecoration: "none", color: "#f578a6" }}
-                >
-                  <FaIcons.FaKey /> Admin
-                </MobileNavItem>
-              </div>
-            ) : null}
-
-            <div
-              onClick={() => {
-                dispatch(logoutUser(null));
-              }}
-            >
-              <MobileNavItem
-                to="/"
-                onClick={() => {
-                  handleNavbarToggle();
-                }}
-                style={{ textDecoration: "none", color: "#f578a6" }}
-              >
-                <FaIcons.FaSignOutAlt />
-                Log Out
-              </MobileNavItem>
-            </div>
-          </>
-        ) : (
-          <>
-            <MobileNavItem
-              to="/register"
-              onClick={() => {
-                handleNavbarToggle();
-              }}
-              style={{ textDecoration: "none", color: "#f578a6" }}
-            >
-              <FaIcons.FaUserPlus /> Register
-            </MobileNavItem>
-            <MobileNavItem
-              to="/login"
-              onClick={() => {
-                handleNavbarToggle();
-              }}
-              style={{ textDecoration: "none", color: "#f578a6" }}
-            >
-              <FaIcons.FaSignInAlt /> Log In
-            </MobileNavItem>
-          </>
-        )}
-      </MobileNavItems> */}
     </nav>
   );
 };
