@@ -56,7 +56,7 @@ const PayButton = ({ cartItems }) => {
       {error ? (
         <>
           {errorMessage.map((error) => {
-            return <div>{error}</div>;
+            return <CheckoutError key={error}>{error}</CheckoutError>;
           })}
         </>
       ) : null}
@@ -89,4 +89,15 @@ const CheckoutButton = styled.button`
   text-align: center;
   align-items: center;
   justify-content: center;
+`;
+
+const CheckoutError = styled.div`
+  color: #f578a6;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  // border: 1px solid blue;
 `;

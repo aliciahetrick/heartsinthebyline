@@ -8,9 +8,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 // Fetch all products from Stripe API
 router.get("/", async (req, res) => {
   try {
-    const products = await stripe.products.list({
-      limit: 3,
-    });
+    const products = await stripe.products.list();
     res.send(products);
   } catch (err) {
     console.log(err);
