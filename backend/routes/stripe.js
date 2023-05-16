@@ -9,11 +9,9 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req, res) => {
-  // console.log("create checkout session");
   const customer = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
-      // cart: JSON.stringify(req.body.cartItems),
     },
   });
 
@@ -61,7 +59,6 @@ router.post("/create-checkout-session", async (req, res) => {
             currency: "usd",
           },
           display_name: "USPS First-Class Mail",
-          // Delivers between 5-7 business days
           delivery_estimate: {
             minimum: {
               unit: "business_day",
@@ -156,64 +153,60 @@ const createOrder = async (customer, data, lineItems) => {
   }
 };
 
-// Stripe webhoook
+// Stripe webhook
 
-router.post(
-  "/webhook",
-  //   express.raw({ type: "application/json" }),
-  (request, response) => {
-    // confirms that the event that is being called from webhook is coming from stripe
-    const sig = request.headers["stripe-signature"];
+router.post("/webhook", (request, response) => {
+  // confirms that the event that is being called from webhook is coming from stripe
+  const sig = request.headers["stripe-signature"];
 
-    let data;
-    let eventType;
+  let data;
+  let eventType;
 
-    const payload = request.body;
-    const payloadString = JSON.stringify(payload, null, 2);
-    const header = stripe.webhooks.generateTestHeaderString({
-      payload: payloadString,
-      secret: process.env.WEBHOOK_ENDPOINT_SECRET,
-    });
+  const payload = request.body;
+  const payloadString = JSON.stringify(payload, null, 2);
+  const header = stripe.webhooks.generateTestHeaderString({
+    payload: payloadString,
+    secret: process.env.WEBHOOK_ENDPOINT_SECRET,
+  });
 
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(
-        payloadString,
-        header,
-        process.env.WEBHOOK_ENDPOINT_SECRET
-      );
-      // console.log(`Webhook Verified: `, event);
-    } catch (err) {
-      console.log(`Webhook Error: ${err.message}`);
-      res.status(400).send(`Webhook Error: ${err.message}`);
-      return;
-    }
-    data = event.data.object;
-    eventType = event.type;
-
-    // Handle the event
-
-    if (eventType === "checkout.session.completed") {
-      stripe.customers
-        .retrieve(data.customer)
-        .then((customer) => {
-          stripe.checkout.sessions.listLineItems(
-            data.id,
-            {},
-            function (err, lineItems) {
-              console.log("lineItems", lineItems);
-              createOrder(customer, data, lineItems);
-            }
-          );
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-
-    // Return a 200 response to acknowledge receipt of the event
-    response.send().end();
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      payloadString,
+      header,
+      process.env.WEBHOOK_ENDPOINT_SECRET
+    );
+    console.log(`Webhook Verified: `, event);
+  } catch (err) {
+    console.log(`Webhook Error: ${err.message}`);
+    res.status(400).send(`Webhook Error: ${err.message}`);
+    return;
   }
-);
+  data = event.data.object;
+  eventType = event.type;
+
+  // Handle the event
+
+  if (eventType === "checkout.session.completed") {
+    stripe.customers
+      .retrieve(data.customer)
+      .then((customer) => {
+        stripe.checkout.sessions.listLineItems(
+          data.id,
+          {},
+          function (err, lineItems) {
+            console.log("lineItems", lineItems);
+            createOrder(customer, data, lineItems);
+          }
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  // Return a 200 response to acknowledge receipt of the event
+  response.send().end();
+});
 
 module.exports = router;

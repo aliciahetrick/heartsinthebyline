@@ -33,8 +33,6 @@ const CartLaptop = () => {
     dispatch(removeFromCart(cartItem));
   };
 
-  console.log("cartItems:", cart);
-
   return (
     <>
       <WrapperTitle>Cart</WrapperTitle>
