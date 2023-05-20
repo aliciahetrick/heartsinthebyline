@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { url } from "./api";
 import jwtDecode from "jwt-decode";
 
@@ -20,16 +19,21 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (user, { rejectWithValue }) => {
     try {
-      const token = await axios.post(`${url}/register`, {
-        name: user.name,
-        email: user.email,
-        password: user.password,
+      const token = await fetch(`${url}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          password: user.password,
+        }),
       });
-
-      localStorage.setItem("token", token.data);
-      return token.data;
+      localStorage.setItem("token", await token.json());
+      return token.json();
     } catch (error) {
-      console.log(error.response.data);
+      console.log("error", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -38,14 +42,18 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (user, { rejectWithValue }) => {
-    try {
-      const token = await axios.post(`${url}/login`, {
-        email: user.email,
-        password: user.password,
-      });
-
-      localStorage.setItem("token", token.data);
-      return token.data;
+      try {
+        const token = await fetch(`${url}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            password: user.password,
+          }),
+        });
+        return token.json();
     } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.response.data);
