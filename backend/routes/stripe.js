@@ -34,6 +34,9 @@ router.post("/create-checkout-session", async (req, res) => {
     };
   });
 
+  console.log("line items", line_items);
+  // const products = await stripe.products.list();
+
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
       if (
@@ -127,7 +130,7 @@ router.post("/create-checkout-session", async (req, res) => {
   if (allLineItemsInStock()) {
     res.send({ url: session.url });
   } else {
-    res.status(500).send(line_items);
+    res.status(500).send({ data: line_items });
   }
 });
 
@@ -176,7 +179,7 @@ router.post("/webhook", (request, response) => {
       header,
       process.env.WEBHOOK_ENDPOINT_SECRET
     );
-    console.log(`Webhook Verified: `, event);
+    // console.log(`Webhook Verified: `, event);
   } catch (err) {
     console.log(`Webhook Error: ${err.message}`);
     res.status(400).send(`Webhook Error: ${err.message}`);
