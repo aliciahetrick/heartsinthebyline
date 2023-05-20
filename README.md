@@ -6,7 +6,6 @@
 
 - React
 - React Redux
-- Axios
 - React Styled Components
 - React Router
 - Express
