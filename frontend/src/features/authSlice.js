@@ -29,9 +29,10 @@ export const registerUser = createAsyncThunk(
           email: user.email,
           password: user.password,
         }),
-      });
-      localStorage.setItem("token", await token.json());
-      return token.json();
+      })
+      const tokenResponse = await token.text()
+      localStorage.setItem("token", tokenResponse);
+      return tokenResponse;
     } catch (error) {
       console.log("error", error.response.data);
       return rejectWithValue(error.response.data);
@@ -42,18 +43,19 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (user, { rejectWithValue }) => {
-      try {
-        const token = await fetch(`${url}/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: user.email,
-            password: user.password,
-          }),
-        });
-        return token.json();
+    try {
+      const token = await fetch(`${url}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          password: user.password,
+        }),
+      });
+      const tokenResponse = await token.text()
+      return tokenResponse
     } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.response.data);
