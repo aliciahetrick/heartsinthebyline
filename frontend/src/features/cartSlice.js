@@ -18,8 +18,9 @@ const cartSlice = createSlice({
       // if item already in cart
       if (itemIndex >= 0) {
         if (
-          state.cartItems[itemIndex].cartQty <
-          Number(state.cartItems[itemIndex].metadata.stock)
+          state.cartItems[itemIndex].cartQty
+          //  <
+          // Number(state.cartItems[itemIndex].metadata.stock)
         ) {
           state.cartItems[itemIndex].cartQty += 1;
         }
