@@ -1,33 +1,33 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const orderSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: String,
-      required: true,
-    },
+// const orderSchema = new mongoose.Schema(
+//   {
+//     userId: {
+//       type: String,
+//       required: true,
+//     },
 
-    customerId: {
-      type: String,
-    },
+//     customerId: {
+//       type: String,
+//     },
 
-    payment_intent_id: {
-      type: String,
-    },
-    products: [],
-    subtotal: { type: Number, required: true },
-    total: { type: Number, required: true },
+//     payment_intent_id: {
+//       type: String,
+//     },
+//     products: [],
+//     subtotal: { type: Number, required: true },
+//     total: { type: Number, required: true },
 
-    shipping_address: {
-      type: Object,
-      required: true,
-    },
-    delivery_status: { type: String, default: "pending" },
-    payment_status: { type: String, required: true },
-  },
-  { timestamps: true }
-);
+//     shipping_address: {
+//       type: Object,
+//       required: true,
+//     },
+//     delivery_status: { type: String, default: "pending" },
+//     payment_status: { type: String, required: true },
+//   },
+//   { timestamps: true }
+// );
 
-const Order = mongoose.model("Order", orderSchema);
+// const Order = mongoose.model("Order", orderSchema);
 
-module.exports = Order;
+// module.exports = Order;

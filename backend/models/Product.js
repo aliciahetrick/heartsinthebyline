@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize')
-const db = require('../db/db')
+const Sequelize = require("sequelize");
+const db = require("../db/db");
 
-const Product = db.define('product', {
+const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -9,24 +9,24 @@ const Product = db.define('product', {
       notEmpty: true,
     },
   },
-    price: {
+  price: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
-//   imageUrl: {
-//     type: Sequelize.STRING,
-//     defaultValue: 'no-product.jpg',
-//   },
-//   type: {
-//     type: Sequelize.ENUM("bakery", "produce", "dairy", "specialty"),
-//     allowNull: false,
-//   },
-//   description: {
-//     type: Sequelize.TEXT,
-//   },
-})
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: "no-product.jpg",
+  },
+  //   type: {
+  //     type: Sequelize.ENUM("bakery", "produce", "dairy", "specialty"),
+  //     allowNull: false,
+  //   },
+  //   description: {
+  //     type: Sequelize.TEXT,
+  //   },
+});
 
-module.exports = Product
+module.exports = Product;

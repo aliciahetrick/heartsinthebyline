@@ -18,7 +18,7 @@ export const fetchProductsAsync = createAsyncThunk(
       const jsonData = await response.json();
       return jsonData;
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   }
 );
@@ -95,6 +95,7 @@ const productsSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
+      console.log("payload", action.payload);
       state.items = action.payload;
       state.status = "success";
     });
