@@ -18,9 +18,8 @@ const cartSlice = createSlice({
       // if item already in cart
       if (itemIndex >= 0) {
         if (
-          state.cartItems[itemIndex].cartQty
-          //  <
-          // Number(state.cartItems[itemIndex].metadata.stock)
+          state.cartItems[itemIndex].cartQty <
+          Number(state.cartItems[itemIndex].stock)
         ) {
           state.cartItems[itemIndex].cartQty += 1;
         }
@@ -67,7 +66,7 @@ const cartSlice = createSlice({
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { cartQty } = cartItem;
-          const price = cartItem.price.unit_amount / 100;
+          const price = cartItem.price;
           const itemTotal = price * cartQty;
 
           cartTotal.total += itemTotal;

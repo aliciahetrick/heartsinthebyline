@@ -1,6 +1,6 @@
 const express = require("express");
 const Stripe = require("stripe");
-const Order = require("../models/order");
+const Order = require("../models/Order");
 
 require("dotenv").config();
 
@@ -21,14 +21,14 @@ router.post("/create-checkout-session", async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.name,
-          images: [item.images[0]],
+          images: [item.imageUrl],
           description: item.desc,
           metadata: {
             id: item.id,
-            stock: item.metadata.stock,
+            stock: item.stock,
           },
         },
-        unit_amount: item.price.unit_amount,
+        unit_amount: item.price * 100,
       },
       quantity: item.cartQty,
     };
@@ -39,9 +39,7 @@ router.post("/create-checkout-session", async (req, res) => {
 
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
-      if (
-        req.body.cartItems[i].cartQty > req.body.cartItems[i].metadata.stock
-      ) {
+      if (req.body.cartItems[i].cartQty > req.body.cartItems[i].stock) {
         return false;
       }
     }

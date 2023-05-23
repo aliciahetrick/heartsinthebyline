@@ -36,14 +36,14 @@ const SingleProduct = () => {
         <ProductWrapper>
           <ProductName>{singleProduct.name}</ProductName>
           <ProductImage
-            src={singleProduct.images[0]}
+            src={singleProduct.imageUrl}
             alt={singleProduct.name}
             style={{ width: "300px" }}
           />
-          <ProductPrice>${singleProduct.price.unit_amount / 100}</ProductPrice>
+          <ProductPrice>${singleProduct.price}</ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
 
-          {singleProduct.metadata.stock <= "0" ? (
+          {singleProduct.stock <= "0" ? (
             <ProductButtonDisabled disabled>Sold Out </ProductButtonDisabled>
           ) : (
             <ProductButton onClick={() => handleAddToCart(singleProduct)}>

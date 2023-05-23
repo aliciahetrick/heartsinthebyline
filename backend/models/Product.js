@@ -20,6 +20,9 @@ const Product = db.define("product", {
     type: Sequelize.STRING,
     defaultValue: "no-product.jpg",
   },
+  stock: {
+    type: Sequelize.INTEGER,
+  },
   //   type: {
   //     type: Sequelize.ENUM("bakery", "produce", "dairy", "specialty"),
   //     allowNull: false,

@@ -65,7 +65,7 @@ export const updateProductAsync = createAsyncThunk(
   ) => {
     try {
       const response = await fetch(`${url}/products/${productUrl}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
