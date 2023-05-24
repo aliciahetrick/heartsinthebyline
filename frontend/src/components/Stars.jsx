@@ -10,7 +10,7 @@ export function Stars({ color = "gold", amount = DEFAULT_STARS_N }) {
   return (
     <StarsContainer amount={amount}>
       {Array.from(Array(amount).keys()).map((item, index) => {
-        return <StarImage fill={color} id={`${index}`} />;
+        return <StarImage key={index} fill={color} id={`${index}`} />;
       })}
     </StarsContainer>
   );

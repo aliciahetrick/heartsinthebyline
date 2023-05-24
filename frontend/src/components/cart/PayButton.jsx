@@ -7,7 +7,7 @@ const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
-  // console.log("user", user);
+  console.log("user", user);
   const handleCheckout = async () => {
     await fetch(`${url}/stripe/create-checkout-session`, {
       method: "POST",
@@ -16,7 +16,7 @@ const PayButton = ({ cartItems }) => {
       },
       body: JSON.stringify({
         cartItems,
-        userId: user._id,
+        userId: user.id,
       }),
     })
       .then(async (response) => {
@@ -63,8 +63,7 @@ const PayButton = ({ cartItems }) => {
       <CheckoutButton
         onClick={() => {
           handleCheckout();
-        }}
-      >
+        }}>
         Checkout
       </CheckoutButton>
     </>

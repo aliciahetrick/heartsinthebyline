@@ -8,30 +8,28 @@ import { BREAKPOINTS } from "../constants/breakpoints";
 const AllProducts = () => {
   const dispatch = useDispatch();
 
-  const { items: allProducts, status } = useSelector((state) => state.products);
-
   useEffect(() => {
     dispatch(fetchProductsAsync());
   }, [dispatch]);
+
+  const allProducts = useSelector((state) => state.products);
+
   console.log("allProducts", allProducts);
+
   return (
     <>
       <WrapperTitle>All Products</WrapperTitle>
       <div>
-        {status === "success" ? (
+        {allProducts.status === "success" ? (
           <>
             <AllProductsContainer>
-              {allProducts?.data.map((product) => {
+              {allProducts?.items.map((product) => {
                 return (
                   <ProductContainer key={product.id}>
                     <Link
                       to={`/products/${product.id}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <ProductImage
-                        src={product.images[0]}
-                        alt={product.name}
-                      />
+                      style={{ textDecoration: "none" }}>
+                      <ProductImage src={product.imageUrl} alt={product.name} />
 
                       <ProductName>{product.name}</ProductName>
                     </Link>
@@ -40,7 +38,7 @@ const AllProducts = () => {
               })}
             </AllProductsContainer>
           </>
-        ) : status === "pending" ? (
+        ) : allProducts.status === "pending" ? (
           <p>Loading...</p>
         ) : (
           <p>Unexpected error occured...</p>

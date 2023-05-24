@@ -18,7 +18,7 @@ export const fetchProductsAsync = createAsyncThunk(
       const jsonData = await response.json();
       return jsonData;
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   }
 );
@@ -65,7 +65,7 @@ export const updateProductAsync = createAsyncThunk(
   ) => {
     try {
       const response = await fetch(`${url}/products/${productUrl}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
@@ -95,6 +95,7 @@ const productsSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
+      console.log("payload", action.payload);
       state.items = action.payload;
       state.status = "success";
     });
