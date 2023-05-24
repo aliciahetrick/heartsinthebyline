@@ -33,6 +33,8 @@ const CartLaptop = () => {
     dispatch(removeFromCart(cartItem));
   };
 
+  console.log("cart", cart);
+
   return (
     <>
       <WrapperTitle>Cart</WrapperTitle>
@@ -57,45 +59,39 @@ const CartLaptop = () => {
                   <>
                     <CartItemLeftWrapper
                       to={`/products/${cartItem.id}`}
-                      style={{ textDecoration: "none" }}
-                    >
+                      style={{ textDecoration: "none" }}>
                       <CartItemImage
-                        src={cartItem.images[0]}
+                        src={cartItem.imageUrl}
                         alt={cartItem.name}
                         // style={{ width: "300px" }}
                       />
                       <CartItemDetailsWrapper>
                         <CartItemName>{cartItem.name}</CartItemName>
-                        <CartItemPrice>
-                          ${cartItem.price.unit_amount / 100} each
-                        </CartItemPrice>
+                        <CartItemPrice>${cartItem.price} each</CartItemPrice>
                       </CartItemDetailsWrapper>
                     </CartItemLeftWrapper>
                     <CartItemMiddleWrapper>
                       <CartQuantityButtonContainer>
                         <CartQuantityButtonMinus
-                          onClick={() => handleDecreaseCartQuantity(cartItem)}
-                        >
+                          onClick={() => handleDecreaseCartQuantity(cartItem)}>
                           -
                         </CartQuantityButtonMinus>
                         <CartQuantityNumber>
                           {cartItem.cartQty}
                         </CartQuantityNumber>
                         <CartQuantityButtonPlus
-                          onClick={() => handleIncreaseCartQuantity(cartItem)}
-                        >
+                          onClick={() => handleIncreaseCartQuantity(cartItem)}>
                           +
                         </CartQuantityButtonPlus>
                       </CartQuantityButtonContainer>
                       <RemoveCartItemButton
-                        onClick={() => handleRemoveFromCart(cartItem)}
-                      >
+                        onClick={() => handleRemoveFromCart(cartItem)}>
                         Remove
                       </RemoveCartItemButton>
                     </CartItemMiddleWrapper>
                     <CartItemRightWrapper>
                       <CartItemTotal>
-                        ${(cartItem.price.unit_amount / 100) * cartItem.cartQty}
+                        ${cartItem.price * cartItem.cartQty}
                       </CartItemTotal>
                     </CartItemRightWrapper>
                   </>

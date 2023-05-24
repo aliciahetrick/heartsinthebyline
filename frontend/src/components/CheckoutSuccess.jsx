@@ -22,6 +22,7 @@ const CheckoutSuccess = () => {
       return dispatch(updateProductAsync(updateObject));
     });
 
+    // make sure the clear cart runs after the update
     dispatch(clearCart());
   }, [dispatch, paidCart]);
 

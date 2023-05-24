@@ -6,12 +6,11 @@
 
 - React
 - React Redux
-- Axios
 - React Styled Components
 - React Router
 - Express
-- MongoDB
-- Mongoose
+- PostgreSQL
+- Sequelize
 - Stripe API
 - JSON Web Tokens
 - Bcrypt

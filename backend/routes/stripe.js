@@ -1,6 +1,6 @@
 const express = require("express");
 const Stripe = require("stripe");
-const Order = require("../models/order");
+const Order = require("../models/Order");
 
 require("dotenv").config();
 
@@ -21,24 +21,25 @@ router.post("/create-checkout-session", async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.name,
-          images: [item.images[0]],
+          images: [item.imageUrl],
           description: item.desc,
           metadata: {
             id: item.id,
-            stock: item.metadata.stock,
+            stock: item.stock,
           },
         },
-        unit_amount: item.price.unit_amount,
+        unit_amount: item.price * 100,
       },
       quantity: item.cartQty,
     };
   });
 
+  console.log("line items", line_items);
+  // const products = await stripe.products.list();
+
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
-      if (
-        req.body.cartItems[i].cartQty > req.body.cartItems[i].metadata.stock
-      ) {
+      if (req.body.cartItems[i].cartQty > req.body.cartItems[i].stock) {
         return false;
       }
     }
@@ -127,7 +128,7 @@ router.post("/create-checkout-session", async (req, res) => {
   if (allLineItemsInStock()) {
     res.send({ url: session.url });
   } else {
-    res.status(500).send(line_items);
+    res.status(500).send({ data: line_items });
   }
 });
 
@@ -176,7 +177,7 @@ router.post("/webhook", (request, response) => {
       header,
       process.env.WEBHOOK_ENDPOINT_SECRET
     );
-    console.log(`Webhook Verified: `, event);
+    // console.log(`Webhook Verified: `, event);
   } catch (err) {
     console.log(`Webhook Error: ${err.message}`);
     res.status(400).send(`Webhook Error: ${err.message}`);

@@ -51,7 +51,7 @@ const CartMobile = () => {
                 <SingleCartItemContainerLeft>
                   <Link to={`/products/${cartItem.id}`}>
                     <SingleCartItemImage
-                      src={cartItem.images[0]}
+                      src={cartItem.imageUrl}
                       alt={cartItem.name}
                       style={{ width: "80px" }}
                     />
@@ -67,23 +67,20 @@ const CartMobile = () => {
                   <SingleCartItemDetailsBottom>
                     <CartQuantityButtonContainer>
                       <CartQuantityButtonMinus
-                        onClick={() => handleDecreaseCartQuantity(cartItem)}
-                      >
+                        onClick={() => handleDecreaseCartQuantity(cartItem)}>
                         -
                       </CartQuantityButtonMinus>
                       <CartQuantityNumber>
                         {cartItem.cartQty}
                       </CartQuantityNumber>
                       <CartQuantityButtonPlus
-                        onClick={() => handleIncreaseCartQuantity(cartItem)}
-                      >
+                        onClick={() => handleIncreaseCartQuantity(cartItem)}>
                         +
                       </CartQuantityButtonPlus>
                     </CartQuantityButtonContainer>
 
                     <RemoveCartItemButton
-                      onClick={() => handleRemoveFromCart(cartItem)}
-                    >
+                      onClick={() => handleRemoveFromCart(cartItem)}>
                       Remove
                     </RemoveCartItemButton>
                   </SingleCartItemDetailsBottom>
