@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize')
-const db = require('../db/db')
+const Sequelize = require("sequelize");
+const db = require("../db/db");
 
-const User = db.define('user', {
+const User = db.define("user", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -27,10 +27,10 @@ const User = db.define('user', {
       max: 1024,
     },
   },
-  isAdmin: {
+  is_admin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-})
+});
 
-module.exports = User
+module.exports = User;
