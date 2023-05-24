@@ -65,7 +65,7 @@ const Order = db.define("order", {
     },
   },
   shipping_address: {
-    type: Sequelize.STRING,
+    type: Sequelize.JSON,
   },
   delivery_status: {
     type: Sequelize.STRING,
