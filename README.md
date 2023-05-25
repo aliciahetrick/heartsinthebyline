@@ -1,6 +1,6 @@
 # heartsinthebyline
 
-[Deployed](https://heartsinthebyline2.netlify.app/) A full stack e-commerce application for [heartsinthebyline](https://www.etsy.com/shop/heartsinthebyline).
+[Deployed](https://heartsinthebyline.com) A full stack e-commerce application for [heartsinthebyline](https://www.etsy.com/shop/heartsinthebyline).
 
 ## Tech Stack
 
