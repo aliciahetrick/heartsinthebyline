@@ -29,7 +29,10 @@ const AllProducts = () => {
                     <Link
                       to={`/products/${product.id}`}
                       style={{ textDecoration: "none" }}>
-                      <ProductImage src={product.imageUrl} alt={product.name} />
+                      <ProductImage
+                        src={product.image_url}
+                        alt={product.name}
+                      />
 
                       <ProductName>{product.name}</ProductName>
                     </Link>

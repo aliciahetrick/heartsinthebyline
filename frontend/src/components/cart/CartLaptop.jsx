@@ -61,7 +61,7 @@ const CartLaptop = () => {
                       to={`/products/${cartItem.id}`}
                       style={{ textDecoration: "none" }}>
                       <CartItemImage
-                        src={cartItem.imageUrl}
+                        src={cartItem.image_url}
                         alt={cartItem.name}
                         // style={{ width: "300px" }}
                       />

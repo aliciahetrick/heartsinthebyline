@@ -36,7 +36,7 @@ const SingleProduct = () => {
         <ProductWrapper>
           <ProductName>{singleProduct.name}</ProductName>
           <ProductImage
-            src={singleProduct.imageUrl}
+            src={singleProduct.image_url}
             alt={singleProduct.name}
             style={{ width: "300px" }}
           />

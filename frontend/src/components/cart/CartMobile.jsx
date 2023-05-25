@@ -51,7 +51,7 @@ const CartMobile = () => {
                 <SingleCartItemContainerLeft>
                   <Link to={`/products/${cartItem.id}`}>
                     <SingleCartItemImage
-                      src={cartItem.imageUrl}
+                      src={cartItem.image_url}
                       alt={cartItem.name}
                       style={{ width: "80px" }}
                     />
