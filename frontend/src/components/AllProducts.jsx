@@ -29,6 +29,9 @@ const AllProducts = () => {
                     <Link
                       to={`/products/${product.id}`}
                       style={{ textDecoration: "none" }}>
+                      {product.stock === 0 ? (
+                        <SoldOutBadge>SOLD OUT</SoldOutBadge>
+                      ) : null}
                       <ProductImage
                         src={product.image_url}
                         alt={product.name}
@@ -77,6 +80,19 @@ const AllProductsContainer = styled.div`
 
 const ProductContainer = styled.div`
   margin-bottom: 3em;
+`;
+
+const SoldOutBadge = styled.div`
+  position: absolute;
+  background-color: white;
+  padding: 5px 7px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  max-width: 70px;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #f578a6;
 `;
 
 const ProductImage = styled.img`
