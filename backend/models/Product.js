@@ -33,7 +33,7 @@ const Product = db.define(
     //     type: Sequelize.TEXT,
     //   },
   },
-  { timestamps: true, createdAt: "created_at", updatedAt: "updated_at" }
+  { timestamps: false }
 );
 
 module.exports = Product;
