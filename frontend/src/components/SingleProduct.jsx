@@ -35,11 +35,16 @@ const SingleProduct = () => {
       {singleProductStatus === "success" ? (
         <ProductWrapper>
           <ProductName>{singleProduct.name}</ProductName>
-          <ProductImage
-            src={singleProduct.image_url}
-            alt={singleProduct.name}
-            style={{ width: "300px" }}
-          />
+          <ImageWrapper>
+            {singleProduct.stock === 0 ? (
+              <SoldOutBadge>SOLD OUT</SoldOutBadge>
+            ) : null}
+            <ProductImage
+              src={singleProduct.image_url}
+              alt={singleProduct.name}
+              style={{ width: "300px" }}
+            />
+          </ImageWrapper>
           <ProductPrice>${singleProduct.price}</ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
 
@@ -64,6 +69,27 @@ export default SingleProduct;
 
 const ProductWrapper = styled.div`
   transform: translateY(20%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ImageWrapper = styled.div`
+  max-width: 300px;
+`;
+
+const SoldOutBadge = styled.div`
+  color: #f578a6;
+  font-family: "Raleway", sans-serif;
+  position: absolute;
+  background-color: white;
+  padding: 5px 7px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  max-width: 70px;
+  margin-top: 10px;
+  margin-left: 10px;
 `;
 
 const ProductImage = styled.img`
