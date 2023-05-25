@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsAsync } from "../features/productsSlice";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../constants/breakpoints";
-import Card from "./Card";
+import { Link } from "react-router-dom";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -25,13 +25,20 @@ const AllProducts = () => {
             <AllProductsContainer>
               {allProducts?.items.map((product) => {
                 return (
-                  <Card
-                    key={product.id}
-                    id={product.id}
-                    stock={product.stock}
-                    image_url={product.image_url}
-                    name={product.name}
-                  />
+                  <ProductContainer key={product.id}>
+                    <Link
+                      to={`/products/${product.id}`}
+                      style={{ textDecoration: "none" }}>
+                      {product.stock === 0 ? (
+                        <SoldOutBadge>SOLD OUT</SoldOutBadge>
+                      ) : null}
+                      <ProductImage
+                        src={product.image_url}
+                        alt={product.name}
+                      />
+                      <ProductName>{product.name}</ProductName>
+                    </Link>
+                  </ProductContainer>
                 );
               })}
             </AllProductsContainer>
@@ -70,5 +77,46 @@ const AllProductsContainer = styled.div`
     flex-wrap: wrap;
     margin-left: 10%;
     margin-right: 10%;
+  }
+`;
+
+const ProductContainer = styled.div`
+  margin-bottom: 3em;
+  @media only screen and (max-width: ${BREAKPOINTS.medium}) {
+    max-width: 250px;
+  }
+`;
+
+const SoldOutBadge = styled.div`
+  color: #f578a6;
+  font-family: "Raleway", sans-serif;
+  position: absolute;
+  background-color: white;
+  padding: 5px 7px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  max-width: 70px;
+  margin-top: 10px;
+  margin-left: 10px;
+`;
+
+const ProductImage = styled.img`
+  width: 250px;
+  border-radius: 1em;
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    width: 300px;
+  }
+`;
+
+const ProductName = styled.h2`
+  color: #f578a6;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  margin-top: 0.5em;
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    max-width: 300px;
   }
 `;
