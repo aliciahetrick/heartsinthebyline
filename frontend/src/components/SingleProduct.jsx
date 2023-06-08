@@ -36,7 +36,10 @@ const SingleProduct = () => {
         <ProductWrapper>
           <ProductName>{singleProduct.name}</ProductName>
           <ImageWrapper>
-            {singleProduct.stock === 0 ? (
+            {singleProduct.stock === 0 &&
+            singleProduct.stockA === 0 &&
+            singleProduct.stockB === 0 &&
+            singleProduct.stockC === 0 ? (
               <SoldOutBadge>SOLD OUT</SoldOutBadge>
             ) : null}
             <ProductImage
@@ -45,7 +48,9 @@ const SingleProduct = () => {
               style={{ width: "300px" }}
             />
           </ImageWrapper>
-          <ProductPrice>${singleProduct.price}</ProductPrice>
+          <ProductPrice>
+            ${singleProduct.price || singleProduct.priceA}
+          </ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
 
           {singleProduct.stock <= "0" ? (
