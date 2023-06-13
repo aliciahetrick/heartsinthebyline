@@ -11,6 +11,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
+      console.log("action payload", action.payload);
+
       const itemIndex = state.cartItems.findIndex(
         (cartItem) => cartItem.id === action.payload.id
       );
@@ -22,6 +24,7 @@ const cartSlice = createSlice({
           Number(state.cartItems[itemIndex].stock)
         ) {
           state.cartItems[itemIndex].cartQty += 1;
+          // state.cartItems[itemIndex].cartGrade =
         }
       } else {
         const tempProduct = { ...action.payload, cartQty: 1 };
