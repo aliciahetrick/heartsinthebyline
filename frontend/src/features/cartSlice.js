@@ -61,15 +61,19 @@ const cartSlice = createSlice({
         return state;
       });
     },
+
     decreaseCartQuantity(state, action) {
       const itemIndex = state.cartItems.findIndex(
-        (cartItem) => cartItem.id === action.payload.id
+        (cartItem) => cartItem.id === action.payload[0].id
       );
       if (state.cartItems[itemIndex].cartQty > 1) {
         state.cartItems[itemIndex].cartQty -= 1;
       } else if (state.cartItems[itemIndex].cartQty === 1) {
         const filterCartItems = state.cartItems.filter((cartItem) => {
-          return cartItem.id !== action.payload.id;
+          return (
+            `${action.payload[0].id}${action.payload[1]}` !==
+            `${cartItem.id}${cartItem.cartGrade}`
+          );
         });
 
         state.cartItems = filterCartItems;
