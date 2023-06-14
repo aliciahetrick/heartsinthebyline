@@ -46,12 +46,16 @@ const cartSlice = createSlice({
     },
     removeFromCart(state, action) {
       state.cartItems.map((cartItem) => {
-        if (cartItem._id === action.payload._id) {
-          const filtedCartItems = state.cartItems.filter(
-            (item) => item._id !== cartItem._id
+        if (
+          cartItem.id === action.payload.id &&
+          cartItem.cartGrade === action.payload.cartGrade
+        ) {
+          const filteredCartItems = state.cartItems.filter(
+            (item) =>
+              `${item.id}${item.cartGrade}` !==
+              `${cartItem.id}${cartItem.cartGrade}`
           );
-
-          state.cartItems = filtedCartItems;
+          state.cartItems = filteredCartItems;
         }
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         return state;

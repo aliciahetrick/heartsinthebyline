@@ -20,16 +20,17 @@ const CartMobile = () => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
-  const handleDecreaseCartQuantity = (product) => {
-    dispatch(decreaseCartQuantity(product));
+  const handleDecreaseCartQuantity = (product, grade) => {
+    dispatch(decreaseCartQuantity(product, grade));
   };
 
   const handleIncreaseCartQuantity = (product, grade) => {
     dispatch(addToCart(product, grade));
   };
 
-  const handleRemoveFromCart = (cartItem) => {
-    dispatch(removeFromCart(cartItem));
+  const handleRemoveFromCart = ([cartItem, grade]) => {
+    console.log("removed grade", grade);
+    dispatch(removeFromCart(cartItem, grade));
   };
 
   console.log("cart", cart);
@@ -75,7 +76,12 @@ const CartMobile = () => {
                   <SingleCartItemDetailsBottom>
                     <CartQuantityButtonContainer>
                       <CartQuantityButtonMinus
-                        onClick={() => handleDecreaseCartQuantity(cartItem)}>
+                        onClick={() =>
+                          handleDecreaseCartQuantity([
+                            cartItem,
+                            cartItem.cartGrade,
+                          ])
+                        }>
                         -
                       </CartQuantityButtonMinus>
                       <CartQuantityNumber>
@@ -93,7 +99,9 @@ const CartMobile = () => {
                     </CartQuantityButtonContainer>
 
                     <RemoveCartItemButton
-                      onClick={() => handleRemoveFromCart(cartItem)}>
+                      onClick={() =>
+                        handleRemoveFromCart([cartItem, cartItem.cartGrade])
+                      }>
                       Remove
                     </RemoveCartItemButton>
                   </SingleCartItemDetailsBottom>
