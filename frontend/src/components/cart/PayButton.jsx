@@ -28,9 +28,19 @@ const PayButton = ({ cartItems }) => {
           const jsonResponse = await response.json();
           const notEnoughStockItems = await jsonResponse.data.filter(
             (item) =>
-              Number(item.price_data.product_data.metadata.stock) <
-              item.quantity
+              // console.log("item", item)
+
+              Number(
+                item.price_data.product_data.metadata[
+                  `stock${item.price_data.product_data.metadata.cartGrade}`
+                ]
+              ) < item.quantity
+            // &&
+            // Number(item.price_data.product_data.metadata.stock) <
+            // item.quantity
           );
+
+          console.log("notEnoughStockItems", notEnoughStockItems);
 
           setErrorMessage([
             ...errorMessage,

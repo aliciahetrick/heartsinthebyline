@@ -40,8 +40,8 @@ const SingleProduct = () => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const handleAddToCart = (product, grade) => {
+    dispatch(addToCart([product, grade]));
     navigate("/cart");
   };
 
@@ -111,7 +111,8 @@ const SingleProduct = () => {
             singleProduct.stockC === 0) ? (
             <ProductButtonDisabled disabled>Sold Out </ProductButtonDisabled>
           ) : (
-            <ProductButton onClick={() => handleAddToCart(singleProduct)}>
+            <ProductButton
+              onClick={() => handleAddToCart(singleProduct, grade)}>
               Add to Cart
             </ProductButton>
           )}

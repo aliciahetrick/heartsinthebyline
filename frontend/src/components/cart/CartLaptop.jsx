@@ -55,7 +55,7 @@ const CartLaptop = () => {
             </HeadingWrapper>
             {cart.cartItems.map((cartItem) => {
               return (
-                <CartItemContainer key={cartItem.id}>
+                <CartItemContainer key={cartItem.id + cartItem.cartGrade}>
                   <>
                     <CartItemLeftWrapper
                       to={`/products/${cartItem.id}`}
@@ -67,7 +67,18 @@ const CartLaptop = () => {
                       />
                       <CartItemDetailsWrapper>
                         <CartItemName>{cartItem.name}</CartItemName>
-                        <CartItemPrice>${cartItem.price} each</CartItemPrice>
+                        <CartItemPrice>
+                          $
+                          {cartItem.price ||
+                            cartItem[`price${cartItem.cartGrade}`]}{" "}
+                          each
+                        </CartItemPrice>
+
+                        {cartItem.cartGrade ? (
+                          <CartItemPrice>
+                            Grade: {cartItem.cartGrade}
+                          </CartItemPrice>
+                        ) : null}
                       </CartItemDetailsWrapper>
                     </CartItemLeftWrapper>
                     <CartItemMiddleWrapper>
@@ -91,7 +102,10 @@ const CartLaptop = () => {
                     </CartItemMiddleWrapper>
                     <CartItemRightWrapper>
                       <CartItemTotal>
-                        ${cartItem.price * cartItem.cartQty}
+                        $
+                        {(cartItem.price ||
+                          cartItem[`price${cartItem.cartGrade}`]) *
+                          cartItem.cartQty}
                       </CartItemTotal>
                     </CartItemRightWrapper>
                   </>

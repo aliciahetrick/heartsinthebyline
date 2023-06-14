@@ -16,6 +16,7 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   const line_items = req.body.cartItems.map((item) => {
+    console.log("item", item);
     return {
       price_data: {
         currency: "usd",
@@ -26,9 +27,13 @@ router.post("/create-checkout-session", async (req, res) => {
           metadata: {
             id: item.id,
             stock: item.stock,
+            stockA: item.stockA,
+            stockB: item.stockB,
+            stockC: item.stockC,
+            cartGrade: item.cartGrade,
           },
         },
-        unit_amount: item.price * 100,
+        unit_amount: item[`price${item.cartGrade}`] * 100,
       },
       quantity: item.cartQty,
     };
@@ -37,9 +42,14 @@ router.post("/create-checkout-session", async (req, res) => {
   console.log("line items", line_items);
   // const products = await stripe.products.list();
 
+  console.log("request body", req.body);
+
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
-      if (req.body.cartItems[i].cartQty > req.body.cartItems[i].stock) {
+      if (
+        req.body.cartItems[i].cartQty >
+        req.body.cartItems[i][`stock${req.body.cartItems[i].cartGrade}`]
+      ) {
         return false;
       }
     }

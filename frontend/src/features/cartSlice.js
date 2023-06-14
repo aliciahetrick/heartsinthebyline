@@ -11,10 +11,12 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      console.log("action payload", action.payload);
+      console.log("action", action);
 
       const itemIndex = state.cartItems.findIndex(
-        (cartItem) => cartItem.id === action.payload.id
+        (cartItem) =>
+          cartItem.id === action.payload[0].id &&
+          cartItem.cartGrade === action.payload[1]
       );
 
       // if item already in cart
@@ -24,10 +26,14 @@ const cartSlice = createSlice({
           Number(state.cartItems[itemIndex].stock)
         ) {
           state.cartItems[itemIndex].cartQty += 1;
-          // state.cartItems[itemIndex].cartGrade =
+          state.cartItems[itemIndex].cartGrade = action.payload[1];
         }
       } else {
-        const tempProduct = { ...action.payload, cartQty: 1 };
+        const tempProduct = {
+          ...action.payload[0],
+          cartQty: 1,
+          cartGrade: action.payload[1],
+        };
         state.cartItems.push(tempProduct);
       }
 
@@ -69,7 +75,8 @@ const cartSlice = createSlice({
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { cartQty } = cartItem;
-          const price = cartItem.price;
+          const price =
+            cartItem.price || cartItem[`price${cartItem.cartGrade}`];
           const itemTotal = price * cartQty;
 
           cartTotal.total += itemTotal;

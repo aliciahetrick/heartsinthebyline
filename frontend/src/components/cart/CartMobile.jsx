@@ -47,7 +47,7 @@ const CartMobile = () => {
         <div>
           {cart.cartItems.map((cartItem) => {
             return (
-              <SingleCartItemContainer key={cartItem.id}>
+              <SingleCartItemContainer key={cartItem.id + cartItem.cartGrade}>
                 <SingleCartItemContainerLeft>
                   <Link to={`/products/${cartItem.id}`}>
                     <SingleCartItemImage
@@ -61,8 +61,15 @@ const CartMobile = () => {
                   <SingleCartItemDetailsTop>
                     <SingleCartItemTitle>{cartItem.name}</SingleCartItemTitle>
                     <SingleCartItemPrice>
-                      ${cartItem.price.unit_amount / 100} each
+                      $
+                      {cartItem.price || cartItem[`price${cartItem.cartGrade}`]}{" "}
+                      each
                     </SingleCartItemPrice>
+                    {cartItem.cartGrade ? (
+                      <SingleCartItemPrice>
+                        Grade: {cartItem.cartGrade}
+                      </SingleCartItemPrice>
+                    ) : null}
                   </SingleCartItemDetailsTop>
                   <SingleCartItemDetailsBottom>
                     <CartQuantityButtonContainer>
