@@ -14,7 +14,7 @@ const AllProducts = () => {
 
   const allProducts = useSelector((state) => state.products);
 
-  console.log("allProducts", allProducts);
+  // console.log("allProducts", allProducts);
 
   return (
     <>

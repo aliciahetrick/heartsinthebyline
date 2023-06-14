@@ -18,7 +18,7 @@ const SingleProduct = () => {
     setGrade(event.target.value);
   };
 
-  console.log("grade:", grade);
+  // console.log("grade:", grade);
   // console.log("price:", price);
 
   // useEffect(() => {

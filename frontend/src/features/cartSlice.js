@@ -19,8 +19,8 @@ const cartSlice = createSlice({
           cartItem.cartGrade === action.payload[1]
       );
 
-      console.log("itemIndex", itemIndex);
-      console.log("state cart items", state.cartItems[0]);
+      // console.log("itemIndex", itemIndex);
+      // console.log("state cart items", state.cartItems[0]);
 
       // if item already in cart
       if (itemIndex >= 0) {

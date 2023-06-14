@@ -18,7 +18,7 @@ const NavbarMobile = () => {
     setIsMobileSidebarToggled(!isMobileSidebarToggled);
   };
 
-  console.log("toggled?", isMobileSidebarToggled);
+  // console.log("toggled?", isMobileSidebarToggled);
 
   return (
     <nav style={{ backgroundColor: "#ffd4e9" }}>
@@ -27,8 +27,7 @@ const NavbarMobile = () => {
           <CloseNavButton
             onClick={() => {
               handleNavbarToggle();
-            }}
-          >
+            }}>
             <FaIcons.FaTimes />
           </CloseNavButton>
           <TitleLink to="/">heartsinthebyline</TitleLink>
@@ -38,8 +37,7 @@ const NavbarMobile = () => {
               onClick={() => {
                 handleNavbarToggle();
               }}
-              style={{ textDecoration: "none", color: "#f578a6" }}
-            >
+              style={{ textDecoration: "none", color: "#f578a6" }}>
               <FaIcons.FaHome /> Home
             </MobileNavItem>
             <MobileNavItem
@@ -47,8 +45,7 @@ const NavbarMobile = () => {
               onClick={() => {
                 handleNavbarToggle();
               }}
-              style={{ textDecoration: "none", color: "#f578a6" }}
-            >
+              style={{ textDecoration: "none", color: "#f578a6" }}>
               <FaIcons.FaHeart /> Products
             </MobileNavItem>
             <MobileNavItem
@@ -56,8 +53,7 @@ const NavbarMobile = () => {
               onClick={() => {
                 handleNavbarToggle();
               }}
-              style={{ textDecoration: "none", color: "#f578a6" }}
-            >
+              style={{ textDecoration: "none", color: "#f578a6" }}>
               <FaIcons.FaShoppingCart /> Cart({cartTotalQty})
             </MobileNavItem>
             {auth._id ? (
@@ -69,8 +65,7 @@ const NavbarMobile = () => {
                       onClick={() => {
                         handleNavbarToggle();
                       }}
-                      style={{ textDecoration: "none", color: "#f578a6" }}
-                    >
+                      style={{ textDecoration: "none", color: "#f578a6" }}>
                       <FaIcons.FaKey /> Admin
                     </MobileNavItem>
                   </div>
@@ -79,15 +74,13 @@ const NavbarMobile = () => {
                 <div
                   onClick={() => {
                     dispatch(logoutUser(null));
-                  }}
-                >
+                  }}>
                   <MobileNavItem
                     to="/"
                     onClick={() => {
                       handleNavbarToggle();
                     }}
-                    style={{ textDecoration: "none", color: "#f578a6" }}
-                  >
+                    style={{ textDecoration: "none", color: "#f578a6" }}>
                     <FaIcons.FaSignOutAlt />
                     Log Out
                   </MobileNavItem>
@@ -100,8 +93,7 @@ const NavbarMobile = () => {
                   onClick={() => {
                     handleNavbarToggle();
                   }}
-                  style={{ textDecoration: "none", color: "#f578a6" }}
-                >
+                  style={{ textDecoration: "none", color: "#f578a6" }}>
                   <FaIcons.FaUserPlus /> Register
                 </MobileNavItem>
                 <MobileNavItem
@@ -109,8 +101,7 @@ const NavbarMobile = () => {
                   onClick={() => {
                     handleNavbarToggle();
                   }}
-                  style={{ textDecoration: "none", color: "#f578a6" }}
-                >
+                  style={{ textDecoration: "none", color: "#f578a6" }}>
                   <FaIcons.FaSignInAlt /> Log In
                 </MobileNavItem>
               </>
@@ -122,8 +113,7 @@ const NavbarMobile = () => {
           <NavbarHamburgerIcon
             onClick={() => {
               handleNavbarToggle();
-            }}
-          >
+            }}>
             <FaIcons.FaBars />
           </NavbarHamburgerIcon>
 

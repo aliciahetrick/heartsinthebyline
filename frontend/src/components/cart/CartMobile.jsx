@@ -33,7 +33,7 @@ const CartMobile = () => {
     dispatch(removeFromCart(cartItem, grade));
   };
 
-  console.log("cart", cart);
+  // console.log("cart", cart);
 
   return (
     <>
