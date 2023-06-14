@@ -29,7 +29,10 @@ const AllProducts = () => {
                     <Link
                       to={`/products/${product.id}`}
                       style={{ textDecoration: "none" }}>
-                      {product.stock === 0 ? (
+                      {product.stock ||
+                      (!product.stockA &&
+                        !product.stockB &&
+                        !product.stockC) ? (
                         <SoldOutBadge>SOLD OUT</SoldOutBadge>
                       ) : null}
                       <ProductImage
