@@ -25,8 +25,8 @@ const CartLaptop = () => {
     dispatch(decreaseCartQuantity(product));
   };
 
-  const handleIncreaseCartQuantity = (product) => {
-    dispatch(addToCart(product));
+  const handleIncreaseCartQuantity = (product, grade) => {
+    dispatch(addToCart(product, grade));
   };
 
   const handleRemoveFromCart = (cartItem) => {
@@ -91,7 +91,12 @@ const CartLaptop = () => {
                           {cartItem.cartQty}
                         </CartQuantityNumber>
                         <CartQuantityButtonPlus
-                          onClick={() => handleIncreaseCartQuantity(cartItem)}>
+                          onClick={() =>
+                            handleIncreaseCartQuantity([
+                              cartItem,
+                              cartItem.cartGrade,
+                            ])
+                          }>
                           +
                         </CartQuantityButtonPlus>
                       </CartQuantityButtonContainer>

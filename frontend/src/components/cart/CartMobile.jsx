@@ -15,7 +15,6 @@ const CartMobile = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   useEffect(() => {
     dispatch(getTotals());
@@ -25,13 +24,15 @@ const CartMobile = () => {
     dispatch(decreaseCartQuantity(product));
   };
 
-  const handleIncreaseCartQuantity = (product) => {
-    dispatch(addToCart(product));
+  const handleIncreaseCartQuantity = (product, grade) => {
+    dispatch(addToCart(product, grade));
   };
 
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem));
   };
+
+  console.log("cart", cart);
 
   return (
     <>
@@ -81,7 +82,12 @@ const CartMobile = () => {
                         {cartItem.cartQty}
                       </CartQuantityNumber>
                       <CartQuantityButtonPlus
-                        onClick={() => handleIncreaseCartQuantity(cartItem)}>
+                        onClick={() =>
+                          handleIncreaseCartQuantity([
+                            cartItem,
+                            cartItem.cartGrade,
+                          ])
+                        }>
                         +
                       </CartQuantityButtonPlus>
                     </CartQuantityButtonContainer>
