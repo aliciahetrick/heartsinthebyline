@@ -67,7 +67,7 @@ const CartMobile = () => {
                       {cartItem.price || cartItem[`price${cartItem.cartGrade}`]}{" "}
                       each
                     </SingleCartItemPrice>
-                    {cartItem.cartGrade ? (
+                    {cartItem.type === "pin" ? (
                       <SingleCartItemPrice>
                         Grade: {cartItem.cartGrade}
                       </SingleCartItemPrice>

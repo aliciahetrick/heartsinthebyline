@@ -14,7 +14,7 @@ const AllProducts = () => {
 
   const allProducts = useSelector((state) => state.products);
 
-  // console.log("allProducts", allProducts);
+  console.log("allProducts", allProducts);
 
   return (
     <>
@@ -29,10 +29,10 @@ const AllProducts = () => {
                     <Link
                       to={`/products/${product.id}`}
                       style={{ textDecoration: "none" }}>
-                      {product.stock ||
-                      (!product.stockA &&
-                        !product.stockB &&
-                        !product.stockC) ? (
+                      {product.stock === 0 ||
+                      (product.stockA === 0 &&
+                        product.stockB === 0 &&
+                        product.stockC === 0) ? (
                         <SoldOutBadge>SOLD OUT</SoldOutBadge>
                       ) : null}
                       <ProductImage

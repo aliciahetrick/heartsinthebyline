@@ -74,7 +74,7 @@ const CartLaptop = () => {
                           each
                         </CartItemPrice>
 
-                        {cartItem.cartGrade ? (
+                        {cartItem.type === "pin" ? (
                           <CartItemPrice>
                             Grade: {cartItem.cartGrade}
                           </CartItemPrice>

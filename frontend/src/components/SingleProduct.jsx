@@ -67,44 +67,46 @@ const SingleProduct = () => {
             ${singleProduct.price || singleProduct[`price${grade}`]}
           </ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
-          <div onChange={handleChangeGrade}>
-            <GradeButton>
-              <label>
-                <input
-                  type="radio"
-                  // disabled={oneProduct.stock.gradeA === 0}
-                  name="grade"
-                  value="A"
-                  disabled={!singleProduct.stockA ? true : false}
-                />
-                A Grade
-              </label>
-            </GradeButton>
-            <GradeButton>
-              <label>
-                <input
-                  type="radio"
-                  // disabled={oneProduct.stock.gradeA === 0}
-                  name="grade"
-                  value="B"
-                  disabled={!singleProduct.stockB ? true : false}
-                />
-                B Grade
-              </label>
-            </GradeButton>
-            <GradeButton>
-              <label>
-                <input
-                  type="radio"
-                  // disabled={oneProduct.stock.gradeA === 0}
-                  name="grade"
-                  value="C"
-                  disabled={!singleProduct.stockC ? true : false}
-                />
-                C Grade
-              </label>
-            </GradeButton>
-          </div>
+          {singleProduct.type === "pin" ? (
+            <div onChange={handleChangeGrade}>
+              <GradeButton>
+                <label>
+                  <input
+                    type="radio"
+                    // disabled={oneProduct.stock.gradeA === 0}
+                    name="grade"
+                    value="A"
+                    disabled={!singleProduct.stockA ? true : false}
+                  />
+                  A Grade
+                </label>
+              </GradeButton>
+              <GradeButton>
+                <label>
+                  <input
+                    type="radio"
+                    // disabled={oneProduct.stock.gradeA === 0}
+                    name="grade"
+                    value="B"
+                    disabled={!singleProduct.stockB ? true : false}
+                  />
+                  B Grade
+                </label>
+              </GradeButton>
+              <GradeButton>
+                <label>
+                  <input
+                    type="radio"
+                    // disabled={oneProduct.stock.gradeA === 0}
+                    name="grade"
+                    value="C"
+                    disabled={!singleProduct.stockC ? true : false}
+                  />
+                  C Grade
+                </label>
+              </GradeButton>
+            </div>
+          ) : null}
           {singleProduct.stock === 0 ||
           (singleProduct.stockA === 0 &&
             singleProduct.stockB === 0 &&
