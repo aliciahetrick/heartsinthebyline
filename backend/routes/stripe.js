@@ -41,23 +41,16 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   console.log("line items", line_items);
-  // const products = await stripe.products.list();
 
   console.log("request body", req.body);
 
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
+      const cartItem = req.body.cartItems[i];
       if (
-        req.body.cartItems[i].cartQty >
-          req.body.cartItems[i][`stock${req.body.cartItems[i].cartGrade}`] &&
-        req.body.cartItems[i].type === "pin"
-        //   ||
-        // req.body.cartItems[i].cartQty > req.body.cartItems[i].stock
-      ) {
-        return false;
-      } else if (
-        req.body.cartItems[i].cartQty > req.body.cartItems[i].stock &&
-        req.body.cartItems[i].type === "sticker"
+        (cartItem.cartQty > cartItem[`stock${cartItem.cartGrade}`] &&
+          cartItem.type === "pin") ||
+        (cartItem.cartQty > cartItem.stock && cartItem.type === "sticker")
       ) {
         return false;
       }
