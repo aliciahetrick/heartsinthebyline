@@ -31,9 +31,10 @@ router.post("/create-checkout-session", async (req, res) => {
             stockB: item.stockB,
             stockC: item.stockC,
             cartGrade: item.cartGrade,
+            type: item.type,
           },
         },
-        unit_amount: item[`price${item.cartGrade}`] * 100,
+        unit_amount: item[`price${item.cartGrade}`] * 100 || item.price * 100,
       },
       quantity: item.cartQty,
     };
@@ -48,7 +49,15 @@ router.post("/create-checkout-session", async (req, res) => {
     for (let i = 0; i < req.body.cartItems.length; i++) {
       if (
         req.body.cartItems[i].cartQty >
-        req.body.cartItems[i][`stock${req.body.cartItems[i].cartGrade}`]
+          req.body.cartItems[i][`stock${req.body.cartItems[i].cartGrade}`] &&
+        req.body.cartItems[i].type === "pin"
+        //   ||
+        // req.body.cartItems[i].cartQty > req.body.cartItems[i].stock
+      ) {
+        return false;
+      } else if (
+        req.body.cartItems[i].cartQty > req.body.cartItems[i].stock &&
+        req.body.cartItems[i].type === "sticker"
       ) {
         return false;
       }

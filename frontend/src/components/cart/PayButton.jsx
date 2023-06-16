@@ -26,7 +26,7 @@ const PayButton = ({ cartItems }) => {
         } else {
           setError(true);
           const jsonResponse = await response.json();
-          const notEnoughStockItems = await jsonResponse.data.filter(
+          const notEnoughStockItemsPins = await jsonResponse.data.filter(
             (item) =>
               // console.log("item", item)
 
@@ -34,11 +34,32 @@ const PayButton = ({ cartItems }) => {
                 item.price_data.product_data.metadata[
                   `stock${item.price_data.product_data.metadata.cartGrade}`
                 ]
-              ) < item.quantity
-            // &&
+              ) < item.quantity &&
+              item.price_data.product_data.metadata.type === "pin"
+            // ||
             // Number(item.price_data.product_data.metadata.stock) <
             // item.quantity
           );
+
+          const notEnoughStockItemsOther = await jsonResponse.data.filter(
+            (item) =>
+              // console.log("item", item)
+
+              // Number(
+              //   item.price_data.product_data.metadata[
+              //     `stock${item.price_data.product_data.metadata.cartGrade}`
+              //   ]
+              // ) < item.quantity
+              // // ||
+              Number(item.price_data.product_data.metadata.stock) <
+                item.quantity &&
+              item.price_data.product_data.metadata.type === "sticker"
+          );
+
+          const notEnoughStockItems = [
+            ...notEnoughStockItemsPins,
+            ...notEnoughStockItemsOther,
+          ];
 
           console.log("notEnoughStockItems", notEnoughStockItems);
 
