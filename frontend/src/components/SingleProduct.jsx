@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, getTotals } from "../features/cartSlice";
@@ -10,23 +10,38 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
+
+  const [grade, setGrade] = useState("A");
+  // const [price, setPrice] = useState(20);
+
+  const handleChangeGrade = (event) => {
+    setGrade(event.target.value);
+  };
+
+  // console.log("grade:", grade);
+  // console.log("price:", price);
+
+  // useEffect(() => {
+  //   setPrice("price" + grade);
+  // }, [grade]);
+
   const { singleProduct, singleProductStatus } = useSelector(
     (state) => state.products
   );
 
-  console.log("param", param);
+  // console.log("param", param);
   useEffect(() => {
     dispatch(fetchSingleProductAsync(param));
   }, [dispatch, param]);
 
-  console.log("singleProduct", singleProduct);
+  // console.log("singleProduct", singleProduct);
 
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const handleAddToCart = (product, grade) => {
+    dispatch(addToCart([product, grade]));
     navigate("/cart");
   };
 
@@ -36,7 +51,10 @@ const SingleProduct = () => {
         <ProductWrapper>
           <ProductName>{singleProduct.name}</ProductName>
           <ImageWrapper>
-            {singleProduct.stock === 0 ? (
+            {singleProduct.stock === 0 ||
+            (singleProduct.stockA === 0 &&
+              singleProduct.stockB === 0 &&
+              singleProduct.stockC === 0) ? (
               <SoldOutBadge>SOLD OUT</SoldOutBadge>
             ) : null}
             <ProductImage
@@ -45,13 +63,58 @@ const SingleProduct = () => {
               style={{ width: "300px" }}
             />
           </ImageWrapper>
-          <ProductPrice>${singleProduct.price}</ProductPrice>
+          <ProductPrice>
+            ${singleProduct.price || singleProduct[`price${grade}`]}
+          </ProductPrice>
           {/* <p>{singleProduct.desc}</p> */}
-
-          {singleProduct.stock <= "0" ? (
+          {singleProduct.type === "pin" ? (
+            <div onChange={handleChangeGrade}>
+              <GradeButton>
+                <label>
+                  <input
+                    type="radio"
+                    // disabled={oneProduct.stock.gradeA === 0}
+                    name="grade"
+                    value="A"
+                    disabled={!singleProduct.stockA ? true : false}
+                  />
+                  A Grade
+                </label>
+              </GradeButton>
+              <GradeButton>
+                <label>
+                  <input
+                    type="radio"
+                    // disabled={oneProduct.stock.gradeA === 0}
+                    name="grade"
+                    value="B"
+                    disabled={!singleProduct.stockB ? true : false}
+                  />
+                  B Grade
+                </label>
+              </GradeButton>
+              <GradeButton>
+                <label>
+                  <input
+                    type="radio"
+                    // disabled={oneProduct.stock.gradeA === 0}
+                    name="grade"
+                    value="C"
+                    disabled={!singleProduct.stockC ? true : false}
+                  />
+                  C Grade
+                </label>
+              </GradeButton>
+            </div>
+          ) : null}
+          {singleProduct.stock === 0 ||
+          (singleProduct.stockA === 0 &&
+            singleProduct.stockB === 0 &&
+            singleProduct.stockC === 0) ? (
             <ProductButtonDisabled disabled>Sold Out </ProductButtonDisabled>
           ) : (
-            <ProductButton onClick={() => handleAddToCart(singleProduct)}>
+            <ProductButton
+              onClick={() => handleAddToCart(singleProduct, grade)}>
               Add to Cart
             </ProductButton>
           )}
@@ -103,6 +166,12 @@ const ProductName = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   // margin-top: 3em;
+`;
+
+const GradeButton = styled.div`
+  &:active {
+    color: white;
+  }
 `;
 
 const ProductPrice = styled.p`

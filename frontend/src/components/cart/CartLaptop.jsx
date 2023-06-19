@@ -21,19 +21,19 @@ const CartLaptop = () => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
-  const handleDecreaseCartQuantity = (product) => {
-    dispatch(decreaseCartQuantity(product));
+  const handleDecreaseCartQuantity = (product, grade) => {
+    dispatch(decreaseCartQuantity(product, grade));
   };
 
-  const handleIncreaseCartQuantity = (product) => {
-    dispatch(addToCart(product));
+  const handleIncreaseCartQuantity = (product, grade) => {
+    dispatch(addToCart(product, grade));
   };
 
-  const handleRemoveFromCart = (cartItem) => {
-    dispatch(removeFromCart(cartItem));
+  const handleRemoveFromCart = ([cartItem, grade]) => {
+    dispatch(removeFromCart(cartItem, grade));
   };
 
-  console.log("cart", cart);
+  // console.log("cart", cart);
 
   return (
     <>
@@ -55,7 +55,7 @@ const CartLaptop = () => {
             </HeadingWrapper>
             {cart.cartItems.map((cartItem) => {
               return (
-                <CartItemContainer key={cartItem.id}>
+                <CartItemContainer key={cartItem.id + cartItem.cartGrade}>
                   <>
                     <CartItemLeftWrapper
                       to={`/products/${cartItem.id}`}
@@ -67,31 +67,57 @@ const CartLaptop = () => {
                       />
                       <CartItemDetailsWrapper>
                         <CartItemName>{cartItem.name}</CartItemName>
-                        <CartItemPrice>${cartItem.price} each</CartItemPrice>
+                        <CartItemPrice>
+                          $
+                          {cartItem.price ||
+                            cartItem[`price${cartItem.cartGrade}`]}{" "}
+                          each
+                        </CartItemPrice>
+
+                        {cartItem.type === "pin" ? (
+                          <CartItemPrice>
+                            Grade: {cartItem.cartGrade}
+                          </CartItemPrice>
+                        ) : null}
                       </CartItemDetailsWrapper>
                     </CartItemLeftWrapper>
                     <CartItemMiddleWrapper>
                       <CartQuantityButtonContainer>
                         <CartQuantityButtonMinus
-                          onClick={() => handleDecreaseCartQuantity(cartItem)}>
+                          onClick={() =>
+                            handleDecreaseCartQuantity([
+                              cartItem,
+                              cartItem.cartGrade,
+                            ])
+                          }>
                           -
                         </CartQuantityButtonMinus>
                         <CartQuantityNumber>
                           {cartItem.cartQty}
                         </CartQuantityNumber>
                         <CartQuantityButtonPlus
-                          onClick={() => handleIncreaseCartQuantity(cartItem)}>
+                          onClick={() =>
+                            handleIncreaseCartQuantity([
+                              cartItem,
+                              cartItem.cartGrade,
+                            ])
+                          }>
                           +
                         </CartQuantityButtonPlus>
                       </CartQuantityButtonContainer>
                       <RemoveCartItemButton
-                        onClick={() => handleRemoveFromCart(cartItem)}>
+                        onClick={() =>
+                          handleRemoveFromCart([cartItem, cartItem.cartGrade])
+                        }>
                         Remove
                       </RemoveCartItemButton>
                     </CartItemMiddleWrapper>
                     <CartItemRightWrapper>
                       <CartItemTotal>
-                        ${cartItem.price * cartItem.cartQty}
+                        $
+                        {(cartItem.price ||
+                          cartItem[`price${cartItem.cartGrade}`]) *
+                          cartItem.cartQty}
                       </CartItemTotal>
                     </CartItemRightWrapper>
                   </>
