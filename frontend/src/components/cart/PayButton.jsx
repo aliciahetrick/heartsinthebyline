@@ -1,14 +1,17 @@
 import { useSelector } from "react-redux";
 import { url } from "../../features/api";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
-  console.log("user", user);
+  // console.log("user", user);
+
   const handleCheckout = async () => {
+    setError(false);
+    setErrorMessage([]);
     await fetch(`${url}/stripe/create-checkout-session`, {
       method: "POST",
       headers: {
@@ -26,21 +29,42 @@ const PayButton = ({ cartItems }) => {
         } else {
           setError(true);
           const jsonResponse = await response.json();
-          const notEnoughStockItems = await jsonResponse.data.filter(
+          const notEnoughStockItemsPins = await jsonResponse.data.filter(
             (item) =>
-              Number(item.price_data.product_data.metadata.stock) <
-              item.quantity
+              Number(
+                item.price_data.product_data.metadata[
+                  `stock${item.price_data.product_data.metadata.cartGrade}`
+                ]
+              ) < item.quantity &&
+              item.price_data.product_data.metadata.type === "pin"
           );
 
+          const notEnoughStockItemsOther = await jsonResponse.data.filter(
+            (item) =>
+              Number(item.price_data.product_data.metadata.stock) <
+                item.quantity &&
+              item.price_data.product_data.metadata.type === "sticker"
+          );
+
+          const notEnoughStockItems = [
+            ...notEnoughStockItemsPins,
+            ...notEnoughStockItemsOther,
+          ];
+
+          console.log("notEnoughStockItems", notEnoughStockItems);
+
           setErrorMessage([
-            ...errorMessage,
             ...notEnoughStockItems.map((item) => {
-              const stock = item.price_data.product_data.metadata.stock;
+              const grade = item.price_data.product_data.metadata.cartGrade;
+              const stockGrade = "stock" + grade;
+              const stock =
+                item.price_data.product_data.metadata.stock ||
+                item.price_data.product_data.metadata[stockGrade];
               const name = item.price_data.product_data.name;
               if (stock <= 1) {
-                return `There is only ${stock} ${name} left`;
+                return `There is only ${stock} ${name} in stock`;
               } else {
-                return `There are only ${stock} ${name}s left`;
+                return `There are only ${stock} ${name}s in stock`;
               }
             }),
           ]);

@@ -95,7 +95,7 @@ const productsSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
-      console.log("payload", action.payload);
+      // console.log("payload", action.payload);
       state.items = action.payload;
       state.status = "success";
     });

@@ -15,23 +15,25 @@ const CartMobile = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
-  const handleDecreaseCartQuantity = (product) => {
-    dispatch(decreaseCartQuantity(product));
+  const handleDecreaseCartQuantity = (product, grade) => {
+    dispatch(decreaseCartQuantity(product, grade));
   };
 
-  const handleIncreaseCartQuantity = (product) => {
-    dispatch(addToCart(product));
+  const handleIncreaseCartQuantity = (product, grade) => {
+    dispatch(addToCart(product, grade));
   };
 
-  const handleRemoveFromCart = (cartItem) => {
-    dispatch(removeFromCart(cartItem));
+  const handleRemoveFromCart = ([cartItem, grade]) => {
+    console.log("removed grade", grade);
+    dispatch(removeFromCart(cartItem, grade));
   };
+
+  // console.log("cart", cart);
 
   return (
     <>
@@ -47,7 +49,7 @@ const CartMobile = () => {
         <div>
           {cart.cartItems.map((cartItem) => {
             return (
-              <SingleCartItemContainer key={cartItem.id}>
+              <SingleCartItemContainer key={cartItem.id + cartItem.cartGrade}>
                 <SingleCartItemContainerLeft>
                   <Link to={`/products/${cartItem.id}`}>
                     <SingleCartItemImage
@@ -61,26 +63,45 @@ const CartMobile = () => {
                   <SingleCartItemDetailsTop>
                     <SingleCartItemTitle>{cartItem.name}</SingleCartItemTitle>
                     <SingleCartItemPrice>
-                      ${cartItem.price.unit_amount / 100} each
+                      $
+                      {cartItem.price || cartItem[`price${cartItem.cartGrade}`]}{" "}
+                      each
                     </SingleCartItemPrice>
+                    {cartItem.type === "pin" ? (
+                      <SingleCartItemPrice>
+                        Grade: {cartItem.cartGrade}
+                      </SingleCartItemPrice>
+                    ) : null}
                   </SingleCartItemDetailsTop>
                   <SingleCartItemDetailsBottom>
                     <CartQuantityButtonContainer>
                       <CartQuantityButtonMinus
-                        onClick={() => handleDecreaseCartQuantity(cartItem)}>
+                        onClick={() =>
+                          handleDecreaseCartQuantity([
+                            cartItem,
+                            cartItem.cartGrade,
+                          ])
+                        }>
                         -
                       </CartQuantityButtonMinus>
                       <CartQuantityNumber>
                         {cartItem.cartQty}
                       </CartQuantityNumber>
                       <CartQuantityButtonPlus
-                        onClick={() => handleIncreaseCartQuantity(cartItem)}>
+                        onClick={() =>
+                          handleIncreaseCartQuantity([
+                            cartItem,
+                            cartItem.cartGrade,
+                          ])
+                        }>
                         +
                       </CartQuantityButtonPlus>
                     </CartQuantityButtonContainer>
 
                     <RemoveCartItemButton
-                      onClick={() => handleRemoveFromCart(cartItem)}>
+                      onClick={() =>
+                        handleRemoveFromCart([cartItem, cartItem.cartGrade])
+                      }>
                       Remove
                     </RemoveCartItemButton>
                   </SingleCartItemDetailsBottom>

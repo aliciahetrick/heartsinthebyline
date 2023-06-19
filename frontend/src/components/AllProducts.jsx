@@ -29,7 +29,10 @@ const AllProducts = () => {
                     <Link
                       to={`/products/${product.id}`}
                       style={{ textDecoration: "none" }}>
-                      {product.stock === 0 ? (
+                      {product.stock === 0 ||
+                      (product.stockA === 0 &&
+                        product.stockB === 0 &&
+                        product.stockC === 0) ? (
                         <SoldOutBadge>SOLD OUT</SoldOutBadge>
                       ) : null}
                       <ProductImage
@@ -44,9 +47,14 @@ const AllProducts = () => {
             </AllProductsContainer>
           </>
         ) : allProducts.status === "pending" ? (
-          <p>Loading...</p>
+          <>
+            <LoaderContainer>
+              <ErrorText>Loading...</ErrorText>
+              <CSSLoader></CSSLoader>
+            </LoaderContainer>
+          </>
         ) : (
-          <p>Unexpected error occured...</p>
+          <ErrorText>Unexpected error occured...</ErrorText>
         )}
       </div>
     </>
@@ -118,5 +126,40 @@ const ProductName = styled.h2`
   margin-top: 0.5em;
   @media only screen and (min-width: ${BREAKPOINTS.medium}) {
     max-width: 300px;
+  }
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ErrorText = styled.h4`
+  color: #f578a6;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-bottom: 1em;
+`;
+
+const CSSLoader = styled.div`
+  border: 10px solid pink;
+  border-top: 10px solid #f578a6;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
