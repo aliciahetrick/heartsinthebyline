@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { url } from "../../features/api";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
