@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsAsync } from "../features/productsSlice";
+import { fetchProductsAsync } from "../../features/productsSlice";
 import styled from "styled-components";
-import { BREAKPOINTS } from "../constants/breakpoints";
+import { BREAKPOINTS } from "../../constants/breakpoints";
 import { Link } from "react-router-dom";
 
 const AllProducts = () => {
