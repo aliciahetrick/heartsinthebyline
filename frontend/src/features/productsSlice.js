@@ -60,7 +60,7 @@ export const createProductAsync = createAsyncThunk(
 export const updateProductAsync = createAsyncThunk(
   "products/updateProductAsync",
   async (
-    { url: productUrl, cartQty: purchasedQuantity },
+    { url: productUrl, cartQty: purchasedQuantity, type, cartGrade },
     { rejectWithValue }
   ) => {
     try {
@@ -71,6 +71,8 @@ export const updateProductAsync = createAsyncThunk(
         },
         body: JSON.stringify({
           purchasedQuantity,
+          type,
+          cartGrade,
         }),
       });
 
