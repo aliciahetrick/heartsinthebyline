@@ -27,7 +27,7 @@ const CheckoutSuccess = () => {
     });
 
     // make sure the clear cart runs after the update
-    // dispatch(clearCart());
+    dispatch(clearCart());
   }, [dispatch, paidCart]);
 
   return (
