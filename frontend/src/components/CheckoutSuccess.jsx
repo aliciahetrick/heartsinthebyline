@@ -11,6 +11,8 @@ const CheckoutSuccess = () => {
 
   const dispatch = useDispatch();
 
+  console.log("paid cart", paidCart);
+
   useEffect(() => {
     dispatch(getTotals());
 
@@ -18,12 +20,14 @@ const CheckoutSuccess = () => {
       const updateObject = {
         url: cartItem.id,
         cartQty: cartItem.cartQty,
+        type: cartItem.type,
+        cartGrade: cartItem.cartGrade,
       };
       return dispatch(updateProductAsync(updateObject));
     });
 
     // make sure the clear cart runs after the update
-    dispatch(clearCart());
+    // dispatch(clearCart());
   }, [dispatch, paidCart]);
 
   return (
