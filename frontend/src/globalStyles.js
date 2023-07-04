@@ -19,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
       height: 100%;
       padding: 0;
       margin: 0;
-      font-family: "Open Sans", sans-serif;
+      font-family: "Raleway", sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
   }
