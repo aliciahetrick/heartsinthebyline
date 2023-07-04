@@ -43,13 +43,9 @@ const Product = db.define(
       type: Sequelize.ENUM("pin", "sticker"),
       allowNull: false,
     },
-    //   type: {
-    //     type: Sequelize.ENUM("bakery", "produce", "dairy", "specialty"),
-    //     allowNull: false,
-    //   },
-    //   description: {
-    //     type: Sequelize.TEXT,
-    //   },
+    description: {
+      type: Sequelize.TEXT,
+    },
   },
   { timestamps: false }
 );

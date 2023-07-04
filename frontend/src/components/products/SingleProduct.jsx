@@ -45,6 +45,8 @@ const SingleProduct = () => {
     navigate("/cart");
   };
 
+  console.log(singleProduct.description);
+
   return (
     <>
       {singleProductStatus === "success" ? (
@@ -66,7 +68,7 @@ const SingleProduct = () => {
           <ProductPrice>
             ${singleProduct.price || singleProduct[`price${grade}`]}
           </ProductPrice>
-          {/* <p>{singleProduct.desc}</p> */}
+          <ProductDescription>{singleProduct.description}</ProductDescription>
           {singleProduct.type === "pin" ? (
             <div onChange={handleChangeGrade}>
               <GradeButton>
@@ -181,6 +183,16 @@ const ProductPrice = styled.p`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 600;
+`;
+
+const ProductDescription = styled.div`
+  white-space: pre-wrap;
+  // color: #f578a6;
+  // text-align: center;
+  // font-size: 1rem;
+  // font-family: "Raleway", sans-serif;
+  // text-transform: uppercase;
+  // font-weight: 600;
 `;
 
 const ProductButton = styled.button`
