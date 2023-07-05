@@ -4,6 +4,7 @@ import { fetchProductsAsync } from "../../features/productsSlice";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../constants/breakpoints";
 import { Link } from "react-router-dom";
+import SoldOutBadge from "./SoldOutBadge";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const AllProducts = () => {
                       (product.stockA === 0 &&
                         product.stockB === 0 &&
                         product.stockC === 0) ? (
-                        <SoldOutBadge>SOLD OUT</SoldOutBadge>
+                        <SoldOutBadge />
                       ) : null}
                       <ProductImage
                         src={product.image_url}
@@ -93,20 +94,6 @@ const ProductContainer = styled.div`
   @media only screen and (max-width: ${BREAKPOINTS.medium}) {
     max-width: 250px;
   }
-`;
-
-const SoldOutBadge = styled.div`
-  color: #f578a6;
-  font-family: "Raleway", sans-serif;
-  position: absolute;
-  background-color: white;
-  padding: 5px 7px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 12px;
-  max-width: 70px;
-  margin-top: 10px;
-  margin-left: 10px;
 `;
 
 const ProductImage = styled.img`
