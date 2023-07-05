@@ -6,6 +6,7 @@ import { fetchSingleProductAsync } from "../../features/productsSlice";
 import styled from "styled-components";
 
 import { BREAKPOINTS } from "../../constants/breakpoints";
+import SoldOutBadge from "./SoldOutBadge";
 
 const SingleProduct = () => {
   const param = useParams().id;
@@ -45,7 +46,7 @@ const SingleProduct = () => {
               (singleProduct.stockA === 0 &&
                 singleProduct.stockB === 0 &&
                 singleProduct.stockC === 0) ? (
-                <SoldOutBadge>SOLD OUT</SoldOutBadge>
+                <SoldOutBadge />
               ) : null}
               <ProductImage
                 src={singleProduct.image_url}
@@ -292,20 +293,6 @@ const ProductDescription = styled.div`
   // font-family: "Raleway", sans-serif;
   // text-transform: uppercase;
   // font-weight: 600;
-`;
-
-const SoldOutBadge = styled.div`
-  color: #f578a6;
-  font-family: "Raleway", sans-serif;
-  position: absolute;
-  background-color: white;
-  padding: 5px 7px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 12px;
-  max-width: 70px;
-  margin-top: 10px;
-  margin-left: 10px;
 `;
 
 const ProductImage = styled.img`
