@@ -88,38 +88,47 @@ const SingleProduct = () => {
                   </p>
                   <GradeButtonsContainer onChange={handleChangeGrade}>
                     <GradeButton>
-                      <Label disabled={!singleProduct.stockA ? true : false}>
+                      <Label
+                        disabled={!singleProduct.stockA ? true : false}
+                        checked={grade === "A"}>
+                        <Input
+                          type="radio"
+                          name="grade"
+                          value="A"
+                          disabled={!singleProduct.stockA ? true : false}
+                          defaultChecked
+                          checked={grade === "A"}
+                        />
                         A
                       </Label>
-                      <Input
-                        type="radio"
-                        name="grade"
-                        value="A"
-                        disabled={!singleProduct.stockA ? true : false}
-                        defaultChecked
-                      />
                     </GradeButton>
                     <GradeButton>
-                      <Label disabled={!singleProduct.stockB ? true : false}>
+                      <Label
+                        disabled={!singleProduct.stockB ? true : false}
+                        checked={grade === "B"}>
+                        <Input
+                          type="radio"
+                          name="grade"
+                          value="B"
+                          disabled={!singleProduct.stockB ? true : false}
+                          checked={grade === "B"}
+                        />
                         B
                       </Label>
-                      <Input
-                        type="radio"
-                        name="grade"
-                        value="B"
-                        disabled={!singleProduct.stockB ? true : false}
-                      />
                     </GradeButton>
                     <GradeButton>
-                      <Label disabled={!singleProduct.stockC ? true : false}>
+                      <Label
+                        disabled={!singleProduct.stockC ? true : false}
+                        checked={grade === "C"}>
+                        <Input
+                          type="radio"
+                          name="grade"
+                          value="C"
+                          disabled={!singleProduct.stockC ? true : false}
+                          checked={grade === "C"}
+                        />
                         C
                       </Label>
-                      <Input
-                        type="radio"
-                        name="grade"
-                        value="C"
-                        disabled={!singleProduct.stockC ? true : false}
-                      />
                     </GradeButton>
                   </GradeButtonsContainer>
                 </>
@@ -353,14 +362,16 @@ const Label = styled.label`
   ${({ checked }) =>
     checked &&
     `
-color:green;
+    background-color: #f578a6;
+    color: #ffe4f1;
+
 `}
 `;
 
 const Input = styled.input`
   position: fixed;
-  // opacity: 0;
-  // pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 `;
 
 // Add to cart section styling
