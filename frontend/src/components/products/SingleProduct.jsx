@@ -70,6 +70,9 @@ const SingleProduct = () => {
             <ProductHeading>
               <ProductName>{singleProduct.name}</ProductName>
               <ProductSubtitle>{singleProduct.subtitle}</ProductSubtitle>
+              <ProductPrice>
+                ${singleProduct.price || singleProduct[`price${grade}`]}
+              </ProductPrice>
               <ImageWrapperMobile>
                 {singleProduct.stock === 0 ||
                 (singleProduct.stockA === 0 &&
@@ -83,9 +86,6 @@ const SingleProduct = () => {
                   style={{ width: "300px" }}
                 />
               </ImageWrapperMobile>
-              <ProductPrice>
-                ${singleProduct.price || singleProduct[`price${grade}`]}
-              </ProductPrice>
             </ProductHeading>
             <ProductMiddle>
               <ProductDescription>
@@ -108,6 +108,7 @@ const SingleProduct = () => {
                           name="grade"
                           value="A"
                           disabled={!singleProduct.stockA ? true : false}
+                          defaultChecked
                         />
                         A
                       </InputLabel>
@@ -175,11 +176,15 @@ const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  // border: 1px solid purple;
+  margin-top: -6em;
+
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 15em;
+    margin-top: -1em;
     // border: 1px solid purple;
   }
 `;
@@ -199,9 +204,27 @@ const DesktopRightContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   // gap: 3em;
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    // border: 1px solid green;
+    background-color: #ffe4f1;
+    min-width: 80%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 4em;
+  }
 `;
 
-const ProductHeading = styled.div``;
+const ProductHeading = styled.div`
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    // border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
 
 const ProductMiddle = styled.div``;
 
@@ -222,6 +245,7 @@ const ImageWrapperDesktop = styled.div`
 
 const ImageWrapperMobile = styled.div`
   max-width: 300px;
+
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
     display: none;
   }
@@ -254,12 +278,13 @@ const ProductImage = styled.img`
 const ProductName = styled.h2`
   color: #f578a6;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  // margin-top: 3em;
+  margin-top: 0.5em;
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
     // border: 2px solid blue;
+    margin-top: 0em;
     font-size: 2.5em;
     // margin-bottom: -0.4em;
     // padding-top: 0.4em;
@@ -293,6 +318,12 @@ const InputLabel = styled.label`
   border: 3px solid grey;
   cursor: not-allowed;
   `}
+
+  ${({ checked }) =>
+    checked &&
+    `
+color:green;
+`}
 `;
 
 const InputButton = styled.input`
@@ -326,6 +357,10 @@ const ProductPrice = styled.p`
   font-weight: 800;
   font-size: 20px;
   // margin-top: -0.1em;
+
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    margin-bottom: 1em;
+  }
 `;
 
 const ProductDescription = styled.div`
@@ -362,6 +397,10 @@ const ProductButton = styled.button`
   // &:hover {
   //   background-color: #fff5fa;
   // }
+
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    margin-bottom: 1em;
+  }
 `;
 
 const ProductButtonDisabled = styled.button`
@@ -385,4 +424,8 @@ const ProductButtonDisabled = styled.button`
   // &:hover {
   //   background-color: #fff5fa;
   // }
+
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    margin-bottom: 1em;
+  }
 `;
