@@ -12,35 +12,23 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-
-  const [grade, setGrade] = useState("A");
-  // const [price, setPrice] = useState(20);
-
-  const handleChangeGrade = (event) => {
-    setGrade(event.target.value);
-  };
-
-  // console.log("grade:", grade);
-  // console.log("price:", price);
-
-  // useEffect(() => {
-  //   setPrice("price" + grade);
-  // }, [grade]);
-
   const { singleProduct, singleProductStatus } = useSelector(
     (state) => state.products
   );
 
-  // console.log("param", param);
+  const [grade, setGrade] = useState("A");
+
   useEffect(() => {
     dispatch(fetchSingleProductAsync(param));
   }, [dispatch, param]);
 
-  // console.log("singleProduct", singleProduct);
-
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
+
+  const handleChangeGrade = (event) => {
+    setGrade(event.target.value);
+  };
 
   const handleAddToCart = (product, grade) => {
     dispatch(addToCart([product, grade]));
@@ -100,44 +88,38 @@ const SingleProduct = () => {
                   </p>
                   <GradeButtonsContainer onChange={handleChangeGrade}>
                     <GradeButton>
-                      <InputLabel
-                        disabled={!singleProduct.stockA ? true : false}>
-                        <InputButton
-                          type="radio"
-                          // disabled={oneProduct.stock.gradeA === 0}
-                          name="grade"
-                          value="A"
-                          disabled={!singleProduct.stockA ? true : false}
-                          defaultChecked
-                        />
+                      <Label disabled={!singleProduct.stockA ? true : false}>
                         A
-                      </InputLabel>
+                      </Label>
+                      <Input
+                        type="radio"
+                        name="grade"
+                        value="A"
+                        disabled={!singleProduct.stockA ? true : false}
+                        defaultChecked
+                      />
                     </GradeButton>
                     <GradeButton>
-                      <InputLabel
-                        disabled={!singleProduct.stockB ? true : false}>
-                        <InputButton
-                          type="radio"
-                          // disabled={oneProduct.stock.gradeA === 0}
-                          name="grade"
-                          value="B"
-                          disabled={!singleProduct.stockB ? true : false}
-                        />
+                      <Label disabled={!singleProduct.stockB ? true : false}>
                         B
-                      </InputLabel>
+                      </Label>
+                      <Input
+                        type="radio"
+                        name="grade"
+                        value="B"
+                        disabled={!singleProduct.stockB ? true : false}
+                      />
                     </GradeButton>
                     <GradeButton>
-                      <InputLabel
-                        disabled={!singleProduct.stockC ? true : false}>
-                        <InputButton
-                          type="radio"
-                          // disabled={oneProduct.stock.gradeA === 0}
-                          name="grade"
-                          value="C"
-                          disabled={!singleProduct.stockC ? true : false}
-                        />
+                      <Label disabled={!singleProduct.stockC ? true : false}>
                         C
-                      </InputLabel>
+                      </Label>
+                      <Input
+                        type="radio"
+                        name="grade"
+                        value="C"
+                        disabled={!singleProduct.stockC ? true : false}
+                      />
                     </GradeButton>
                   </GradeButtonsContainer>
                 </>
@@ -303,7 +285,7 @@ const ProductSubtitle = styled.p`
   }
 `;
 
-const InputLabel = styled.label`
+const Label = styled.label`
   color: #f578a6;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -326,7 +308,7 @@ color:green;
 `}
 `;
 
-const InputButton = styled.input`
+const Input = styled.input`
   position: fixed;
   // opacity: 0;
   // pointer-events: none;
