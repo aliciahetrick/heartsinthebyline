@@ -9,23 +9,17 @@ const FAQ = () => {
         <Answer>
           <b>A grade pins</b> - Perfect or near perfect quality on the face of
           the pin. Small flaws may include light scratches on the metal plating
-          or underfilling or scuffing on enamel colorfill. Small flaws will only
-          be seen upon close inspection. I recommend A grades for collectors
-          that prefer to enjoy their pins in a low contact setting, like hanging
-          on a pin board or kept in the packaging.
+          or underfilling/scuffing on enamel colorfill.
         </Answer>
         <Answer>
           <b>B grade pins</b> - Pins with more noticeable minor flaws that
           include but are not limited to multiple areas of underfilled enamel,
           air bubbles or trapped dust in enamel, and moderately scratched enamel
-          plating on the face of the pin. B grade pins are recommended for those
-          that display their pins in a high contact setting (like on a
-          backpack).
+          plating on the face of the pin.
         </Answer>
         <Answer>
           <b>C grade pins</b> - Pins in this category and grade are pins with
-          marked bubbling in the metal plating and/or scratched screen printed
-          details.
+          marked bubbling in the metal plating and/or scratched screen printing.
         </Answer>
         <Question>Do you ship internationally?</Question>
         <Answer>
