@@ -171,6 +171,8 @@ const ProductWrapper = styled.div`
   }
 `;
 
+// Laptop vs mobile containers syling
+
 const DesktopLeftContainer = styled.div`
   // border: 3px solid red;
 `;
@@ -199,25 +201,6 @@ const DesktopRightContainer = styled.div`
   }
 `;
 
-const ProductHeading = styled.div`
-  @media only screen and (max-width: ${BREAKPOINTS.large}) {
-    // border: 1px solid green;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-const ProductMiddle = styled.div``;
-
-const ProductGrades = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-`;
-
-const AddToCartButton = styled.div``;
-
 const ImageWrapperDesktop = styled.div`
   max-width: 300px;
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
@@ -233,27 +216,14 @@ const ImageWrapperMobile = styled.div`
   }
 `;
 
-const SoldOutBadge = styled.div`
-  color: #f578a6;
-  font-family: "Raleway", sans-serif;
-  position: absolute;
-  background-color: white;
-  padding: 5px 7px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 12px;
-  max-width: 70px;
-  margin-top: 10px;
-  margin-left: 10px;
-`;
+// Product name, subtitle and price section styling
 
-const ProductImage = styled.img`
-  border-radius: 1em;
-  width: 300px;
-  // border: 2px solid green;
-  @media only screen and (min-width: ${BREAKPOINTS.large}) {
-    min-width: 500px;
-    // border: 2px solid red;
+const ProductHeading = styled.div`
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    // border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -285,6 +255,85 @@ const ProductSubtitle = styled.p`
   }
 `;
 
+const ProductPrice = styled.p`
+  color: #f578a6;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 20px;
+  // margin-top: -0.1em;
+
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
+    margin-bottom: 1em;
+  }
+`;
+
+// Product description section
+
+const ProductMiddle = styled.div``;
+
+const ProductDescription = styled.div`
+  white-space: pre-wrap;
+  // margin-bottom: 0.5em;
+  // text-align: left;
+  // color: #f578a6;
+  // text-align: center;
+  // font-size: 1rem;
+  // font-family: "Raleway", sans-serif;
+  // text-transform: uppercase;
+  // font-weight: 600;
+`;
+
+const SoldOutBadge = styled.div`
+  color: #f578a6;
+  font-family: "Raleway", sans-serif;
+  position: absolute;
+  background-color: white;
+  padding: 5px 7px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  max-width: 70px;
+  margin-top: 10px;
+  margin-left: 10px;
+`;
+
+const ProductImage = styled.img`
+  border-radius: 1em;
+  width: 300px;
+  // border: 2px solid green;
+  @media only screen and (min-width: ${BREAKPOINTS.large}) {
+    min-width: 500px;
+    // border: 2px solid red;
+  }
+`;
+
+// Grade section styling
+
+const ProductGrades = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+`;
+
+const GradeButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  // margin-bottom: -1em;
+  color: #f578a6;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 20px;
+`;
+
+const GradeButton = styled.div`
+  color: #f578a6;
+`;
+
 const Label = styled.label`
   color: #f578a6;
   font-size: 1.5rem;
@@ -314,48 +363,9 @@ const Input = styled.input`
   // pointer-events: none;
 `;
 
-const GradeButton = styled.div`
-  color: #f578a6;
-`;
+// Add to cart section styling
 
-const GradeButtonsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-  // margin-bottom: -1em;
-  color: #f578a6;
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  font-weight: 800;
-  font-size: 20px;
-`;
-
-const ProductPrice = styled.p`
-  color: #f578a6;
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  font-weight: 800;
-  font-size: 20px;
-  // margin-top: -0.1em;
-
-  @media only screen and (max-width: ${BREAKPOINTS.large}) {
-    margin-bottom: 1em;
-  }
-`;
-
-const ProductDescription = styled.div`
-  white-space: pre-wrap;
-  // margin-bottom: 0.5em;
-  // text-align: left;
-  // color: #f578a6;
-  // text-align: center;
-  // font-size: 1rem;
-  // font-family: "Raleway", sans-serif;
-  // text-transform: uppercase;
-  // font-weight: 600;
-`;
+const AddToCartButton = styled.div``;
 
 const ProductButton = styled.button`
   display: flex;
