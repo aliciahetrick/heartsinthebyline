@@ -98,14 +98,14 @@ const SingleProduct = () => {
                     <GradeButton>
                       <Label
                         disabled={!singleProduct.stockA ? true : false}
-                        checked={grade === "A"}>
+                        checked={grade === "A" && singleProduct.stockA}>
                         <Input
                           type="radio"
                           name="grade"
                           value="A"
                           disabled={!singleProduct.stockA ? true : false}
                           defaultChecked
-                          checked={grade === "A"}
+                          checked={grade === "A" && singleProduct.stockA}
                         />
                         A
                       </Label>
