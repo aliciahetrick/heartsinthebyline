@@ -5,6 +5,22 @@ const FAQ = () => {
     <>
       <QuestionMark>?</QuestionMark>
       <Container>
+        <Question>What's your grading policy?</Question>
+        <Answer>
+          <b>A grade pins</b> - Perfect or near perfect quality on the face of
+          the pin. Small flaws may include light scratches on the metal plating
+          or underfilling/scuffing on enamel colorfill.
+        </Answer>
+        <Answer>
+          <b>B grade pins</b> - Pins with more noticeable minor flaws that
+          include but are not limited to multiple areas of underfilled enamel,
+          air bubbles or trapped dust in enamel, and moderately scratched enamel
+          plating on the face of the pin.
+        </Answer>
+        <Answer>
+          <b>C grade pins</b> - Pins in this category and grade are pins with
+          marked bubbling in the metal plating and/or scratched screen printing.
+        </Answer>
         <Question>Do you ship internationally?</Question>
         <Answer>
           Unfortunately, I currently only ship to United States addresses.

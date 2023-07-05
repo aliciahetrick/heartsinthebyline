@@ -11,6 +11,9 @@ const Product = db.define(
         notEmpty: true,
       },
     },
+    subtitle: {
+      type: Sequelize.STRING,
+    },
     price: {
       type: Sequelize.INTEGER,
     },
@@ -43,13 +46,13 @@ const Product = db.define(
       type: Sequelize.ENUM("pin", "sticker"),
       allowNull: false,
     },
-    //   type: {
-    //     type: Sequelize.ENUM("bakery", "produce", "dairy", "specialty"),
-    //     allowNull: false,
-    //   },
-    //   description: {
-    //     type: Sequelize.TEXT,
-    //   },
+    tarot: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
+    description: {
+      type: Sequelize.TEXT,
+    },
   },
   { timestamps: false }
 );
