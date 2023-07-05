@@ -100,7 +100,8 @@ const SingleProduct = () => {
                   </p>
                   <GradeButtonsContainer onChange={handleChangeGrade}>
                     <GradeButton>
-                      <InputLabel>
+                      <InputLabel
+                        disabled={!singleProduct.stockA ? true : false}>
                         <InputButton
                           type="radio"
                           // disabled={oneProduct.stock.gradeA === 0}
@@ -112,7 +113,8 @@ const SingleProduct = () => {
                       </InputLabel>
                     </GradeButton>
                     <GradeButton>
-                      <InputLabel>
+                      <InputLabel
+                        disabled={!singleProduct.stockB ? true : false}>
                         <InputButton
                           type="radio"
                           // disabled={oneProduct.stock.gradeA === 0}
@@ -124,7 +126,8 @@ const SingleProduct = () => {
                       </InputLabel>
                     </GradeButton>
                     <GradeButton>
-                      <InputLabel>
+                      <InputLabel
+                        disabled={!singleProduct.stockC ? true : false}>
                         <InputButton
                           type="radio"
                           // disabled={oneProduct.stock.gradeA === 0}
@@ -282,24 +285,24 @@ const InputLabel = styled.label`
   padding: 0.1em;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  border: 2px solid #f578a6;
+  border: 3px solid #f578a6;
+  ${({ disabled }) =>
+    disabled &&
+    `
+  color: grey;
+  border: 3px solid grey;
+  cursor: not-allowed;
+  `}
 `;
 
 const InputButton = styled.input`
   position: fixed;
-  opacity: 0;
-  pointer-events: none;
-
-  color: #f578a6;
-  &:focus {
-    color: white;
-  }
+  // opacity: 0;
+  // pointer-events: none;
 `;
 
 const GradeButton = styled.div`
-  &:active {
-    color: white;
-  }
+  color: #f578a6;
 `;
 
 const GradeButtonsContainer = styled.div`
