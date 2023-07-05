@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, getTotals } from "../../features/cartSlice";
 import { fetchSingleProductAsync } from "../../features/productsSlice";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { BREAKPOINTS } from "../../constants/breakpoints";
 import SoldOutBadge from "./SoldOutBadge";
@@ -85,7 +86,13 @@ const SingleProduct = () => {
               {singleProduct.type === "pin" ? (
                 <>
                   <p>
-                    Grade / see <b>Grading Policy</b>:
+                    Grade / see{" "}
+                    <Link
+                      to={`/faq/`}
+                      style={{ textDecoration: "none", color: "black" }}>
+                      <b>Grading Policy</b>{" "}
+                    </Link>
+                    :
                   </p>
                   <GradeButtonsContainer onChange={handleChangeGrade}>
                     <GradeButton>
