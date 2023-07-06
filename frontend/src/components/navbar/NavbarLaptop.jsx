@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../features/authSlice";
 
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import "../../fonts/AmerikaSignature.ttf";
 
 const NavbarLaptop = () => {
@@ -27,8 +27,7 @@ const NavbarLaptop = () => {
                 <div>
                   <NavLink
                     to="/admin/summary"
-                    style={{ textDecoration: "none", color: "#f578a6" }}
-                  >
+                    style={{ textDecoration: "none", color: "#f578a6" }}>
                     Admin
                   </NavLink>
                 </div>
@@ -37,12 +36,10 @@ const NavbarLaptop = () => {
               <div
                 onClick={() => {
                   dispatch(logoutUser(null));
-                }}
-              >
+                }}>
                 <NavLink
                   to="/"
-                  style={{ textDecoration: "none", color: "#f578a6" }}
-                >
+                  style={{ textDecoration: "none", color: "#f578a6" }}>
                   Log Out
                 </NavLink>
               </div>
@@ -51,14 +48,12 @@ const NavbarLaptop = () => {
             <>
               <NavLink
                 to="/register"
-                style={{ textDecoration: "none", color: "#f578a6" }}
-              >
+                style={{ textDecoration: "none", color: "#f578a6" }}>
                 Register
               </NavLink>
               <NavLink
                 to="/login"
-                style={{ textDecoration: "none", color: "#f578a6" }}
-              >
+                style={{ textDecoration: "none", color: "#f578a6" }}>
                 Log In
               </NavLink>
             </>

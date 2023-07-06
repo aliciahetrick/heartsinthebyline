@@ -9,7 +9,7 @@ import {
 } from "../../features/cartSlice";
 import PayButton from "./PayButton";
 
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const CartMobile = () => {
   const dispatch = useDispatch();
