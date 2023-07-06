@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../features/authSlice";
 
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import "../../fonts/AmerikaSignature.ttf";
 import * as FaIcons from "react-icons/fa";
 
@@ -31,6 +31,7 @@ const NavbarMobile = () => {
             <FaIcons.FaTimes />
           </CloseNavButton>
           <TitleLink to="/">heartsinthebyline</TitleLink>
+
           <MobileNavItems>
             <MobileNavItem
               to="/"
@@ -109,7 +110,7 @@ const NavbarMobile = () => {
           </MobileNavItems>
         </MobileNavToggled>
       ) : (
-        <>
+        <MobileHeaderContainer>
           <NavbarHamburgerIcon
             onClick={() => {
               handleNavbarToggle();
@@ -118,7 +119,7 @@ const NavbarMobile = () => {
           </NavbarHamburgerIcon>
 
           <TitleLink to="/">heartsinthebyline</TitleLink>
-        </>
+        </MobileHeaderContainer>
       )}
     </nav>
   );
@@ -127,19 +128,27 @@ const NavbarMobile = () => {
 export default NavbarMobile;
 
 const TitleLink = styled(Link)`
-  display: flex;
   // top: 0;
   // background-color: #fff5fa;
   display: inline-block;
   text-decoration: none;
   color: #f578a6;
-  font-size: 80px;
+  font-size: 70px;
+  line-height: 80px;
   font-family: "AmerikaSignature";
-  margin-top: -0.3em;
+  // padding-top: -1em;
+  // margin-top: -0.4em;
+  // margin-bottom: -0.8em;
+`;
+
+const MobileHeaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const NavbarHamburgerIcon = styled.div`
-  display: flex;
+  position: absolute;
+  left: 0;
   justify-content: left;
   padding-top: 15px;
   padding-left: 15px;
