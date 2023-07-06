@@ -182,6 +182,9 @@ const MobileNavItems = styled.div`
   font-size: 15px;
   margin-top: 10px;
   text-transform: uppercase;
+
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 `;
 
 const MobileNavItem = styled(Link)``;
