@@ -171,12 +171,12 @@ const SingleProduct = () => {
 export default SingleProduct;
 
 const ProductWrapper = styled.div`
-  transform: translateY(20%);
+  // transform: translateY(20%);
   display: flex;
   flex-direction: column;
   align-items: center;
   // border: 1px solid purple;
-  margin-top: -6em;
+  // margin-top: -6em;
 
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
     display: flex;
@@ -185,6 +185,8 @@ const ProductWrapper = styled.div`
     gap: 15em;
     margin-top: -1em;
     // border: 1px solid purple;
+    // margin-top: -6em;
+    transform: translateY(20%);
   }
 `;
 
@@ -207,14 +209,15 @@ const DesktopRightContainer = styled.div`
   // gap: 3em;
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
     // border: 1px solid green;
-    background-color: #ffe4f1;
+
+    background-color: #fff5fa;
     min-width: 80%;
     display: flex;
     flex-direction: column;
     // justify-content: center;
     align-items: center;
     gap: 1em;
-    margin-bottom: 4em;
+    // margin-bottom: 4em;
   }
 `;
 
@@ -282,7 +285,7 @@ const ProductPrice = styled.p`
   // margin-top: -0.1em;
 
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
   }
 `;
 
