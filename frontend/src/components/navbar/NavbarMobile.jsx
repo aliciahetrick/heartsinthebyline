@@ -1,18 +1,18 @@
 // import { useSelector } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { logoutUser } from "../../features/authSlice";
+// import { logoutUser } from "../../features/authSlice";
 
 import styled from "styled-components/macro";
 import "../../fonts/AmerikaSignature.ttf";
-import * as FaIcons from "react-icons/fa";
+// import * as FaIcons from "react-icons/fa";
 
 const NavbarMobile = () => {
   const [isMobileSidebarToggled, setIsMobileSidebarToggled] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { cartTotalQty } = useSelector((state) => state.cart);
-  const auth = useSelector((state) => state.auth);
+  // const auth = useSelector((state) => state.auth);
 
   const handleNavbarToggle = () => {
     setIsMobileSidebarToggled(!isMobileSidebarToggled);
@@ -21,43 +21,46 @@ const NavbarMobile = () => {
   // console.log("toggled?", isMobileSidebarToggled);
 
   return (
-    <nav style={{ backgroundColor: "#ffd4e9" }}>
-      {isMobileSidebarToggled ? (
-        <MobileNavToggled>
-          <CloseNavButton
-            onClick={() => {
-              handleNavbarToggle();
-            }}>
-            <FaIcons.FaTimes />
-          </CloseNavButton>
-          <TitleLink to="/">heartsinthebyline</TitleLink>
-
-          <MobileNavItems>
-            <MobileNavItem
-              to="/"
-              onClick={() => {
-                handleNavbarToggle();
-              }}
-              style={{ textDecoration: "none", color: "#f578a6" }}>
-              <FaIcons.FaHome /> Home
-            </MobileNavItem>
-            <MobileNavItem
-              to="/products"
-              onClick={() => {
-                handleNavbarToggle();
-              }}
-              style={{ textDecoration: "none", color: "#f578a6" }}>
-              <FaIcons.FaHeart /> Products
-            </MobileNavItem>
-            <MobileNavItem
-              to="/cart"
-              onClick={() => {
-                handleNavbarToggle();
-              }}
-              style={{ textDecoration: "none", color: "#f578a6" }}>
-              <FaIcons.FaShoppingCart /> Cart({cartTotalQty})
-            </MobileNavItem>
-            {auth._id ? (
+    <NavContainer style={{ backgroundColor: "#ffd4e9" }}>
+      <TitleLink to="/">heartsinthebyline</TitleLink>
+      <MobileNavItems>
+        <MobileNavItem
+          to="/"
+          onClick={() => {
+            handleNavbarToggle();
+          }}
+          style={{ textDecoration: "none", color: "#f578a6" }}>
+          {/* <FaIcons.FaHome />  */}
+          Home
+        </MobileNavItem>
+        <MobileNavItem
+          to="/products"
+          onClick={() => {
+            handleNavbarToggle();
+          }}
+          style={{ textDecoration: "none", color: "#f578a6" }}>
+          {/* <FaIcons.FaHeart />  */}
+          Products
+        </MobileNavItem>
+        <MobileNavItem
+          to="/faq"
+          onClick={() => {
+            handleNavbarToggle();
+          }}
+          style={{ textDecoration: "none", color: "#f578a6" }}>
+          {/* <FaIcons.FaHeart />  */}
+          FAQ
+        </MobileNavItem>
+        <MobileNavItem
+          to="/cart"
+          onClick={() => {
+            handleNavbarToggle();
+          }}
+          style={{ textDecoration: "none", color: "#f578a6" }}>
+          {/* <FaIcons.FaShoppingCart />  */}
+          Cart({cartTotalQty})
+        </MobileNavItem>
+        {/* {auth._id ? (
               <>
                 {auth.isAdmin ? (
                   <div>
@@ -67,7 +70,8 @@ const NavbarMobile = () => {
                         handleNavbarToggle();
                       }}
                       style={{ textDecoration: "none", color: "#f578a6" }}>
-                      <FaIcons.FaKey /> Admin
+                      <FaIcons.FaKey /> 
+                      Admin
                     </MobileNavItem>
                   </div>
                 ) : null}
@@ -95,7 +99,8 @@ const NavbarMobile = () => {
                     handleNavbarToggle();
                   }}
                   style={{ textDecoration: "none", color: "#f578a6" }}>
-                  <FaIcons.FaUserPlus /> Register
+                  <FaIcons.FaUserPlus /> 
+                  Register
                 </MobileNavItem>
                 <MobileNavItem
                   to="/login"
@@ -103,29 +108,22 @@ const NavbarMobile = () => {
                     handleNavbarToggle();
                   }}
                   style={{ textDecoration: "none", color: "#f578a6" }}>
-                  <FaIcons.FaSignInAlt /> Log In
+                  <FaIcons.FaSignInAlt /> 
+                  Log In
                 </MobileNavItem>
               </>
-            )}
-          </MobileNavItems>
-        </MobileNavToggled>
-      ) : (
-        <MobileHeaderContainer>
-          <NavbarHamburgerIcon
-            onClick={() => {
-              handleNavbarToggle();
-            }}>
-            <FaIcons.FaBars />
-          </NavbarHamburgerIcon>
-
-          <TitleLink to="/">heartsinthebyline</TitleLink>
-        </MobileHeaderContainer>
-      )}
-    </nav>
+            )} */}
+      </MobileNavItems>
+    </NavContainer>
   );
 };
 
 export default NavbarMobile;
+
+const NavContainer = styled.div`
+  // position: sticky;
+  // overflow: hidden;
+`;
 
 const TitleLink = styled(Link)`
   // top: 0;
@@ -141,52 +139,48 @@ const TitleLink = styled(Link)`
   // margin-bottom: -0.8em;
 `;
 
-const MobileHeaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+// const MobileHeaderContainer = styled.div`
+//   display: flex;
+//   justify-content: center;
+// `;
 
-const NavbarHamburgerIcon = styled.div`
-  position: absolute;
-  left: 0;
-  justify-content: left;
-  padding-top: 15px;
-  padding-left: 15px;
-  color: #f578a6;
-`;
+// const HamburgerIcon = styled.div`
+//   position: absolute;
+//   left: 0;
+//   justify-content: left;
+//   padding-top: 15px;
+//   padding-left: 15px;
+//   color: #f578a6;
+// `;
 
-const MobileNavToggled = styled.div`
-  background-color: #ffd4e9;
-  height: 100vh;
-`;
+// const MobileNavToggled = styled.div`
+//   background-color: #ffd4e9;
+//   // height: 100vh;
+// `;
 
-const CloseNavButton = styled.div`
-  display: flex;
-  justify-content: right;
-  padding-top: 15px;
-  padding-right: 15px;
-
-  color: #f578a6;
-`;
+// const CloseNavButton = styled.div`
+//   position: absolute;
+//   right: 0;
+//   justify-content: right;
+//   padding-top: 15px;
+//   padding-right: 15px;
+//   color: #f578a6;
+// `;
 
 const MobileNavItems = styled.div`
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
+  justify-content: center;
   gap: 1em;
-
-  height: 70vh;
-  border: 1px solid red;
-
-  // justify-content: space-around;
-
+  // height: 70vh;
+  // border: 1px solid green;
   text-decoration: none;
-  // color: #fff5fa;
-  color: white;
+  background-color: rgb(255, 228, 241);
+  // color: white;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 15px;
   margin-top: 10px;
-
   text-transform: uppercase;
 `;
 

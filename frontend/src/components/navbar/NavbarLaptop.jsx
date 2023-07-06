@@ -46,7 +46,7 @@ const NavbarLaptop = () => {
             </>
           ) : (
             <>
-              <NavLink
+              {/* <NavLink
                 to="/register"
                 style={{ textDecoration: "none", color: "#f578a6" }}>
                 Register
@@ -55,7 +55,7 @@ const NavbarLaptop = () => {
                 to="/login"
                 style={{ textDecoration: "none", color: "#f578a6" }}>
                 Log In
-              </NavLink>
+              </NavLink> */}
             </>
           )}
           <NavLink to="/cart">Cart ({cartTotalQty})</NavLink>
@@ -69,23 +69,24 @@ export default NavbarLaptop;
 
 const WrapperNavBoth = styled.div`
   display: flex;
-  // background-color: #fff5fa;
+  background-color: rgb(255, 228, 241);
+  align-items: center;
   justify-content: center;
-  padding-bottom: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 `;
 
 const TitleLink = styled(Link)`
-  display: flex;
+  // display: flex;
   top: 0;
   // background-color: #fff5fa;
   display: inline-block;
   text-decoration: none;
   color: #f578a6;
   font-size: 100px;
-  padding-top: 0;
   // margin-top: 10px;
-  /* margin-left: 15px; */
-
+  // border: 1px solid green;
+  line-height: 1em;
   font-family: "AmerikaSignature";
 `;
 
