@@ -39,12 +39,22 @@ const CartMobile = () => {
     <>
       <WrapperPageTitle>Cart</WrapperPageTitle>
       {cart.cartItems.length === 0 ? (
-        <div>
-          <p>Your cart is empty</p>
+        <Wrapper>
+          <EmptyCartMessage>Your cart is empty</EmptyCartMessage>
+          <ImageWrapper src="../../../dive.gif" />
           <div>
-            <Link to="/products">Start shopping</Link>
+            <Link
+              to="/products"
+              style={{
+                textDecoration: "none",
+                color: "#f578a6",
+                fontSize: "1em",
+                fontWeight: "bold",
+              }}>
+              START SHOPPING
+            </Link>
           </div>
-        </div>
+        </Wrapper>
       ) : (
         <div>
           {cart.cartItems.map((cartItem) => {
@@ -126,6 +136,31 @@ const CartMobile = () => {
 
 export default CartMobile;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  // margin-top: 6em;
+  align-items: center;
+`;
+
+const EmptyCartMessage = styled.p`
+  color: #f578a6;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+`;
+
+const ImageWrapper = styled.img`
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+`;
+
 const WrapperPageTitle = styled.h1`
   color: #f578a6;
   text-align: center;
@@ -133,7 +168,19 @@ const WrapperPageTitle = styled.h1`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 1em;
-  // margin-bottom: 1em;
+  margin-bottom: 1em;
+
+  &::after {
+    content: "";
+    position: absolute;
+    margin: auto;
+    margin-top: 1.5em;
+    right: 0;
+    left: 0;
+    width: 30%;
+    height: 2px;
+    background-color: pink;
+  }
 `;
 
 const SingleCartItemContainer = styled.div`
