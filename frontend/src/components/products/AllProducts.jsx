@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsAsync } from "../../features/productsSlice";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { BREAKPOINTS } from "../../constants/breakpoints";
 import { Link } from "react-router-dom";
 import SoldOutBadge from "./SoldOutBadge";

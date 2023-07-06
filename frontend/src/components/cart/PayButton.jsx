@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { url } from "../../features/api";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { useState } from "react";
 
 const PayButton = ({ cartItems }) => {

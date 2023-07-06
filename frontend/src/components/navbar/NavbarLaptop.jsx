@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../features/authSlice";
 
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import "../../fonts/AmerikaSignature.ttf";
 
 const NavbarLaptop = () => {
@@ -27,8 +27,7 @@ const NavbarLaptop = () => {
                 <div>
                   <NavLink
                     to="/admin/summary"
-                    style={{ textDecoration: "none", color: "#f578a6" }}
-                  >
+                    style={{ textDecoration: "none", color: "#f578a6" }}>
                     Admin
                   </NavLink>
                 </div>
@@ -37,30 +36,26 @@ const NavbarLaptop = () => {
               <div
                 onClick={() => {
                   dispatch(logoutUser(null));
-                }}
-              >
+                }}>
                 <NavLink
                   to="/"
-                  style={{ textDecoration: "none", color: "#f578a6" }}
-                >
+                  style={{ textDecoration: "none", color: "#f578a6" }}>
                   Log Out
                 </NavLink>
               </div>
             </>
           ) : (
             <>
-              <NavLink
+              {/* <NavLink
                 to="/register"
-                style={{ textDecoration: "none", color: "#f578a6" }}
-              >
+                style={{ textDecoration: "none", color: "#f578a6" }}>
                 Register
               </NavLink>
               <NavLink
                 to="/login"
-                style={{ textDecoration: "none", color: "#f578a6" }}
-              >
+                style={{ textDecoration: "none", color: "#f578a6" }}>
                 Log In
-              </NavLink>
+              </NavLink> */}
             </>
           )}
           <NavLink to="/cart">Cart ({cartTotalQty})</NavLink>
@@ -74,23 +69,24 @@ export default NavbarLaptop;
 
 const WrapperNavBoth = styled.div`
   display: flex;
-  // background-color: #fff5fa;
+  background-color: rgb(255, 228, 241);
+  align-items: center;
   justify-content: center;
-  padding-bottom: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 `;
 
 const TitleLink = styled(Link)`
-  display: flex;
+  // display: flex;
   top: 0;
   // background-color: #fff5fa;
   display: inline-block;
   text-decoration: none;
   color: #f578a6;
   font-size: 100px;
-  padding-top: 0;
   // margin-top: 10px;
-  /* margin-left: 15px; */
-
+  // border: 1px solid green;
+  line-height: 1em;
   font-family: "AmerikaSignature";
 `;
 

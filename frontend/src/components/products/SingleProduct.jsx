@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, getTotals } from "../../features/cartSlice";
 import { fetchSingleProductAsync } from "../../features/productsSlice";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 
 import { BREAKPOINTS } from "../../constants/breakpoints";
