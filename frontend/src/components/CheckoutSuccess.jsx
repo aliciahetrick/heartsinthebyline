@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getTotals } from "../features/cartSlice";
 import { updateProductAsync } from "../features/productsSlice";
 import { Stars } from "./Stars";
+import styled from "styled-components/macro";
 
 const CheckoutSuccess = () => {
   const { updateStockStatus } = useSelector((state) => state.products);
@@ -37,7 +38,10 @@ const CheckoutSuccess = () => {
       ) : (
         <>
           <Stars amount={16} color={GOLD_COLOR} />
-          <h2>Checkout Success</h2>
+          <Container>
+            <Title>Checkout Success</Title>
+            <ImageWrapper src="../../happy.gif" />
+          </Container>
         </>
       )}
     </>
@@ -47,3 +51,27 @@ const CheckoutSuccess = () => {
 export default CheckoutSuccess;
 
 const GOLD_COLOR = "#ffd700";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 6em;
+  align-items: center;
+`;
+
+const ImageWrapper = styled.img`
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 1.5em;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  color: #f578a6;
+  font-family: Raleway;
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: 2em;
+  text-transform: uppercase;
+`;
