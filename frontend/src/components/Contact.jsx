@@ -48,10 +48,10 @@ export const Contact = () => {
       {successfulSubmit ? (
         <FormSection>
           <SuccessfulSubmitMessage>
-            Email successfully sent.
+            Email successfully sent
           </SuccessfulSubmitMessage>
           <SuccessfulSubmitMessage>
-            We will get back to you shortly.
+            We will get back to you shortly
           </SuccessfulSubmitMessage>
         </FormSection>
       ) : null}
