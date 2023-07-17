@@ -35,15 +35,15 @@ export const Contact = () => {
     <Form ref={form} onSubmit={sendEmail}>
       <FormSection>
         <FormLabel>Name</FormLabel>
-        <FormTextInput type="text" name="user_name" />
+        <FormTextInput type="text" name="user_name" required />
       </FormSection>
       <FormSection>
         <FormLabel>Email</FormLabel>
-        <FormTextInput type="email" name="user_email" />
+        <FormTextInput type="email" name="user_email" required />
       </FormSection>
       <FormSection>
         <FormLabel>Message</FormLabel>
-        <FormTextAreaInput name="message" />
+        <FormTextAreaInput name="message" required />
       </FormSection>
       {successfulSubmit ? (
         <FormSection>
