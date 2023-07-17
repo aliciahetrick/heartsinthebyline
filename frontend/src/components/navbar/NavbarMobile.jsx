@@ -1,6 +1,6 @@
 // import { useSelector } from "react-redux";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { logoutUser } from "../../features/authSlice";
 
@@ -9,16 +9,9 @@ import "../../fonts/AmerikaSignature.ttf";
 // import * as FaIcons from "react-icons/fa";
 
 const NavbarMobile = () => {
-  const [isMobileSidebarToggled, setIsMobileSidebarToggled] = useState(false);
   // const dispatch = useDispatch();
   const { cartTotalQty } = useSelector((state) => state.cart);
   // const auth = useSelector((state) => state.auth);
-
-  const handleNavbarToggle = () => {
-    setIsMobileSidebarToggled(!isMobileSidebarToggled);
-  };
-
-  // console.log("toggled?", isMobileSidebarToggled);
 
   return (
     <NavContainer style={{ backgroundColor: "#ffd4e9" }}>
@@ -26,36 +19,30 @@ const NavbarMobile = () => {
       <MobileNavItems>
         <MobileNavItem
           to="/"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
           style={{ textDecoration: "none", color: "#f578a6" }}>
           {/* <FaIcons.FaHome />  */}
           Home
         </MobileNavItem>
         <MobileNavItem
           to="/products"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
           style={{ textDecoration: "none", color: "#f578a6" }}>
           {/* <FaIcons.FaHeart />  */}
           Products
         </MobileNavItem>
         <MobileNavItem
           to="/faq"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
           style={{ textDecoration: "none", color: "#f578a6" }}>
           {/* <FaIcons.FaHeart />  */}
           FAQ
         </MobileNavItem>
         <MobileNavItem
+          to="/contact"
+          style={{ textDecoration: "none", color: "#f578a6" }}>
+          {/* <FaIcons.FaHeart />  */}
+          Contact
+        </MobileNavItem>
+        <MobileNavItem
           to="/cart"
-          onClick={() => {
-            handleNavbarToggle();
-          }}
           style={{ textDecoration: "none", color: "#f578a6" }}>
           {/* <FaIcons.FaShoppingCart />  */}
           Cart({cartTotalQty})
@@ -66,9 +53,7 @@ const NavbarMobile = () => {
                   <div>
                     <MobileNavItem
                       to="/admin/summary"
-                      onClick={() => {
-                        handleNavbarToggle();
-                      }}
+            
                       style={{ textDecoration: "none", color: "#f578a6" }}>
                       <FaIcons.FaKey /> 
                       Admin
@@ -82,9 +67,7 @@ const NavbarMobile = () => {
                   }}>
                   <MobileNavItem
                     to="/"
-                    onClick={() => {
-                      handleNavbarToggle();
-                    }}
+                   
                     style={{ textDecoration: "none", color: "#f578a6" }}>
                     <FaIcons.FaSignOutAlt />
                     Log Out
@@ -182,6 +165,9 @@ const MobileNavItems = styled.div`
   font-size: 15px;
   margin-top: 10px;
   text-transform: uppercase;
+
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 `;
 
 const MobileNavItem = styled(Link)``;

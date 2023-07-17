@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
 
 const FAQ = () => {
   return (
@@ -51,9 +52,13 @@ const FAQ = () => {
 
         <Question>Help, I have a problem with my order! What do I do?</Question>
         <Answer>
-          Email us at <b>shop.heartsinthebyline@gmail.com</b> as soon as
-          possible with a detailed explaination of what went wrong. Please
-          include stripe reciept number with your inquiry.
+          <ContactLink
+            to="/contact"
+            style={{ textDecoration: "none", color: "#f578a6" }}>
+            Contact
+          </ContactLink>{" "}
+          us as soon as possible with a detailed explanation of what went wrong.
+          Please include stripe reciept number with your inquiry.
         </Answer>
       </Container>
 
@@ -102,4 +107,8 @@ const Answer = styled.div`
   //   text-transform: uppercase;
   //   margin-top: 0.5em;
   font-weight: 500;
+`;
+
+const ContactLink = styled(Link)`
+  font-weight: bold;
 `;
