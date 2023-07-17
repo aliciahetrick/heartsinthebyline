@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import styled from "styled-components/macro";
 import { BREAKPOINTS } from "../constants/breakpoints";
 
 export const Contact = () => {
   const form = useRef();
+  const [successfulSubmit, isSuccessfulSubmit] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export const Contact = () => {
           console.log(result.text);
           console.log("Message sent");
           e.target.reset();
+          isSuccessfulSubmit(true);
         },
         (error) => {
           console.log(error.text);
@@ -43,6 +45,16 @@ export const Contact = () => {
         <FormLabel>Message</FormLabel>
         <FormTextAreaInput name="message" />
       </FormSection>
+      {successfulSubmit ? (
+        <FormSection>
+          <SuccessfulSubmitMessage>
+            Email successfully sent.
+          </SuccessfulSubmitMessage>
+          <SuccessfulSubmitMessage>
+            We will get back to you shortly.
+          </SuccessfulSubmitMessage>
+        </FormSection>
+      ) : null}
       <FormSection>
         <FormSubmit type="submit" value="Send" />
       </FormSection>
@@ -97,6 +109,14 @@ const FormTextInput = styled.input`
 const FormTextAreaInput = styled.textarea`
   width: 100%;
   height: 10em;
+`;
+
+const SuccessfulSubmitMessage = styled.p`
+  color: #f578a6;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
 `;
 
 const FormSubmit = styled.input`
