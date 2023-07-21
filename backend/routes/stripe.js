@@ -58,6 +58,7 @@ router.post("/create-checkout-session", async (req, res) => {
     return true;
   }
 
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     shipping_address_collection: {
@@ -71,7 +72,7 @@ router.post("/create-checkout-session", async (req, res) => {
             amount: 500,
             currency: "usd",
           },
-          display_name: "USPS First-Class Mail",
+          display_name: "USPS Ground Advantage",
           delivery_estimate: {
             minimum: {
               unit: "business_day",
