@@ -58,86 +58,74 @@ router.post("/create-checkout-session", async (req, res) => {
     return true;
   }
 
+  function orderType() {
+    for (let i = 0; i < req.body.cartItems.length; i++) {
+      const cartItem = req.body.cartItems[i];
+      if (cartItem.type === "pin") {
+        return "pin";
+      }
+    }
+    return "sticker";
+  }
 
-  const session = await stripe.checkout.sessions.create({
+  const checkoutSessionObj = {
     payment_method_types: ["card"],
     shipping_address_collection: {
       allowed_countries: ["US"],
     },
-    shipping_options: [
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 500,
-            currency: "usd",
-          },
-          display_name: "USPS Ground Advantage",
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 1,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 5,
-            },
-          },
-        },
-      },
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 1000,
-            currency: "usd",
-          },
-          display_name: "USPS Priority Mail",
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 1,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 5,
-            },
-          },
-        },
-      },
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 3500,
-            currency: "usd",
-          },
-          display_name: "USPS Priority Mail Express",
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 1,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 2,
-            },
-          },
-        },
-      },
-    ],
+    shipping_options: [],
     customer: customer.id,
     line_items,
-    // automatic_tax: {
-    //   enabled: true,
-    // },
-    // customer_update: {
-    //   shipping: "never",
-    // },
     mode: "payment",
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
-  });
+  };
+
+  if (orderType() === "sticker") {
+    checkoutSessionObj.shipping_options.push({
+      shipping_rate_data: {
+        type: "fixed_amount",
+        fixed_amount: {
+          amount: 66,
+          currency: "usd",
+        },
+        display_name: "USPS Stamped Mail",
+        delivery_estimate: {
+          minimum: {
+            unit: "business_day",
+            value: 1,
+          },
+          maximum: {
+            unit: "business_day",
+            value: 5,
+          },
+        },
+      },
+    });
+  } else {
+    checkoutSessionObj.shipping_options.push({
+      shipping_rate_data: {
+        type: "fixed_amount",
+        fixed_amount: {
+          amount: 500,
+          currency: "usd",
+        },
+        display_name: "USPS Ground Advantage",
+        delivery_estimate: {
+          minimum: {
+            unit: "business_day",
+            value: 1,
+          },
+          maximum: {
+            unit: "business_day",
+            value: 5,
+          },
+        },
+      },
+    });
+  }
+
+  const session = await stripe.checkout.sessions.create(checkoutSessionObj);
   if (allLineItemsInStock()) {
     res.send({ url: session.url });
   } else {
