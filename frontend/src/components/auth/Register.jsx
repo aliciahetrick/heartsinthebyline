@@ -32,16 +32,19 @@ const Register = () => {
       <Title>Register</Title>
       <LoginForm onSubmit={handleRegisterSubmit}>
         <FormInput
+          required
           type="text"
           placeholder="name"
           onChange={(e) => setUser({ ...user, name: e.target.value })}
         />
         <FormInput
+          required
           type="email"
           placeholder="email"
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
         <FormInput
+          required
           type="password"
           placeholder="password"
           onChange={(e) => setUser({ ...user, password: e.target.value })}

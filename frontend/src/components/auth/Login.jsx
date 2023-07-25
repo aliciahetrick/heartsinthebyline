@@ -31,11 +31,13 @@ const Login = () => {
       <Title>Login</Title>
       <LoginForm onSubmit={handleRegisterSubmit}>
         <FormInput
+          required
           type="email"
           placeholder="email"
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
         <FormInput
+          required
           type="password"
           placeholder="password"
           onChange={(e) => setUser({ ...user, password: e.target.value })}
