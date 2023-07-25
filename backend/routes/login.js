@@ -1,7 +1,7 @@
-const router = express.Router();
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const express = require("express");
+const router = express.Router();
 const genAuthToken = require("../utils/genAuthToken");
 
 const {

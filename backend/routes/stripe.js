@@ -1,9 +1,9 @@
 require("dotenv").config();
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const express = require("express");
-const Stripe = require("stripe");
-const Order = require("../models/Order");
 const router = express.Router();
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const Order = require("../models/Order");
 
 // Create checkout session
 
