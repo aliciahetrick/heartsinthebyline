@@ -32,24 +32,22 @@ const FAQ = () => {
         </Answer>
         <Question>How long will it take for my item to arrive?</Question>
         <Answer>
-          My goal is to ensure that all orders are shipped within 3-5 business
-          days.
+          All orders are shipped within 3-5 business days of order placement.
         </Answer>
         <Answer>
           All sticker only orders are shipped by stamped mail and expected to
           arrive 1-5 business days from shipment.
         </Answer>
         <Answer>
-          All other orders are shipped via USPS First-Class Mail which is
+          All other orders are shipped via USPS Ground Advantage Mail which is
           expected to arrive within 1-5 days from shipment as well.
         </Answer>
         <Answer>
           Please keep a close watch on your tracking code as it will provide you
           with the expected delivery date. In the event that the delivery is
           unsuccessful and the item is returned to the sender, please note that
-          an additional postage fee will be necessary for reshipping.
+          an additional postage fee will be necessary for reshipment.
         </Answer>
-
         <Question>Help, I have a problem with my order! What do I do?</Question>
         <Answer>
           <ContactLink
@@ -87,7 +85,8 @@ const Container = styled.div`
   align-items: center;
   margin: auto;
   gap: 1em;
-  margin-bottom: 2em;
+  // margin-bottom: 2em;
+  padding-bottom: 2em;
 `;
 
 const Question = styled.div`
