@@ -1,12 +1,11 @@
+require("dotenv").config();
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const express = require("express");
 const Stripe = require("stripe");
 const Order = require("../models/Order");
-
-require("dotenv").config();
-
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-
 const router = express.Router();
+
+// Create checkout session
 
 router.post("/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
@@ -16,7 +15,6 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   const line_items = req.body.cartItems.map((item) => {
-    console.log("item", item);
     return {
       price_data: {
         currency: "usd",
@@ -39,10 +37,6 @@ router.post("/create-checkout-session", async (req, res) => {
       quantity: item.cartQty,
     };
   });
-
-  console.log("line items", line_items);
-
-  console.log("request body", req.body);
 
   function allLineItemsInStock() {
     for (let i = 0; i < req.body.cartItems.length; i++) {
@@ -89,7 +83,7 @@ router.post("/create-checkout-session", async (req, res) => {
           amount: 66,
           currency: "usd",
         },
-        display_name: "USPS Stamped Mail",
+        display_name: "USPS Stamped Mail, no tracking",
         delivery_estimate: {
           minimum: {
             unit: "business_day",
@@ -133,32 +127,10 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-//Create order
-
-const createOrder = async (customer, data, lineItems) => {
-  const newOrder = new Order({
-    userId: customer.metadata.userId,
-    customerId: data.customer,
-    paymentIntentId: data.payment_intent_id,
-    products: lineItems.data,
-    subtotal: data.amount_subtotal,
-    total: data.amount_total,
-    shipping_address: data.customer_details,
-    payment_status: data.payment_status,
-  });
-
-  try {
-    const savedOrder = await newOrder.save();
-    console.log("Processed order: ", savedOrder);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 // Stripe webhook
+// confirms that the event that is being called from webhook is coming from stripe
 
 router.post("/webhook", (request, response) => {
-  // confirms that the event that is being called from webhook is coming from stripe
   const sig = request.headers["stripe-signature"];
 
   let data;
@@ -178,7 +150,6 @@ router.post("/webhook", (request, response) => {
       header,
       process.env.WEBHOOK_ENDPOINT_SECRET
     );
-    // console.log(`Webhook Verified: `, event);
   } catch (err) {
     console.log(`Webhook Error: ${err.message}`);
     res.status(400).send(`Webhook Error: ${err.message}`);
@@ -206,6 +177,28 @@ router.post("/webhook", (request, response) => {
         console.log(err.message);
       });
   }
+
+  // Create order
+
+  const createOrder = async (customer, data, lineItems) => {
+    const newOrder = new Order({
+      userId: customer.metadata.userId,
+      customerId: data.customer,
+      paymentIntentId: data.payment_intent_id,
+      products: lineItems.data,
+      subtotal: data.amount_subtotal,
+      total: data.amount_total,
+      shipping_address: data.customer_details,
+      payment_status: data.payment_status,
+    });
+
+    try {
+      const savedOrder = await newOrder.save();
+      console.log("Processed order: ", savedOrder);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // Return a 200 response to acknowledge receipt of the event
   response.send().end();

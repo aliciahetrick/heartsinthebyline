@@ -1,15 +1,12 @@
+const router = express.Router();
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const express = require("express");
 const genAuthToken = require("../utils/genAuthToken");
-
-const router = express.Router();
-
 const {
   models: { User },
 } = require("../db");
 
-// /api/register
 router.post("/", async (req, res) => {
   const model = Joi.object({
     name: Joi.string().required().min(3).max(30),
@@ -18,12 +15,15 @@ router.post("/", async (req, res) => {
   });
 
   const { error } = model.validate(req.body);
-
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
 
   let user = await User.findOne({ where: { email: req.body.email } });
 
-  if (user) return res.status(400).send("User already exists");
+  if (user) {
+    return res.status(400).send("User already exists");
+  }
 
   user = new User({
     name: req.body.name,

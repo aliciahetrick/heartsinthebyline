@@ -2,21 +2,20 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
-
 const productsRoute = require("./routes/products");
 const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
 
-// logging middleware
+// Logging middleware
 app.use(morgan("dev"));
 
-// body parsing middleware
+// Body parsing middleware
 app.use(express.json());
 
 app.use(cors());
 
-// auth and api routes
+// Auth and API routes
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/stripe", stripe);

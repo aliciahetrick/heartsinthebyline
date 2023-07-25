@@ -3,7 +3,8 @@ const Product = require("../models/Product");
 const User = require("../models/User");
 const Order = require("../models/Order");
 
-// associations go here
+// Associations go here
+// TODO: create an order upon payment and associate with user
 
 module.exports = {
   db,
