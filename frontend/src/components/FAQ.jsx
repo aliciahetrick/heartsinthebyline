@@ -52,7 +52,7 @@ const FAQ = () => {
         <Answer>
           <ContactLink
             to="/contact"
-            style={{ textDecoration: "none", color: "#f578a6" }}>
+            style={{ textDecoration: "none", color: "#795CB2" }}>
             Contact
           </ContactLink>{" "}
           us as soon as possible with a detailed explanation of what went wrong.

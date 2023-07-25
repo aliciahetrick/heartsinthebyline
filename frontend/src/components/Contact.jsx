@@ -123,7 +123,7 @@ const FormSubmit = styled.input`
   font-size: 15px;
   font-weight: 600;
   font-family: "Raleway", sans-serif;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   text-align: center;
   align-items: center;

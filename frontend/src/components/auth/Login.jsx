@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../features/authSlice";
+import { Link } from "react-router-dom";
+import styled from "styled-components/macro";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -25,27 +27,83 @@ const Login = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleRegisterSubmit}>
-        <h2>Login</h2>
-
-        <input
+    <Container>
+      <Title>Login</Title>
+      <LoginForm onSubmit={handleRegisterSubmit}>
+        <FormInput
           type="email"
           placeholder="email"
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-        <input
+        <FormInput
           type="password"
           placeholder="password"
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-        <button>
+        <LoginButton>
           {auth.loginStatus === "pending" ? "Submitting" : "Login"}
-        </button>
+        </LoginButton>
         {auth.loginStatus === "rejected" ? <p>{auth.loginError} </p> : null}
-      </form>
-    </>
+      </LoginForm>
+      <div>Don't have an account?</div>
+      <Link
+        to={`/register`}
+        style={{ textDecoration: "none", color: "#795CB2" }}>
+        Register
+      </Link>
+    </Container>
   );
 };
 
 export default Login;
+
+const Container = styled.h2`
+  color: #f578a6;
+  text-align: center;
+  font-size: 1em;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  max-width: 50%;
+  margin: 0 auto;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+`;
+
+const Title = styled.p`
+  margin-bottom: 1em;
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  text-align: center;
+`;
+
+const FormInput = styled.input`
+  ::placeholder {
+    text-align: center;
+    text-transform: uppercase;
+  }
+`;
+
+const LoginButton = styled.button`
+  display: flex;
+  width: 100%;
+  height: 40px;
+  background-color: #f578a6;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+`;
