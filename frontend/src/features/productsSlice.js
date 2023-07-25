@@ -23,7 +23,6 @@ export const fetchProductsAsync = createAsyncThunk(
   }
 );
 
-// a redux thunk that fetches a single post from the database
 export const fetchSingleProductAsync = createAsyncThunk(
   "products/fetchSingleProductAsync",
   async (_id) => {
@@ -97,7 +96,6 @@ const productsSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
-      // console.log("payload", action.payload);
       state.items = action.payload;
       state.status = "success";
     });

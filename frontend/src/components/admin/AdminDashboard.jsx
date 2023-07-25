@@ -15,16 +15,14 @@ const AdminDashboard = () => {
           to="/admin/summary"
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
-          }
-        >
+          }>
           Summary
         </NavLink>
         <NavLink
           to="/admin/products"
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
-          }
-        >
+          }>
           Products
         </NavLink>
       </div>

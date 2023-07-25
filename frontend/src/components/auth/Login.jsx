@@ -8,8 +8,6 @@ const Login = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
 
-  console.log("auth", auth);
-
   useEffect(() => {
     if (auth._id) {
       navigate("/products");

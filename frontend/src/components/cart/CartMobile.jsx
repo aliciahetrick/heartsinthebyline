@@ -8,7 +8,6 @@ import {
   removeFromCart,
 } from "../../features/cartSlice";
 import PayButton from "./PayButton";
-
 import styled from "styled-components/macro";
 
 const CartMobile = () => {
@@ -29,11 +28,8 @@ const CartMobile = () => {
   };
 
   const handleRemoveFromCart = ([cartItem, grade]) => {
-    console.log("removed grade", grade);
     dispatch(removeFromCart(cartItem, grade));
   };
-
-  // console.log("cart", cart);
 
   return (
     <>
@@ -120,12 +116,10 @@ const CartMobile = () => {
             );
           })}
           <CartCheckoutContainer>
-            {/* <button onClick={() => handleClearCart()}>Clear cart</button> */}
             <CheckoutBlurb>
               Shipping & taxes calculated at checkout
             </CheckoutBlurb>
             <CheckoutTotal>Total: ${cart.cartTotalPrice}</CheckoutTotal>
-
             <PayButton cartItems={cart.cartItems} />
           </CartCheckoutContainer>
         </div>
@@ -139,7 +133,6 @@ export default CartMobile;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  // margin-top: 6em;
   align-items: center;
 `;
 
@@ -190,23 +183,10 @@ const SingleCartItemContainer = styled.div`
   margin-right: 5%;
   margin-bottom: 1em;
   padding-top: 1em;
-
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   margin: auto;
-  //   margin-top: 6em;
-  //   right: 0;
-  //   left: 0;
-  //   width: 90%;
-  //   height: 2px;
-  //   background-color: pink;
-  // }
 `;
 
 const SingleCartItemContainerLeft = styled.div`
   width: 25%;
-  // border: 1px solid red;
 `;
 
 const SingleCartItemImage = styled.img`
@@ -215,7 +195,6 @@ const SingleCartItemImage = styled.img`
 
 const SingleCartItemContainerRight = styled.div`
   width: 75%;
-  // border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -226,16 +205,12 @@ const SingleCartItemDetailsTop = styled.div`
   flex-direction: column;
   margin-left: 8%;
   text-align: left;
-  // border: 1px solid orange;
-  // height: 50%;
 `;
 
 const SingleCartItemTitle = styled.p`
   text-align: left;
-  // border: 1px solid green;
   margin-top: 0;
   margin-bottom: 0;
-
   color: #f578a6;
   font-weight: bold;
   text-align: left;
@@ -246,9 +221,7 @@ const SingleCartItemTitle = styled.p`
 
 const SingleCartItemPrice = styled.p`
   text-align: left;
-  // border: 1px solid green;
   margin-top: 0;
-
   color: pink;
   font-weight: bold;
   text-align: left;
@@ -284,7 +257,6 @@ const CartQuantityButtonMinus = styled.button`
   background-color: #f578a6;
   color: white;
   padding: 0.3em;
-
   border-top-left-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   border: none;
@@ -319,7 +291,6 @@ const RemoveCartItemButton = styled.button`
   cursor: pointer;
   outline: inherit;
   text-decoration: underline;
-
   color: pink;
   font-size: 0.8em;
   font-weight: 600;

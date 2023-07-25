@@ -14,8 +14,6 @@ const CheckoutSuccess = () => {
 
   const dispatch = useDispatch();
 
-  console.log("paid cart", paidCart);
-
   useEffect(() => {
     dispatch(getTotals());
 
@@ -29,7 +27,7 @@ const CheckoutSuccess = () => {
       return dispatch(updateProductAsync(updateObject));
     });
 
-    // make sure the clear cart runs after the update
+    // make sure to cleat the cart after checkout completes
     dispatch(clearCart());
   }, [dispatch, paidCart]);
 
@@ -61,9 +59,7 @@ const CheckoutSuccess = () => {
                     <PaidItemImage
                       src={paidItem.image_url}
                       alt={paidItem.name}
-                      // style={{ width: "300px" }}
                     />
-
                     <PaidItemsDescriptionContainer>
                       <PaidItemDetail>{paidItem.name}</PaidItemDetail>
                       <PaidItemDetail>{paidItem.subtitle}</PaidItemDetail>
@@ -125,7 +121,6 @@ const ErrorMessageLink = styled(Link)`
 const SuccessMessageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // margin-top: 6em;
   align-items: center;
 `;
 
@@ -158,9 +153,9 @@ const ItemsPurchasedTitle = styled.h2`
   margin-top: 2em;
   text-transform: uppercase;
   width: 50%;
-  // border: 1px solid red;
   padding-bottom: 1em;
   border-bottom: 2px solid pink;
+
   @media only screen and (max-width: ${BREAKPOINTS.medium}) {
     width: 90%;
   }
@@ -223,5 +218,4 @@ const PaidItemDetail = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 0.5em;
-  // border: 1px solid blue;
 `;

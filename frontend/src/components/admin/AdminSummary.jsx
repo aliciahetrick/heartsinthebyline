@@ -1,5 +1,5 @@
 const AdminSummary = () => {
-  return <>this is a page</>;
+  return <>Admin summary page</>;
 };
 
 export default AdminSummary;

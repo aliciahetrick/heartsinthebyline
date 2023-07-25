@@ -7,7 +7,6 @@ const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
-  // console.log("user", user);
 
   const handleCheckout = async () => {
     setError(false);
@@ -122,5 +121,4 @@ const CheckoutError = styled.div`
   text-transform: uppercase;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  // border: 1px solid blue;
 `;

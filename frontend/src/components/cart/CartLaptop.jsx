@@ -33,8 +33,6 @@ const CartLaptop = () => {
     dispatch(removeFromCart(cartItem, grade));
   };
 
-  // console.log("cart", cart);
-
   return (
     <>
       <WrapperTitle>Cart</WrapperTitle>
@@ -136,7 +134,6 @@ const CartLaptop = () => {
             })}
           </AllCartItemsContainer>
           <CartCheckoutContainer>
-            {/* <button onClick={() => handleClearCart()}>Clear cart</button> */}
             <CheckoutBlurb>
               Shipping & taxes calculated at checkout
             </CheckoutBlurb>
@@ -191,7 +188,6 @@ const HeadingWrapper = styled.div`
   display: flex;
   margin-left: 10%;
   margin-right: 10%;
-  // border: 1px solid red;
   color: #f578a6;
   text-align: center;
   font-size: 0.5rem;
@@ -219,30 +215,16 @@ const HeadingWrapper = styled.div`
 
 const ProductWrapper = styled.h2`
   width: 60%;
-  text-align: left;
-  // border: 1px solid green;
 `;
 const QuantityWrapper = styled.h2`
   width: 20%;
-  // border: 1px solid green;
 `;
 
 const TotalWrapper = styled.h2`
   width: 20%;
-  // border: 1px solid green;
 `;
 
-const AllCartItemsContainer = styled.div`
-  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
-    // gap: 1em;
-    // flex-wrap: wrap;
-    // margin-left: 10%;
-    // margin-right: 10%;
-  }
-`;
+const AllCartItemsContainer = styled.div``;
 
 const CartItemContainer = styled.div`
   display: flex;
@@ -255,19 +237,6 @@ const CartItemContainer = styled.div`
     margin-left: 25%;
     margin-right: 25%;
   }
-
-  border-bottom: 2px solid pink;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   margin: auto;
-  //   margin-top: 1em;
-  //   right: 0;
-  //   left: 0;
-  //   width: 80%;
-  //   height: 2px;
-  //   background-color: pink;
-  // }
 `;
 
 const CartItemLeftWrapper = styled(Link)`
@@ -279,10 +248,6 @@ const CartItemImage = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 1em;
-  // @media only screen and (min-width: ${BREAKPOINTS.medium}) {
-  //   width: 300px;
-  //   height: 300px;
-  // }
 `;
 
 const CartItemDetailsWrapper = styled.div`
@@ -299,7 +264,6 @@ const CartItemName = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 0.5em;
-  // border: 1px solid blue;
 `;
 
 const CartItemPrice = styled.h2`
@@ -310,7 +274,6 @@ const CartItemPrice = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 0.5em;
-  // border: 1px solid blue;
 `;
 
 const CartItemMiddleWrapper = styled.div`
@@ -330,7 +293,6 @@ const CartQuantityButtonMinus = styled.button`
   background-color: #f578a6;
   color: white;
   padding: 0.5em;
-
   border-top-left-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   border: none;
@@ -350,7 +312,6 @@ const CartQuantityButtonPlus = styled.button`
   background-color: #f578a6;
   color: white;
   padding: 0.5em;
-
   border-top-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   border: none;
@@ -366,7 +327,6 @@ const RemoveCartItemButton = styled.button`
   cursor: pointer;
   outline: inherit;
   text-decoration: underline;
-
   color: pink;
   font-size: 1em;
   font-weight: 600;
@@ -378,7 +338,6 @@ const CartItemRightWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  // border: 1px solid green;
   width: 20%;
 `;
 
@@ -389,7 +348,6 @@ const CartItemTotal = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 0.5em;
-  // border: 1px solid blue;
 `;
 
 const CartCheckoutContainer = styled.div`

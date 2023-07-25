@@ -8,8 +8,6 @@ const Register = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
 
-  console.log("auth", auth);
-
   useEffect(() => {
     if (auth._id) {
       navigate("/products");
@@ -46,7 +44,6 @@ const Register = () => {
           placeholder="password"
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-        {/* <button>Register</button> */}
         <button>
           {auth.registerStatus === "pending" ? "Submitting" : "Register"}
         </button>

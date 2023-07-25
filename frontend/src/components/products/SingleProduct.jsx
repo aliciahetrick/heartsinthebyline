@@ -5,7 +5,6 @@ import { addToCart, getTotals } from "../../features/cartSlice";
 import { fetchSingleProductAsync } from "../../features/productsSlice";
 import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
-
 import { BREAKPOINTS } from "../../constants/breakpoints";
 import SoldOutBadge from "./SoldOutBadge";
 
@@ -176,12 +175,9 @@ const SingleProduct = () => {
 export default SingleProduct;
 
 const ProductWrapper = styled.div`
-  // transform: translateY(20%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  // border: 1px solid purple;
-  // margin-top: -6em;
 
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
     display: flex;
@@ -189,21 +185,15 @@ const ProductWrapper = styled.div`
     justify-content: center;
     gap: 15em;
     margin-top: -1em;
-    // border: 1px solid purple;
-    // margin-top: -6em;
     transform: translateY(20%);
   }
 `;
 
-// Laptop vs mobile containers syling
+// Laptop vs mobile containers styling
 
-const DesktopLeftContainer = styled.div`
-  // border: 3px solid red;
-`;
+const DesktopLeftContainer = styled.div``;
 
 const DesktopRightContainer = styled.div`
-  // border: 5px solid purple;
-  // margin: 0;
   min-width: 500px;
   min-height: 500px;
   background-color: #ffe4f1;
@@ -211,23 +201,20 @@ const DesktopRightContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  // gap: 3em;
-  @media only screen and (max-width: ${BREAKPOINTS.large}) {
-    // border: 1px solid green;
 
+  @media only screen and (max-width: ${BREAKPOINTS.large}) {
     background-color: #fff5fa;
     min-width: 80%;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
     gap: 1em;
-    // margin-bottom: 4em;
   }
 `;
 
 const ImageWrapperDesktop = styled.div`
   max-width: 300px;
+
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
     display: none;
   }
@@ -245,7 +232,6 @@ const ImageWrapperMobile = styled.div`
 
 const ProductHeading = styled.div`
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
-    // border: 1px solid green;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -259,12 +245,10 @@ const ProductName = styled.h2`
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   margin-top: 0.5em;
+
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
-    // border: 2px solid blue;
     margin-top: 0em;
     font-size: 2.5em;
-    // margin-bottom: -0.4em;
-    // padding-top: 0.4em;
   }
 `;
 
@@ -272,10 +256,10 @@ const ProductSubtitle = styled.p`
   color: #f578a6;
   font-size: 1rem;
   text-transform: uppercase;
-  // margin-bottom: -0.4em;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 15px;
+
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
   }
 `;
@@ -287,7 +271,6 @@ const ProductPrice = styled.p`
   text-transform: uppercase;
   font-weight: 800;
   font-size: 20px;
-  // margin-top: -0.1em;
 
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
     margin-bottom: 0.5em;
@@ -300,23 +283,14 @@ const ProductMiddle = styled.div``;
 
 const ProductDescription = styled.div`
   white-space: pre-wrap;
-  // margin-bottom: 0.5em;
-  // text-align: left;
-  // color: #f578a6;
-  // text-align: center;
-  // font-size: 1rem;
-  // font-family: "Raleway", sans-serif;
-  // text-transform: uppercase;
-  // font-weight: 600;
 `;
 
 const ProductImage = styled.img`
   border-radius: 1em;
   width: 300px;
-  // border: 2px solid green;
+
   @media only screen and (min-width: ${BREAKPOINTS.large}) {
     min-width: 500px;
-    // border: 2px solid red;
   }
 `;
 
@@ -332,7 +306,6 @@ const GradeButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 1em;
-  // margin-bottom: -1em;
   color: #f578a6;
   text-align: center;
   font-family: "Raleway", sans-serif;
@@ -391,7 +364,6 @@ const ProductButton = styled.button`
   margin-top: 21px;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: -30px; */
 
   font-family: "Raleway", sans-serif;
   border-radius: 10px;
@@ -399,9 +371,6 @@ const ProductButton = styled.button`
   text-align: center;
   align-items: center;
   justify-content: center;
-  // &:hover {
-  //   background-color: #fff5fa;
-  // }
 
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
     margin-bottom: 1em;
@@ -419,16 +388,12 @@ const ProductButtonDisabled = styled.button`
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: -30px; */
   font-family: "Raleway", sans-serif;
   border-radius: 10px;
   border: none;
   text-align: center;
   align-items: center;
   justify-content: center;
-  // &:hover {
-  //   background-color: #fff5fa;
-  // }
 
   @media only screen and (max-width: ${BREAKPOINTS.large}) {
     margin-bottom: 1em;

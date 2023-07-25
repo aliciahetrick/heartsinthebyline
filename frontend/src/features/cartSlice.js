@@ -19,19 +19,10 @@ const cartSlice = createSlice({
           cartItem.cartGrade === action.payload[1]
       );
 
-      // console.log("itemIndex", itemIndex);
-      // console.log("state cart items", state.cartItems[0]);
-
       // if item already in cart
       if (itemIndex >= 0) {
-        // if (
-        //   state.cartItems[itemIndex].cartQty <
-        //   Number(state.cartItems[itemIndex].stock)
-        // ) {
         state.cartItems[itemIndex].cartQty += 1;
         state.cartItems[itemIndex].cartGrade = action.payload[1];
-        // }
-        console.log("added one to qty");
       } else {
         const tempProduct = {
           ...action.payload[0],
@@ -39,7 +30,6 @@ const cartSlice = createSlice({
           cartGrade: action.payload[1],
         };
         state.cartItems.push(tempProduct);
-        console.log("added new cart item");
       }
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));

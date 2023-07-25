@@ -15,10 +15,6 @@ const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
 
-  // console.log("type", type);
-
-  //   console.log(productImage);
-
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
     transformFile(file);
@@ -95,8 +91,7 @@ const CreateProduct = () => {
         <select
           name="artist"
           onChange={(e) => setArtist(e.target.value)}
-          required
-        >
+          required>
           <option value="">Select Artist</option>
           <option value="taylor">Taylor</option>
           <option value="billie">Billie</option>

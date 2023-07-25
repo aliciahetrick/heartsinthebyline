@@ -59,8 +59,6 @@ const FAQ = () => {
           Please include stripe reciept number with your inquiry.
         </Answer>
       </Container>
-
-      {/* <Question>Do you accept ____ currency?</Question> */}
     </>
   );
 };
@@ -71,13 +69,11 @@ const QuestionMark = styled.p`
   color: pink;
   font-size: 5rem;
   font-weight: 800;
-  //   border: 1px solid red;
   margin-top: 0;
   margin-bottom: 0;
 `;
 
 const Container = styled.div`
-  //   border: 1px solid red;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -85,7 +81,6 @@ const Container = styled.div`
   align-items: center;
   margin: auto;
   gap: 1em;
-  // margin-bottom: 2em;
   padding-bottom: 2em;
 `;
 
@@ -103,8 +98,6 @@ const Answer = styled.div`
   text-align: center;
   font-size: 1rem;
   font-family: "Raleway", sans-serif;
-  //   text-transform: uppercase;
-  //   margin-top: 0.5em;
   font-weight: 500;
 `;
 

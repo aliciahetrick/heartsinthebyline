@@ -11,7 +11,6 @@ import { GlobalStyles } from "./globalStyles";
 
 store.dispatch(getTotals());
 store.dispatch(loadUser(null));
-// console.log("totals", getTotals());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

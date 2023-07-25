@@ -15,7 +15,6 @@ export const Contact = () => {
         `${process.env.REACT_APP_EMAILJS_SERVICE_ID}`,
         `${process.env.REACT_APP_EMAILJS_TEMPLATE_ID}`,
         form.current,
-        // "YOUR_PUBLIC_KEY"
         `${process.env.REACT_APP_EMAILJS_PUBLIC_KEY}`
       )
       .then(
@@ -68,9 +67,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //   width: 80%;
-  //   border: 1px solid red;
-  //   margin: 0 auto;
   padding-top: 1em;
   margin-left: 10%;
   margin-right: 10%;
@@ -87,7 +83,6 @@ const Form = styled.form`
 `;
 
 const FormSection = styled.div`
-  //   border: 1px solid green;
   width: 100%;
   margin-bottom: 1em;
 `;
@@ -134,5 +129,4 @@ const FormSubmit = styled.input`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  //   border: 1px solid red;
 `;
