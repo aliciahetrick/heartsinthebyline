@@ -6,7 +6,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: "",
   email: "",
-  _id: "",
+  id: "",
   isAdmin: "",
   registerStatus: "",
   registerError: "",
@@ -29,8 +29,8 @@ export const registerUser = createAsyncThunk(
           email: user.email,
           password: user.password,
         }),
-      })
-      const tokenResponse = await token.text()
+      });
+      const tokenResponse = await token.text();
       localStorage.setItem("token", tokenResponse);
       return tokenResponse;
     } catch (error) {
@@ -54,8 +54,8 @@ export const loginUser = createAsyncThunk(
           password: user.password,
         }),
       });
-      const tokenResponse = await token.text()
-      return tokenResponse
+      const tokenResponse = await token.text();
+      return tokenResponse;
     } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.response.data);
@@ -78,7 +78,7 @@ const authSlice = createSlice({
           token,
           name: user.name,
           email: user.email,
-          _id: user._id,
+          id: user.id,
           isAdmin: user.isAdmin,
           userLoaded: true,
         };
@@ -92,7 +92,7 @@ const authSlice = createSlice({
         token: "",
         name: "",
         email: "",
-        _id: "",
+        id: "",
         isAdmin: false,
         registerStatus: "",
         registerError: "",
@@ -118,7 +118,7 @@ const authSlice = createSlice({
           token: action.payload,
           name: user.name,
           email: user.email,
-          _id: user._id,
+          id: user.id,
           isAdmin: user.isAdmin,
           registerStatus: "success",
         };
@@ -149,7 +149,7 @@ const authSlice = createSlice({
           token: action.payload,
           name: user.name,
           email: user.email,
-          _id: user._id,
+          id: user.id,
           isAdmin: user.isAdmin,
           loginStatus: "success",
         };

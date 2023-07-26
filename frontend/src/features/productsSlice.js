@@ -25,9 +25,9 @@ export const fetchProductsAsync = createAsyncThunk(
 
 export const fetchSingleProductAsync = createAsyncThunk(
   "products/fetchSingleProductAsync",
-  async (_id) => {
+  async (id) => {
     try {
-      const response = await fetch(`${url}/products/${_id}`);
+      const response = await fetch(`${url}/products/${id}`);
       const jsonData = await response.json();
       return jsonData;
     } catch (error) {

@@ -19,7 +19,7 @@ const NavbarLaptop = () => {
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/faq">FAQ</NavLink>
           <NavLink to="/contact">Contact</NavLink>
-          {auth._id ? (
+          {auth.id ? (
             <>
               {auth.isAdmin ? (
                 <div>

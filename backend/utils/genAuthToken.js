@@ -5,7 +5,7 @@ const genAuthToken = (user) => {
 
   const token = JWT.sign(
     {
-      _id: user._id,
+      id: user.id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,

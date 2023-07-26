@@ -11,10 +11,10 @@ const Register = () => {
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (auth._id) {
+    if (auth.id) {
       navigate("/products");
     }
-  }, [auth._id, navigate]);
+  }, [auth.id, navigate]);
 
   const [user, setUser] = useState({
     name: "",

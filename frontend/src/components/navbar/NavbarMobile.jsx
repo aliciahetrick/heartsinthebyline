@@ -39,7 +39,7 @@ const NavbarMobile = () => {
           style={{ textDecoration: "none", color: "#f578a6" }}>
           Cart({cartTotalQty})
         </MobileNavItem>
-        {/* {auth._id ? (
+        {/* {auth.id ? (
               <>
                 {auth.isAdmin ? (
                   <div>
